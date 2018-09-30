@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cntek.iot.modbus.dao.MbMdDefineMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cntek.iot.modbus.entity.MbMdDefine">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="device_id" jdbcType="VARCHAR"
+			property="deviceId" />
+		<result column="mb_gate_no" jdbcType="INTEGER"
+			property="mbGateNo" />
+		<result column="mb_fun_code" jdbcType="INTEGER"
+			property="mbFunCode" />
+		<result column="mb_register_address" jdbcType="INTEGER"
+			property="mbRegisterAddress" />
+		<result column="data_name" jdbcType="VARCHAR"
+			property="dataName" />
+		<result column="data_type" jdbcType="INTEGER"
+			property="dataType" />
+		<result column="data_decode_order" jdbcType="INTEGER"
+			property="dataDecodeOrder" />
+		<result column="data_unit" jdbcType="VARCHAR"
+			property="dataUnit" />
+		<result column="data_decimal" jdbcType="INTEGER"
+			property="dataDecimal" />
+		<result column="data_ratio" jdbcType="DECIMAL"
+			property="dataRatio" />
+		<result column="data_bit_pos" jdbcType="INTEGER"
+			property="dataBitPos" />
+		<result column="data_0_display" jdbcType="VARCHAR"
+			property="data0Display" />
+		<result column="data_1_display" jdbcType="VARCHAR"
+			property="data1Display" />
+		<result column="data_fun" jdbcType="VARCHAR" property="dataFun" />
+		<result column="data_enum" jdbcType="VARCHAR"
+			property="dataEnum" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		t_mb_md_define
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.cntek.iot.modbus.entity.MbMdDefine">
+		insert into t_mb_md_define (ID, device_id, mb_gate_no,
+		mb_fun_code, mb_register_address, data_name,
+		data_type,
+		data_decode_order, data_unit,
+		data_decimal, data_ratio, data_bit_pos,
+		data_0_display, data_1_display, data_fun,
+		data_enum)
+		values
+		(#{id,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR},
+		#{mbGateNo,jdbcType=INTEGER},
+		#{mbFunCode,jdbcType=INTEGER},
+		#{mbRegisterAddress,jdbcType=INTEGER}, #{dataName,jdbcType=VARCHAR},
+		#{dataType,jdbcType=INTEGER}, #{dataDecodeOrder,jdbcType=INTEGER},
+		#{dataUnit,jdbcType=VARCHAR},
+		#{dataDecimal,jdbcType=INTEGER},
+		#{dataRatio,jdbcType=DECIMAL}, #{dataBitPos,jdbcType=INTEGER},
+		#{data0Display,jdbcType=VARCHAR}, #{data1Display,jdbcType=VARCHAR},
+		#{dataFun,jdbcType=VARCHAR},
+		#{dataEnum,jdbcType=VARCHAR})
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cntek.iot.modbus.entity.MbMdDefine">
+		update t_mb_md_define
+		set device_id =
+		#{deviceId,jdbcType=VARCHAR},
+		mb_gate_no =
+		#{mbGateNo,jdbcType=INTEGER},
+		mb_fun_code =
+		#{mbFunCode,jdbcType=INTEGER},
+		mb_register_address =
+		#{mbRegisterAddress,jdbcType=INTEGER},
+		data_name =
+		#{dataName,jdbcType=VARCHAR},
+		data_type = #{dataType,jdbcType=INTEGER},
+		data_decode_order = #{dataDecodeOrder,jdbcType=INTEGER},
+		data_unit =
+		#{dataUnit,jdbcType=VARCHAR},
+		data_decimal =
+		#{dataDecimal,jdbcType=INTEGER},
+		data_ratio =
+		#{dataRatio,jdbcType=DECIMAL},
+		data_bit_pos =
+		#{dataBitPos,jdbcType=INTEGER},
+		data_0_display =
+		#{data0Display,jdbcType=VARCHAR},
+		data_1_display =
+		#{data1Display,jdbcType=VARCHAR},
+		data_fun =
+		#{dataFun,jdbcType=VARCHAR},
+		data_enum = #{dataEnum,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select ID, device_id, mb_gate_no, mb_fun_code,
+		mb_register_address,
+		data_name, data_type,
+		data_decode_order, data_unit,
+		data_decimal, data_ratio, data_bit_pos, data_0_display,
+		data_1_display, data_fun, data_enum
+		from t_mb_md_define
+		where ID =
+		#{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select ID, device_id,
+		mb_gate_no, mb_fun_code, mb_register_address,
+		data_name, data_type,
+		data_decode_order, data_unit, data_decimal, data_ratio, data_bit_pos,
+		data_0_display,
+		data_1_display, data_fun, data_enum
+		from t_mb_md_define
+	</select>
+	<select id="selectByFunCode" parameterType="map"
+		resultMap="BaseResultMap">
+		select ID, device_id, mb_gate_no, mb_fun_code,
+		mb_register_address,
+		data_name, data_type,
+		data_decode_order, data_unit,
+		data_decimal, data_ratio, data_bit_pos, data_0_display,
+		data_1_display, data_fun, data_enum
+		from t_mb_md_define
+		where device_id
+		=
+		#{deviceId,jdbcType=VARCHAR}
+		and mb_gate_no =
+		#{mbGateNo,jdbcType=INTEGER}
+		and mb_fun_code =
+		#{mbFunCode,jdbcType=INTEGER}
+	</select>
+</mapper>
