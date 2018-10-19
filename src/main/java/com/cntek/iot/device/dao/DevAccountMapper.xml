@@ -1,68 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cntek.iot.device.dao.DevAccountMapper">
-  <resultMap id="BaseResultMap" type="com.cntek.iot.device.entity.DevAccount">
-    <id column="device_id" jdbcType="VARCHAR" property="deviceId" />
-    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
-    <result column="owner_type" jdbcType="CHAR" property="ownerType" />
-    <result column="owner_code" jdbcType="VARCHAR" property="ownerCode" />
-    <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
-    <result column="position" jdbcType="VARCHAR" property="position" />
-    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
-    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
-    <result column="installer" jdbcType="VARCHAR" property="installer" />
-    <result column="install_date" jdbcType="TIMESTAMP" property="installDate" />
-    <result column="manager" jdbcType="VARCHAR" property="manager" />
-    <result column="tel" jdbcType="VARCHAR" property="tel" />
-    <result column="is_online" jdbcType="BIT" property="isOnline" />
-    <result column="last_time" jdbcType="TIMESTAMP" property="lastTime" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from t_dev_account
-    where device_id = #{deviceId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.cntek.iot.device.entity.DevAccount">
-    insert into t_dev_account (device_id, device_type, owner_type, 
-      owner_code, owner_name, position, 
-      longitude, latitude, installer, 
-      install_date, manager, tel, 
-      is_online, last_time)
-    values (#{deviceId,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, #{ownerType,jdbcType=CHAR}, 
-      #{ownerCode,jdbcType=VARCHAR}, #{ownerName,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
-      #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, #{installer,jdbcType=VARCHAR}, 
-      #{installDate,jdbcType=TIMESTAMP}, #{manager,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
-      #{isOnline,jdbcType=BIT}, #{lastTime,jdbcType=TIMESTAMP})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.cntek.iot.device.entity.DevAccount">
-    update t_dev_account
-    set device_type = #{deviceType,jdbcType=VARCHAR},
-      owner_type = #{ownerType,jdbcType=CHAR},
-      owner_code = #{ownerCode,jdbcType=VARCHAR},
-      owner_name = #{ownerName,jdbcType=VARCHAR},
-      position = #{position,jdbcType=VARCHAR},
-      longitude = #{longitude,jdbcType=DOUBLE},
-      latitude = #{latitude,jdbcType=DOUBLE},
-      installer = #{installer,jdbcType=VARCHAR},
-      install_date = #{installDate,jdbcType=TIMESTAMP},
-      manager = #{manager,jdbcType=VARCHAR},
-      tel = #{tel,jdbcType=VARCHAR},
-      is_online = #{isOnline,jdbcType=BIT},
-      last_time = #{lastTime,jdbcType=TIMESTAMP}
-    where device_id = #{deviceId,jdbcType=VARCHAR}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select device_id, device_type, owner_type, owner_code, owner_name, position, longitude, 
-    latitude, installer, install_date, manager, tel, is_online, last_time
-    from t_dev_account
-    where device_id = #{deviceId,jdbcType=VARCHAR}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select device_id, device_type, owner_type, owner_code, owner_name, position, longitude, 
-    latitude, installer, install_date, manager, tel, is_online, last_time
-    from t_dev_account
-  </select>
-  <select id="selectByPage" parameterType="map" resultMap="BaseResultMap">
-        select * from t_dev_account limit #{currIndex} , #{pageSize}
-</select>
+	<resultMap id="BaseResultMap"
+		type="com.cntek.iot.device.entity.DevAccount">
+		<id column="device_id" jdbcType="VARCHAR" property="deviceId" />
+		<result column="device_type" jdbcType="VARCHAR"
+			property="deviceType" />
+		<result column="owner_type" jdbcType="CHAR"
+			property="ownerType" />
+		<result column="owner_code" jdbcType="VARCHAR"
+			property="ownerCode" />
+		<result column="owner_name" jdbcType="VARCHAR"
+			property="ownerName" />
+		<result column="position" jdbcType="VARCHAR"
+			property="position" />
+		<result column="longitude" jdbcType="DOUBLE"
+			property="longitude" />
+		<result column="latitude" jdbcType="DOUBLE" property="latitude" />
+		<result column="installer" jdbcType="VARCHAR"
+			property="installer" />
+		<result column="install_date" jdbcType="TIMESTAMP"
+			property="installDate" />
+		<result column="manager" jdbcType="VARCHAR" property="manager" />
+		<result column="tel" jdbcType="VARCHAR" property="tel" />
+		<result column="is_online" jdbcType="BIT" property="isOnline" />
+		<result column="last_time" jdbcType="TIMESTAMP"
+			property="lastTime" />
+		<result column="device_name" jdbcType="VARCHAR"
+			property="deviceName" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from t_dev_account
+		where device_id = #{deviceId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.cntek.iot.device.entity.DevAccount">
+		insert into t_dev_account (device_id, device_type, owner_type,
+		owner_code, owner_name, position,
+		longitude, latitude, installer,
+		install_date, manager, tel,
+		is_online, last_time, device_name
+		)
+		values (#{deviceId,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR},
+		#{ownerType,jdbcType=CHAR},
+		#{ownerCode,jdbcType=VARCHAR}, #{ownerName,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR},
+		#{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE},
+		#{installer,jdbcType=VARCHAR},
+		#{installDate,jdbcType=TIMESTAMP}, #{manager,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR},
+		#{isOnline,jdbcType=BIT}, #{lastTime,jdbcType=TIMESTAMP},
+		#{deviceName,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cntek.iot.device.entity.DevAccount">
+		update t_dev_account
+		set device_type = #{deviceType,jdbcType=VARCHAR},
+		owner_type = #{ownerType,jdbcType=CHAR},
+		owner_code = #{ownerCode,jdbcType=VARCHAR},
+		owner_name = #{ownerName,jdbcType=VARCHAR},
+		position = #{position,jdbcType=VARCHAR},
+		longitude = #{longitude,jdbcType=DOUBLE},
+		latitude = #{latitude,jdbcType=DOUBLE},
+		installer = #{installer,jdbcType=VARCHAR},
+		install_date = #{installDate,jdbcType=TIMESTAMP},
+		manager = #{manager,jdbcType=VARCHAR},
+		tel = #{tel,jdbcType=VARCHAR},
+		is_online = #{isOnline,jdbcType=BIT},
+		last_time = #{lastTime,jdbcType=TIMESTAMP},
+		device_name = #{deviceName,jdbcType=VARCHAR}
+		where device_id = #{deviceId,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select device_id, device_type, owner_type, owner_code, owner_name, position,
+		longitude,
+		latitude, installer, install_date, manager, tel, is_online, last_time,
+		device_name
+		from t_dev_account
+		where device_id = #{deviceId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select device_id, device_type, owner_type, owner_code, owner_name, position,
+		longitude,
+		latitude, installer, install_date, manager, tel, is_online, last_time,
+		device_name
+		from t_dev_account
+	</select>
+	<select id="selectByPage" parameterType="map"
+		resultMap="BaseResultMap">
+		select * from t_dev_account limit #{currIndex} , #{pageSize}
+	</select>
 
 </mapper>

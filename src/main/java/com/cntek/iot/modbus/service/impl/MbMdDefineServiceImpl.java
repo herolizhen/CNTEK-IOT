@@ -1,6 +1,7 @@
 package com.cntek.iot.modbus.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.script.ScriptEngine;
@@ -17,6 +18,7 @@ import com.cntek.iot.modbus.dto.MbComm;
 import com.cntek.iot.modbus.entity.DevRealTime;
 import com.cntek.iot.modbus.entity.MbMdDefine;
 import com.cntek.iot.modbus.service.IMbMdDefineService;
+import com.mysql.cj.util.StringUtils;
 
 @Service("mbMdDefineService")
 public class MbMdDefineServiceImpl implements IMbMdDefineService {
@@ -125,7 +127,7 @@ public class MbMdDefineServiceImpl implements IMbMdDefineService {
 		int mb_read_pos = (reg_to_read - reg_begin) * 2;
 
 		Object o_data = 0;
-		// 16 有符号
+
 		if (define.getDataType() == 1) {
 			// 16位有符号
 			if (define.getDataDecodeOrder() == 1) {
@@ -262,4 +264,36 @@ public class MbMdDefineServiceImpl implements IMbMdDefineService {
 		return (byte) "0123456789ABCDEF".indexOf(c);
 	}
 
+	@Override
+	public List<MbMdDefine> getMdByDeviceID(String device_id) {
+		return this.mbMdDefineDao.selectByDeviceId(device_id);
+	}
+
+	@Override
+	public MbMdDefine saveOrUpdateMd(MbMdDefine record) {
+		int ret = 0;
+		if (StringUtils.isNullOrEmpty(record.getId())) {
+			record.setId(UUID.randomUUID().toString());
+			ret = this.mbMdDefineDao.insert(record);
+		} else {
+			ret = this.mbMdDefineDao.updateByPrimaryKey(record);
+		}
+		if (ret == 1) {
+			return record;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public int delMbMdDefines(List<MbMdDefine> mbMdDefines) {
+		int ret = 0;
+		for (int i = 0; i < mbMdDefines.size(); i++) {
+			ret = this.mbMdDefineDao.deleteByPrimaryKey(mbMdDefines.get(i).getId());
+			if (ret != 1) {
+				return -1;
+			}
+		}
+		return ret;
+	}
 }

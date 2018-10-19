@@ -1,12 +1,26 @@
 package com.cntek.iot.modbus.dto;
 
+import java.util.List;
+
+import com.cntek.iot.modbus.entity.MbMdDefine;
+
 public class MbComm {
+	
 	private String deviceId;
 	private Integer mbGateNo;
 	private Integer mbFunCode;
 	private Integer mbBeginAddress;
 	private Integer mbDataLength;
 	private String data;
+	private List<MbMdDefine> mbMdDefines;
+
+	public List<MbMdDefine> getMbMdDefines() {
+		return mbMdDefines;
+	}
+
+	public void setMbMdDefines(List<MbMdDefine> mbMdDefines) {
+		this.mbMdDefines = mbMdDefines;
+	}
 
 	public String getDeviceId() {
 		return deviceId;

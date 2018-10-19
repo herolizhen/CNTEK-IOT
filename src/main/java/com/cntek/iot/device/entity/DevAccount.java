@@ -31,6 +31,8 @@ public class DevAccount {
 
     private Date lastTime;
 
+    private String deviceName;
+
     public String getDeviceId() {
         return deviceId;
     }
@@ -141,5 +143,13 @@ public class DevAccount {
 
     public void setLastTime(Date lastTime) {
         this.lastTime = lastTime;
+    }
+
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName == null ? null : deviceName.trim();
     }
 }

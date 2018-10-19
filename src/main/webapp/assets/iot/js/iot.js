@@ -1,6 +1,7 @@
 ﻿(function(w) {
 	var iot = {};
-
+	var err={"code":-100,"message":"request error!"};
+	
 	iot.POST = function(url, token, data, success, error) {
 		$.ajax({
 			url : url,
@@ -15,20 +16,21 @@
 			},
 			dataType : 'json',
 			success : function(ret) {
-				//console.log(url+'返回code码：-----------》'+ret.meta.code);
-				if (!$api.isNull(ret) && !$api.isNull(ret.meta) && !$api.isNull(ret.meta.code)) {
-					if (ret.meta.code == 0) {
-						success(ret.data);
+				//console.log(url+'返回code码：-----------》'+ret.code);
+				if (!$api.isNull(ret) && !$api.isNull(ret.code)) {
+					if (ret.code == 0) {
+						success(ret);
 					} else {
-						error();
+						error(ret);
 					}
-				} else {
-					error();
+				} else { 
+					error(err);
 				}
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 				//console.log('XMLHttpRequest-------------------->'+XMLHttpRequest);
-				error();
+				err.message = XMLHttpRequest;
+				error(err);
 			}
 		});
 	}

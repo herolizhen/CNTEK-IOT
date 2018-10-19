@@ -19,5 +19,7 @@ public interface MbMdDefineMapper {
 
 	List<MbMdDefine> selectByFunCode(@Param("deviceId") String deviceId, @Param("mbGateNo") Integer mbGateNo,
 			@Param("mbFunCode") Integer mbFunCode);
-
+	
+	List<MbMdDefine> selectByDeviceId(@Param("deviceId") String deviceId);
+	
 }

@@ -131,4 +131,17 @@
 		and mb_fun_code =
 		#{mbFunCode,jdbcType=INTEGER}
 	</select>
+
+	<select id="selectByDeviceId" parameterType="map"
+		resultMap="BaseResultMap">
+		select ID, device_id, mb_gate_no, mb_fun_code,
+		mb_register_address,
+		data_name, data_type,
+		data_decode_order, data_unit,
+		data_decimal, data_ratio, data_bit_pos, data_0_display,
+		data_1_display, data_fun, data_enum
+		from t_mb_md_define
+		where device_id
+		=#{deviceId,jdbcType=VARCHAR}
+	</select>
 </mapper>

@@ -320,7 +320,7 @@ Dual licensed under the MIT and GPL licenses.
             title = '加载提示';
         }
         if (api.isNull(text)) {
-            text = '易净物联网';
+            text = '物联网';
         }
         if (w.openAlert && typeof (w.openAlert) == 'function') {
             w.ui_main.openAlert(title, text, callback);

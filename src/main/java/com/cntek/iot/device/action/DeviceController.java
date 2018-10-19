@@ -1,17 +1,11 @@
 package com.cntek.iot.device.action;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,17 +37,12 @@ public class DeviceController {
 
 		try {
 			List<DevAccount> data = this.deviceService.selectAll();
-			if (data.size() == 0) {
-				info.meta.put("message", "no data for this stats.");
-				info.meta.put("code", 100);
-			} else {
-				info.meta.put("code", 0);
-				info.data.put("data", data);
-			}
+			info.setCode(0);
+			info.setData(data);
 		} catch (Exception e) {
 			log.error(e);
-			info.meta.put("message", e.getMessage());
-			info.meta.put("code", -200);
+			info.setMessage(e.getMessage());
+			info.setCode(-1);
 		}
 		return info;
 	}
@@ -64,19 +53,13 @@ public class DeviceController {
 		RetInfoDto info = new RetInfoDto();
 		try {
 			List<DevAccount> data = this.deviceService.selectByPage(page.getCurrIndex(), page.getPageSize());
-			if (data.size() == 0) {
-				info.meta.put("message", "no data for this stats.");
-				info.meta.put("code", 100);
-			} else {
-				info.meta.put("code", 0);
-				info.data.put("data", data);
-			}
+			info.setCode(0);
+			info.setData(data);
 		} catch (Exception e) {
 			log.error(e);
-			info.meta.put("message", e.getMessage());
-			info.meta.put("code", -200);
+			info.setMessage(e.getMessage());
+			info.setCode(-1);
 		}
-		info.data.put("page", page);
 		return info;
 	}
 
