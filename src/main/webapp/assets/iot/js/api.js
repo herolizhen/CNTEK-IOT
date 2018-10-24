@@ -1,8 +1,4 @@
-﻿/*
-1.0.0
-*/
-//日期时间格式化输出
-Date.prototype.pattern = function (fmt) {
+﻿Date.prototype.pattern = function (fmt) {
     var o = {
         "M+": this.getMonth() + 1, //月份     
         "d+": this.getDate(), //日     

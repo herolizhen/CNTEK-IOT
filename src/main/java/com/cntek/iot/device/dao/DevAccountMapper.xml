@@ -29,6 +29,18 @@
 		<result column="device_name" jdbcType="VARCHAR"
 			property="deviceName" />
 	</resultMap>
+	<sql id="Base_Column_List">
+		device_id, device_type, owner_type, owner_code, owner_name, position, longitude,
+		latitude, installer, install_date, manager, tel, is_online, last_time,
+		device_name
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_dev_account
+		where device_id = #{deviceId,jdbcType=VARCHAR}
+	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
 		delete from t_dev_account
 		where device_id = #{deviceId,jdbcType=VARCHAR}
@@ -51,6 +63,153 @@
 		#{deviceName,jdbcType=VARCHAR}
 		)
 	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cntek.iot.device.entity.DevAccount">
+		insert into t_dev_account
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="deviceId != null">
+				device_id,
+			</if>
+			<if test="deviceType != null">
+				device_type,
+			</if>
+			<if test="ownerType != null">
+				owner_type,
+			</if>
+			<if test="ownerCode != null">
+				owner_code,
+			</if>
+			<if test="ownerName != null">
+				owner_name,
+			</if>
+			<if test="position != null">
+				position,
+			</if>
+			<if test="longitude != null">
+				longitude,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="installer != null">
+				installer,
+			</if>
+			<if test="installDate != null">
+				install_date,
+			</if>
+			<if test="manager != null">
+				manager,
+			</if>
+			<if test="tel != null">
+				tel,
+			</if>
+			<if test="isOnline != null">
+				is_online,
+			</if>
+			<if test="lastTime != null">
+				last_time,
+			</if>
+			<if test="deviceName != null">
+				device_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="deviceId != null">
+				#{deviceId,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceType != null">
+				#{deviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerType != null">
+				#{ownerType,jdbcType=CHAR},
+			</if>
+			<if test="ownerCode != null">
+				#{ownerCode,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerName != null">
+				#{ownerName,jdbcType=VARCHAR},
+			</if>
+			<if test="position != null">
+				#{position,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				#{longitude,jdbcType=DOUBLE},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=DOUBLE},
+			</if>
+			<if test="installer != null">
+				#{installer,jdbcType=VARCHAR},
+			</if>
+			<if test="installDate != null">
+				#{installDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manager != null">
+				#{manager,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="isOnline != null">
+				#{isOnline,jdbcType=BIT},
+			</if>
+			<if test="lastTime != null">
+				#{lastTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deviceName != null">
+				#{deviceName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cntek.iot.device.entity.DevAccount">
+		update t_dev_account
+		<set>
+			<if test="deviceType != null">
+				device_type = #{deviceType,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerType != null">
+				owner_type = #{ownerType,jdbcType=CHAR},
+			</if>
+			<if test="ownerCode != null">
+				owner_code = #{ownerCode,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerName != null">
+				owner_name = #{ownerName,jdbcType=VARCHAR},
+			</if>
+			<if test="position != null">
+				position = #{position,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude,jdbcType=DOUBLE},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=DOUBLE},
+			</if>
+			<if test="installer != null">
+				installer = #{installer,jdbcType=VARCHAR},
+			</if>
+			<if test="installDate != null">
+				install_date = #{installDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manager != null">
+				manager = #{manager,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="isOnline != null">
+				is_online = #{isOnline,jdbcType=BIT},
+			</if>
+			<if test="lastTime != null">
+				last_time = #{lastTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deviceName != null">
+				device_name = #{deviceName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where device_id = #{deviceId,jdbcType=VARCHAR}
+	</update>
 	<update id="updateByPrimaryKey"
 		parameterType="com.cntek.iot.device.entity.DevAccount">
 		update t_dev_account
@@ -70,19 +229,12 @@
 		device_name = #{deviceName,jdbcType=VARCHAR}
 		where device_id = #{deviceId,jdbcType=VARCHAR}
 	</update>
-	<select id="selectByPrimaryKey" parameterType="java.lang.String"
-		resultMap="BaseResultMap">
-		select device_id, device_type, owner_type, owner_code, owner_name, position,
-		longitude,
-		latitude, installer, install_date, manager, tel, is_online, last_time,
-		device_name
-		from t_dev_account
-		where device_id = #{deviceId,jdbcType=VARCHAR}
-	</select>
 	<select id="selectAll" resultMap="BaseResultMap">
-		select device_id, device_type, owner_type, owner_code, owner_name, position,
+		select device_id, device_type,
+		owner_type, owner_code, owner_name, position,
 		longitude,
-		latitude, installer, install_date, manager, tel, is_online, last_time,
+		latitude,
+		installer, install_date, manager, tel, is_online, last_time,
 		device_name
 		from t_dev_account
 	</select>
@@ -90,5 +242,4 @@
 		resultMap="BaseResultMap">
 		select * from t_dev_account limit #{currIndex} , #{pageSize}
 	</select>
-
 </mapper>

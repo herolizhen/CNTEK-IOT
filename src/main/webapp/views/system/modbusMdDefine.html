@@ -198,7 +198,7 @@
 			</h3>
 		</div>
 		<div id="toolbardevTable">
-			<button  id="download" class="btn btn-primary"
+			<button id="download" class="btn btn-primary"
 				onClick="$('#devTable').tableExport({ type: 'excel', escape: 'false' })">数据导出</button>
 		</div>
 		<table id="devTable" data-toolbar="#toolbardevTable"></table>
@@ -352,7 +352,7 @@
 						pageList : [ 10, 50, 100, 1000 ],
 						search : true,
 						maintainSelected : true,
-// 						searchAlign : 'left',
+						// 						searchAlign : 'left',
 						columns : [
 							{
 								checkbox : true,
@@ -592,6 +592,7 @@
 		$("#btn_delmbmd").click(function() {
 			var data = {};
 			data.mbMdDefines = $('#mbMdTable').bootstrapTable('getSelections');
+// 			prompt("---",JSON.stringify(data));
 			$modbus.delMdByIds(data,
 				function(ret) {
 					if (ret.code == 0) {

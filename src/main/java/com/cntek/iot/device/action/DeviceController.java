@@ -63,4 +63,27 @@ public class DeviceController {
 		return info;
 	}
 
+	@Transactional
+	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
+	public RetInfoDto saveOrUpdate(@RequestBody DevAccount dto) {
+		RetInfoDto info = new RetInfoDto();
+
+		try {
+			DevAccount data = this.deviceService.saveOrUpdate(dto);
+			if (data != null) {
+				info.setCode(0);
+			} else {
+				info.setCode(1);
+			}
+			info.setData(data);
+
+		} catch (Exception e) {
+			log.error(e);
+			info.setMessage(e.getMessage());
+			info.setCode(-1);
+			info.setData(dto);
+		}
+		return info;
+	}
+
 }

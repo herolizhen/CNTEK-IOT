@@ -8,4 +8,6 @@ public interface IDeviceService {
 
 	List<DevAccount> selectAll() throws Exception;
 	List<DevAccount> selectByPage(int currPage, int pageSize);
+	
+	DevAccount saveOrUpdate(DevAccount record);
 }

@@ -1,19 +1,23 @@
 package com.cntek.iot.device.dao;
 
-import com.cntek.iot.device.entity.DevAccount;
 import java.util.List;
 import java.util.Map;
 
+import com.cntek.iot.device.entity.DevAccount;
+
 public interface DevAccountMapper {
-	int deleteByPrimaryKey(String deviceId);
+    int deleteByPrimaryKey(String deviceId);
 
-	int insert(DevAccount record);
+    int insert(DevAccount record);
 
-	DevAccount selectByPrimaryKey(String deviceId);
+    int insertSelective(DevAccount record);
 
+    DevAccount selectByPrimaryKey(String deviceId);
+
+    int updateByPrimaryKeySelective(DevAccount record);
+
+    int updateByPrimaryKey(DevAccount record);
+    
 	List<DevAccount> selectAll();
-
-	int updateByPrimaryKey(DevAccount record);
-
 	List<DevAccount> selectByPage(Map<String, Object> data);
 }

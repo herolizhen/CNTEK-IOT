@@ -31,20 +31,6 @@ public class ModBusController {
 	}
 
 	@RequestMapping(value = "/pushMBData")
-	public RetInfoDto pushData(@RequestBody MbComm dto) {
-		RetInfoDto info = new RetInfoDto();
-		if (CRCCheck.checkHexString(dto.getData())) {
-			mbMetadataDefineService.push(dto);
-			info.setMessage("pushMBData success.");
-			info.setCode(0);
-		} else {
-			info.setMessage("pushMBData fail.");
-			info.setCode(-1);
-		}
-		return info;
-	}
-
-	@RequestMapping(value = "/pushMBDataNew")
 	public RetInfoDto pushMBData(@RequestBody MbComm dto) {
 		RetInfoDto info = new RetInfoDto();
 		if (CRCCheck.checkHexString(dto.getData())) {
@@ -77,7 +63,12 @@ public class ModBusController {
 		RetInfoDto info = new RetInfoDto();
 		try {
 			MbMdDefine data = this.mbMdDefineService.saveOrUpdateMd(dto);
-			info.setCode(0);
+			if (data != null) {
+				info.setCode(0);
+
+			} else {
+				info.setCode(1);
+			}
 			info.setData(data);
 		} catch (Exception e) {
 			info.setMessage(e.getMessage());

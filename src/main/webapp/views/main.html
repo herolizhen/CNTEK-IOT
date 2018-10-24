@@ -16,6 +16,7 @@
 	height: 100%;
 	text-align: center;
 }
+
 .div_dev {
 	border-color: #ff0000;
 	border-width: 1px;
@@ -23,23 +24,27 @@
 	padding: 0;
 	margin: 0px 0px 2px;
 }
+
 .div_shadow {
 	padding: 0 1px 0;
 	margin: 0px 0px 2px;
 	box-shadow: 2px 4px 6px #000;
 }
+
 .sidebar-nav {
-/* 	border-width: 1px; */
+	/* 	border-width: 1px; */
 	background-color: #ffffff;
-/* 	border-style: dashed; */
-/* 	border-color: #ff0000; */
+	/* 	border-style: dashed; */
+	/* 	border-color: #ff0000; */
 }
+
 .sidebar-nav ul {
 	padding: 0;
 	margin: 0;
 	list-style: none;
 	background: #F0F0F0;
 }
+
 .sidebar-nav .metismenu {
 	background: #F6F6F6;
 	display: -webkit-box;
@@ -50,15 +55,19 @@
 	-ms-flex-direction: column;
 	flex-direction: column;
 }
+
 .sidebar-nav .metismenu li+li {
 	margin-top: 5px;
 }
+
 .sidebar-nav .metismenu li:first-child {
 	margin-top: 5px;
 }
+
 .sidebar-nav .metismenu li:last-child {
 	margin-bottom: 5px;
 }
+
 .sidebar-nav .metismenu>li {
 	/*-webkit-box-flex: 1;
     -ms-flex: 1 1 0%;
@@ -72,6 +81,7 @@
 	flex-direction: column;
 	position: relative;
 }
+
 .sidebar-nav .metismenu a {
 	position: relative;
 	display: block;
@@ -80,12 +90,15 @@
 	outline-width: 0;
 	transition: all .3s ease-out;
 }
+
 .sidebar-nav .metismenu ul a {
 	padding: 10px 15px 10px 30px;
 }
+
 .sidebar-nav .metismenu ul ul a {
 	padding: 10px 15px 10px 45px;
 }
+
 .sidebar-nav .metismenu a:hover, .sidebar-nav .metismenu a:focus,
 	.sidebar-nav .metismenu a:active {
 	color: #000000;
@@ -135,18 +148,25 @@
 			<div id="frame-left " class="col-xs-1 col-lg-2 div_shadow ">
 				<nav class="sidebar-nav ">
 					<ul class="metismenu" id="mm_menu2">
-						<li><a class="has-arrow" aria-expanded="false">字典管理</a>
+						<li><a class="has-arrow" aria-expanded="false">基础配置</a>
 							<ul aria-expanded="false">
-								<li data-key="111" onclick="onMenuHor(this)"><a>设备台账管理</a></li>
+								<li data-key="111" onclick="onMenuHor(this)"><a>设备列表</a></li>
 								<li data-key="222" onclick="onMenuHor(this)"><a>元数据管理</a></li>
 							</ul></li>
-						<li><a class="has-arrow" aria-expanded="false">第二菜单</a>
+						<li><a class="has-arrow" aria-expanded="false">组态管理</a>
 							<ul aria-expanded="false">
 								<li><a>item 1.1</a></li>
 								<li><a>item 1.2</a></li>
 								<li><a>item 1.4</a></li>
 							</ul></li>
-						<li><a class="has-arrow" aria-expanded="false">第三菜单</a>
+						<li><a class="has-arrow" aria-expanded="false">权限管理</a>
+							<ul aria-expanded="false">
+								<li><a>item 2.1</a></li>
+								<li><a>item 2.2</a></li>
+								<li><a>item 2.3</a></li>
+								<li><a>item 2.4</a></li>
+							</ul></li>
+						<li><a class="has-arrow" aria-expanded="false">监控中心</a>
 							<ul aria-expanded="false">
 								<li><a>item 2.1</a></li>
 								<li><a>item 2.2</a></li>
@@ -172,7 +192,7 @@
 			$('#iframe_fun').height(h);
 			//$('#iframe_fun').prop('src', 'system/deviceInfo.html');
 			setTimeout(function() {
-				$('#iframe_fun').prop('src', 'system/deviceInfo.html');
+				$('#iframe_fun').prop('src', 'default.html');
 			}, 300)
 		}
 	
@@ -197,8 +217,6 @@
 			$('#mm_menu2').metisMenu();
 			Initialize();
 		});
-	
-	
 	</script>
 </body>
 </html>

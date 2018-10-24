@@ -11,15 +11,19 @@ public interface MbMdDefineMapper {
 
 	int insert(MbMdDefine record);
 
+	int insertSelective(MbMdDefine record);
+
 	MbMdDefine selectByPrimaryKey(String id);
 
-	List<MbMdDefine> selectAll();
+	int updateByPrimaryKeySelective(MbMdDefine record);
 
 	int updateByPrimaryKey(MbMdDefine record);
 
+	List<MbMdDefine> selectAll();
+
 	List<MbMdDefine> selectByFunCode(@Param("deviceId") String deviceId, @Param("mbGateNo") Integer mbGateNo,
 			@Param("mbFunCode") Integer mbFunCode);
-	
+
 	List<MbMdDefine> selectByDeviceId(@Param("deviceId") String deviceId);
-	
+
 }
