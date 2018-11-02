@@ -155,9 +155,8 @@
 							</ul></li>
 						<li><a class="has-arrow" aria-expanded="false">组态管理</a>
 							<ul aria-expanded="false">
-								<li><a>item 1.1</a></li>
-								<li><a>item 1.2</a></li>
-								<li><a>item 1.4</a></li>
+								<li data-key="333" onclick="onMenuHor(this)"><a>组态设计</a></li>
+								<li data-key="444" onclick="onMenuHor(this)"><a>组态设计-new</a></li>
 							</ul></li>
 						<li><a class="has-arrow" aria-expanded="false">权限管理</a>
 							<ul aria-expanded="false">
@@ -209,6 +208,10 @@
 				url = '../views/system/deviceDefine.html' ;
 			} else if (key == '222') {
 				url = '../views/system/modbusMdDefine.html' ;
+			} else if (key == '333') {
+				url = '../assets/design/index.html' ;
+			}else if (key == '444') {
+				url = '../assets/scada/index.html' ;
 			}
 			$('#iframe_fun').prop('src', url);
 		}

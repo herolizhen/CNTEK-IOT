@@ -1,0 +1,169 @@
+.icon-blank{
+	background:url('icons/blank.gif') no-repeat center center;
+}
+.icon-add{
+	background:url('icons/edit_add.png') no-repeat center center;
+}
+.icon-edit{
+	background:url('icons/pencil.png') no-repeat center center;
+}
+.icon-clear{
+	background:url('icons/clear.png') no-repeat center center;
+}
+.icon-remove{
+	background:url('icons/edit_remove.png') no-repeat center center;
+}
+.icon-save{
+	background:url('icons/filesave.png') no-repeat center center;
+}
+.icon-cut{
+	background:url('icons/cut.png') no-repeat center center;
+}
+.icon-ok{
+	background:url('icons/ok.png') no-repeat center center;
+}
+.icon-no{
+	background:url('icons/no.png') no-repeat center center;
+}
+.icon-cancel{
+	background:url('icons/cancel.png') no-repeat center center;
+}
+.icon-reload{
+	background:url('icons/reload.png') no-repeat center center;
+}
+.icon-search{
+	background:url('icons/search.png') no-repeat center center;
+}
+.icon-print{
+	background:url('icons/print.png') no-repeat center center;
+}
+.icon-help{
+	background:url('icons/help.png') no-repeat center center;
+}
+.icon-undo{
+	background:url('icons/undo.png') no-repeat center center;
+}
+.icon-redo{
+	background:url('icons/redo.png') no-repeat center center;
+}
+.icon-back{
+	background:url('icons/back.png') no-repeat center center;
+}
+.icon-sum{
+	background:url('icons/sum.png') no-repeat center center;
+}
+.icon-tip{
+	background:url('icons/tip.png') no-repeat center center;
+}
+.icon-filter{
+	background:url('icons/filter.png') no-repeat center center;
+}
+.icon-man{
+	background:url('icons/man.png') no-repeat center center;
+}
+.icon-lock{
+	background:url('icons/lock.png') no-repeat center center;
+}
+.icon-more{
+	background:url('icons/more.png') no-repeat center center;
+}
+
+
+.icon-mini-add{
+	background:url('icons/mini_add.png') no-repeat center center;
+}
+.icon-mini-edit{
+	background:url('icons/mini_edit.png') no-repeat center center;
+}
+.icon-mini-refresh{
+	background:url('icons/mini_refresh.png') no-repeat center center;
+}
+
+.icon-large-picture{
+	background:url('icons/large_picture.png') no-repeat center center;
+}
+.icon-large-clipart{
+	background:url('icons/large_clipart.png') no-repeat center center;
+}
+.icon-large-shapes{
+	background:url('icons/large_shapes.png') no-repeat center center;
+}
+.icon-large-smartart{
+	background:url('icons/large_smartart.png') no-repeat center center;
+}
+.icon-large-chart{
+	background:url('icons/large_chart.png') no-repeat center center;
+}
+
+/*组态图元素样式*/
+/* .icon-Pointer{
+	background:url('icons/Pointer.png') no-repeat center center;
+}
+.icon-StaticLabel{
+	background:url('icons/StaticLabel.png') no-repeat center center;
+}
+.icon-StaticPicture{
+	background:url('icons/StaticPicture.png') no-repeat center center;
+}
+.icon-DeviceGroup{
+	background:url('icons/DeviceGroup.png') no-repeat center center;
+}
+.icon-NodeLabel{
+	background:url('icons/NodeLabel.png') no-repeat center center;
+}
+.icon-NodeValue{
+	background:url('icons/NodeValue.png') no-repeat center center;
+}
+.icon-DIOPicture{
+	background:url('icons/DIOPicture.png') no-repeat center center;
+}
+.icon-CommonDevicePicture{
+	background:url('icons/CommonDevicePicture.png') no-repeat center center;
+}
+.icon-VarietyPictureBox{
+	background:url('icons/VarietyPictureBox.png') no-repeat center center;
+}
+.icon-DOButton{
+	background:url('icons/DOButton.png') no-repeat center center;
+}
+.icon-CurveButton{
+	background:url('icons/CurveButton.png') no-repeat center center;
+}
+.icon-ThermoHygroMeter{
+	background:url('icons/ThermoHygroMeter.png') no-repeat center center;
+}
+.icon-CircularGauge{
+	background:url('icons/CircularGauge.png') no-repeat center center;
+}
+.icon-LinearGuage{
+	background:url('icons/LinearGuage.png') no-repeat center center;
+}
+.icon-DoorBrush{
+	background:url('icons/DoorBrush.png') no-repeat center center;
+}
+.icon-LatestPictureViewer{
+	background:url('icons/LatestPictureViewer.png') no-repeat center center;
+}
+.icon-SendConfig{
+	background:url('icons/SendConfig.png') no-repeat center center;
+}
+.icon-ShortcutButton{
+	background:url('icons/ShortcutButton.png') no-repeat center center;
+}
+.icon-GroupPanel{
+	background:url('icons/GroupPanel.png') no-repeat center center;
+}
+.icon-Exbutton{
+	background:url('icons/Exbutton.png') no-repeat center center;
+}
+.icon-alarm{
+	background:url('icons/alarm.png') no-repeat center center;
+}
+
+.icon-chg{
+	background:url('icons/chg.png') no-repeat center center;
+}
+.icon-DIOText{
+	background:url('icons/DIOText.png') no-repeat center center;
+}
+body{margin:0px; padding:0px;} */
