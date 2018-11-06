@@ -28,21 +28,20 @@ function dclick(index) {
 		html = '<div id="' + devId + '"class="dev"data-index="' + index + '"data-group="group"style="width:300px;height:300px;border:1px solid #ccc;padding:2px;z-index:' + zIn + ';"><div id="' + devId + 'img" data-Box="groupBox"style="position:relative;width:100%;height:100%; background:url(./images/' + index + '.png) no-repeat;"></div></div>';
 	} else if (index == 2) { //静态标签
 		html = '<div id="' + devId + '"class="dev"data-falg="false"data-bfalg="false"data-index="' + index + '"style="width:100px;height:30px;border:1px solid #ccc;padding:2px;z-index:' + zIn + ';"><div id="' + devId + 'img"style="width:100%;height:100%; background:url(./images/' + index + '.png) no-repeat;"></div></div>';
+//		html = '<div class="dev" id="' + devId + '"+
+//			'style="padding: 8px; outline: rgb(32, 158, 145) dotted 8px; border: 0px solid rgb(255, 255, 255); border-image: none; left: 109px; top: 185px; width: 266px; height: 266px; position: absolute; z-index: 800; outline-offset: -8px;"'+
+//			'data-index="5" data-bfalg="false" data-falg="false">'+
+//			'<div id="dev_0img"'+
+//				'style="background: 0% 0% / contain rgb(255, 255, 255); outline: invert; border-radius: 10px; border: 2px solid rgb(32, 158, 145); border-image: none; width: 100%; height: 100%;"></div>'+
+//		'</div>';
 	} else if (index == 5) { //监测点
 		html = '<div id="' + devId + '"class="dev"data-falg="false"data-bfalg="false"data-index="' + index + '"style="width:100px;height:30px;border:1px solid #ccc;padding:2px;z-index:' + zIn + ';"><div id="' + devId + 'img"style="width:100%;height:100%;overflow:hidden;background-color:rgba(0,0,0,0);color:#333;font-size:14px;font-weight:bold;"><p id="p' + devId + 'img"style="width:100%;"><span id="' + devId + 'name">监测点</span><span id="' + devId + 'val"></span></p></div></div>';
 	} else if (index == 15) { //刻度盘
 		html = '<div id="' + devId + '" class="dev" data-falg="false"data-bfalg="false"data-index="' + index + '"style="width:110px;height:230px;padding:2px;border:1px solid #ccc;z-index:' + zIn + ';"><div id="' + devId + 'img" style="width:100%;height:100%;"></div><span></span></div>';
-	} else if (index == 16) { //门禁
-		html = '<div id="' + devId + '"class="dev"data-falg="false"data-bfalg="false"data-index="' + index + '"style="width:60px;height:100px;border:1px solid #ccc;padding:2px;z-index:' + zIn + ';"><div id="' + devId + 'img"style="width:100%;height:100%;background:url(./images/' + index + '.png) no-repeat;background-size:contain;"></div></div>';
-	} else if (index == 22) { //地图
-		html = '<div id="' + devId + '" class="dev" data-falg="false"data-bfalg="false"data-index="' + index + '"style="width:700px;height:450px;border:1px solid #ccc;padding:2px;z-index:' + zIn + ';"><div id="' + devId + 'map" style="width:100%;height:100%;overflow:hidden;"></div><div id="' + devId + 'img" class="mapDrag"style="position:absolute;left:0px;top:-24px;width:20px;height:20px;background:url(./images/move.jpg);border:1px solid #666;"></div></div>';
-	} else if (index == 23) { //视频
-		html = '<div id="' + devId + '" class="dev video" data-falg="false"data-bfalg="false"data-index="' + index + '"style="width:700px;height:500px;border:1px solid #ccc;padding:2px;z-index:' + zIn + ';background:#5c5c5c;"><p style="width:100%;height:30px;font:16px bolder 微软雅黑;color:#fff;margin-left:10px;">视频监控</p><div id="' + devId + 'tv" style="width:70%;height:90%;float:left;border:1px solid #ccc;margin-left:10px;position:relative;"><p id="tvtishi"style="position:absolute;color:#fff;left:100px;top:180px;font-size:16px;font-weight:bold;width:300px;display:none;">因控件的限制，该控件仅支持IE浏览器</p></div><div id="' + devId + 'ctrl"style="width:175px;height:90%;float:left;margin-left:10px;"><div id="playbtn" style="margin-left:5px;color:#fff;"><p style="margin-left:5px;color:#fff;">通道选择：<select id="channel"></select></p><button id="startPreview" data-dev="' + devId + '"class="ctrlbtn">开始预览</button><button id="stopPreview"class="ctrlbtn"data-dev="' + devId + '">停止预览</button><button id="startVideo"data-dev="' + devId + '"class="ctrlbtn">开始录像</button><button id="stopVideo"data-dev="' + devId + '"class="ctrlbtn">停止录像</button><button id="openall"class="ctrlbtn"data-dev="' + devId + '">全部打开</button><button id="closeall"class="ctrlbtn"data-dev="' + devId + '">全部关闭</button><button id="capture"data-dev="' + devId + '"class="ctrlbtn">抓图</button><button id="fullScreen"data-dev="' + devId + '"class="ctrlbtn">全屏</button></div><div id="' + devId + 'console"style="width:160px;height:150px;margin-left:10px;margin-top:5px;"> <button class="yt2 yt"data-dev="' + devId + '" href="javascript:;" ></button><button class="yt4 yt"data-dev="' + devId + '"href="javascript:;" ></button><button class="yt5 yt" data-dev="' + devId + '" href="javascript:;" id="cptz"></button><button class="yt6 yt" data-dev="' + devId + '"href="javascript:;"></button><button class="yt8 yt"data-dev="' + devId + '" href="javascript:;" ></button></div><table style="color:#fff;margin:0 auto 5px;"><tr><td><button id="focus_minus"class="ctrlb"data-dev="' + devId + '">-</button></td><td>调焦</td><td><button id="focus_plus" class="ctrlb"data-dev="' + devId + '">+</button></td></tr><tr><td><button id="zoom_minus"class="ctrlb"data-dev="' + devId + '">-</button></td><td>变倍</td><td><button id="zoom_plus"class="ctrlb"data-dev="' + devId + '">+</button></td></tr> <tr><td><button  id="aperture_minus"class="ctrlb"data-dev="' + devId + '">-</button></td><td>光圈</td><td><button id="aperture_plus" class="ctrlb"data-dev="' + devId + '">+</button></td></tr></table><p style="margin-bottom:5px;margin-left:5px;color:#fff;">预置点:<select id="presetPoint"data-dev="' + devId + '"style="width:80px;margin-left:5px;"></select></p><button id="preset" class="prePoint">预置</button><button id="use"data-dev="' + devId + '"class="prePoint">调用</button></div><div id="' + devId + 'img" class="mapDrag"style="position:absolute;left:0px;top:-24px;width:20px;height:20px;background:url(./images/move.jpg);border:1px solid #666;z-index:10px;"></div></div>';
-	} else if (index == 24) { //图表控件
-		html = '<div id="' + devId + '" class="dev chart" data-falg="false"data-bfalg="false"data-index="' + index + '"style="width:400px;height:300px;border:1px solid #ccc;padding:2px;z-index:' + zIn + ';"><div id="' + devId + 'img" style="width:100%;height:100%;"></div></div>';
 	}
 	count++;
 	falg = true;
+	alert(html);
 	return html;
 }
 
@@ -235,12 +234,6 @@ $(function() {
 				deviced[devId].fontSize = "14";
 				deviced[devId].fontFamily = "Arial";
 				deviced[devId].fontWeight = "bold";
-			} else if (deviced[devId].devIndex == 20) { //分组面板
-				deviced[devId].bgImg = './images/20.png';
-				deviced[devId].bgColor = '#ffffff';
-				deviced[devId].showmode = 'normal';
-				groupFlag = true;
-
 			} else if (deviced[devId].devIndex == 2) { //静态标签
 				deviced[devId].bgImg = './images/2.png';
 				deviced[devId].tagtype = "pic";

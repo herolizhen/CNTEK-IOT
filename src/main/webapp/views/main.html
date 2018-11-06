@@ -157,6 +157,7 @@
 							<ul aria-expanded="false">
 								<li data-key="333" onclick="onMenuHor(this)"><a>组态设计</a></li>
 								<li data-key="444" onclick="onMenuHor(this)"><a>组态设计-new</a></li>
+								<li data-key="555" onclick="onMenuHor(this)"><a>组态设计-demo</a></li>
 							</ul></li>
 						<li><a class="has-arrow" aria-expanded="false">权限管理</a>
 							<ul aria-expanded="false">
@@ -212,6 +213,8 @@
 				url = '../assets/design/index.html' ;
 			}else if (key == '444') {
 				url = '../assets/scada/index.html' ;
+			}else if (key == '555') {
+				url = '../assets/demo/index.html' ;
 			}
 			$('#iframe_fun').prop('src', url);
 		}
