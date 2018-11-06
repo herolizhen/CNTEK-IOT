@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<title>RunJS 演示代码</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+div {
+	position: absolute;
+	float: left;
+	height: 500px;
+}
+
+div.left {
+	background-color: red;
+	width: 200px;
+	left: 0px;
+}
+
+div.center {
+	background-color: yellow;
+	width: 200px;
+	right: 205px;
+	float: right;
+}
+
+div.handler {
+	width: 5px;
+	cursor: col-resize;
+	background-color: blue;
+	z-index: 1;
+	left: 200px;
+}
+</style>
+<script>
+	jQuery(function($) {
+		var doc = $(document),
+			dl = $("div.left"),
+			dc = $("div.center");
+		var sum = dl.width() + dc.width() +
+		$("div.handler").mousedown(function(e) {
+			var me = $(this);
+			var deltaX = e.clientX
+				-
+				(parseFloat(me.css("left")) || parseFloat(me.prop("clientLeft")));
+			doc.mousemove(function(e) {
+				var lt = e.clientX - deltaX;
+				lt = lt < 0 ? 0 : lt;
+				lt = lt > sum - me.width() ? sum - me.width() : lt;
+				me.css("left", lt + "px");
+				dl.width(lt);
+				dc.width(sum - lt - me.width());
+			});
+		}).width();
+
+		doc.mouseup(function() {
+			doc.unbind("mousemove");
+		});
+		doc[0].ondragstart = doc[0].onselectstart = function() {
+			return false;
+		};
+	});
+</script>
+</head>
+<body>
+	<div class="left">同时在线人数：1000 点击刷新</div>
+	<div class="handler"></div>
+	<div class="center">sss</div>
+</body>
+</html>

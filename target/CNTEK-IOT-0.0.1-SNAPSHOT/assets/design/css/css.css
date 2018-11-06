@@ -1,0 +1,87 @@
+﻿body { font-size:12px; background-color:#ffffff; overflow:auto; }
+.edit{ width:99%; background-color:#95B8E7;}
+.edit td{ background-color:#ffffff; font-size:12px;}
+.edit .left{ text-align:right;}
+.edit .right{ text-align:left;}
+.edit .right .txt{ border:1px solid #95B8E7;}
+#btns{ text-align:center; margin-top:5px;}
+.bj_on_click{ cursor:e-resize;}
+.bj_on_null{ cursor:default;}
+.isreadonly{ background-color:#eee;}
+
+.add
+{
+    background: url(../img/add.png) no-repeat;
+}
+.all
+{
+    background: url(../img/all.gif) no-repeat;
+}
+.browse
+{
+    background: url(../img/browse.png) no-repeat;
+}
+.cancel
+{
+    background: url(../img/cancel.png) no-repeat;
+}
+.clear
+{
+    background: url(../img/clear.png) no-repeat;
+}
+.delete
+{
+    background: url(../img/delete.png) no-repeat;
+}
+.excel
+{
+    background: url(../img/excel.png) no-repeat;
+}
+.group
+{
+    background: url(../img/group.png) no-repeat;
+}
+.import
+{
+    background: url(../img/import.png) no-repeat;
+}
+.modify
+{
+    background: url(../img/modify.png) no-repeat;
+}
+.none
+{
+    background: url(../img/none.gif) no-repeat;
+}
+.ok
+{
+    background: url(../img/ok.png) no-repeat;
+}
+.pdf
+{
+    background: url(../img/pdf.png) no-repeat;
+}
+.permission
+{
+    background: url(../img/permission.png) no-repeat;
+}
+.query
+{
+    background: url(../img/query.png) no-repeat;
+}
+.refresh
+{
+    background: url(../img/refresh.png) no-repeat;
+}
+.save
+{
+    background: url(../img/save.png) no-repeat;
+}
+.word
+{
+    background: url(../img/word.png) no-repeat;
+}
+.ht
+{
+    background: url(../img/png-0814.gif) no-repeat;
+}

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta name="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="../../assets/bootstrap-table/src/bootstrap-table.css">
+<script src="../../assets/jquery/jquery-3.3.1.min.js"></script>
+<script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../assets/bootstrap-table/src/bootstrap-table.js"></script>
+<script src="../../assets/bootstrap-table/src/tableExport.js"></script>
+<script src="../../assets/bootstrap-table/src/locale/bootstrap-table-zh-CN.js"></script>
+<script src="../../assets/iot/js/config.js?v=1.0.0"></script>
+<script src="../../assets/iot/js/api.js?v=1.0.0"></script>
+<script src="../../assets/iot/js/iot.js?v=1.0.0"></script>
+<script src="../../assets/iot/js/device.js?v=1.0.0"></script>
+<script src="../../assets/iot/js/modbus.js?v=1.0.0"></script>
+
+<style type="text/css">
+.page-header {
+	padding-bottom: 1px;
+	margin: 20px 5px 1px;
+	border-bottom: 1px solid #eee;
+}
+
+.input-comm {
+	width: 350px;
+	height: 30px;
+}
+
+.modal-body {
+	position: relative;
+	padding: 10px;
+}
+
+.middle {
+	margin: 5px 1px 1px;
+}
+</style>
+</head>
+<body>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="mbMdTableModal" tabindex="-1" role="dialog"
+		aria-labelledby="mbMdTableLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog" style="width:800px">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="mbMdTableLabel">模态框（Modal）标题</h4>
+				</div>
+				<div id="toolbarmbMdTableModal">
+					<button type="button" id="download" id="btn_download" class="btn btn-primary"
+						onClick="$('#mbMdTable').tableExport({ type: 'excel', escape: 'false' })">数据导出</button>
+					<button type="button" id="btn_delmbmd" class="btn btn-primary">删除</button>
+					<button type="button" id="btn_newmbmd" class="btn btn-primary">新增</button>
+				</div>
+				<table id="mbMdTable" data-toolbar="#toolbarmbMdTableModal"></table>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="mbMdModifyModal" tabindex="-1" role="dialog"
+		aria-labelledby="mbMdModifyLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog" style="width:600px">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="mbMdModifyLabel">新增元素</h4>
+				</div>
+				<div class="modal-body row">
+					<div class="col-xs-3">
+						<p class="text-right middle">数据名称</p>
+					</div>
+					<div class="col-xs-9">
+						<input type="text" id="dataName" class="form-control input-comm" placeholder="温度1#">
+					</div>
+				</div>
+				<div class="modal-body row">
+					<div class="col-xs-3 ">
+						<p class="text-right middle">设备从站地址</p>
+					</div>
+					<div class="col-xs-9">
+						<input type="text" id="mbGateNo" class="form-control input-comm" placeholder="1">
+					</div>
+				</div>
+				<div class="modal-body row">
+					<div class="col-xs-3">
+						<p class="text-right middle">功能码</p>
+					</div>
+					<div class="col-xs-9">
+						<select id="mbFunCode" class="combobox selectpicker input-comm">
+							<option value="1">01:读线圈</option>
+							<option value="2">02:读离散量输入</option>
+							<option value="3">03:读保持寄存器</option>
+							<option value="4">04:读输入寄存器</option>
+						</select>
+					</div>
+				</div>
+				<div class="modal-body row">
+					<div class="col-xs-3">
+						<p class="text-right middle">寄存器地址</p>
+					</div>
+					<div class="col-xs-9">
+						<input type="text" id="mbRegisterAddress" class="form-control input-comm " placeholder="40001">
+					</div>
+				</div>
+				<div class="modal-body row" id="d_dataType">
+					<div class="col-xs-3">
+						<p class="text-right middle">数值类型</p>
+					</div>
+					<div class="col-xs-9">
+						<select class="selectpicker input-comm " id="dataType">
+							<option value="1">16位整形(有符号)</option>
+							<option value="2">16位整形(无符号)</option>
+							<option value="3">32位整形(有符号)</option>
+							<option value="4">32位整形(无符号)</option>
+							<option value="5">浮点型</option>
+							<option value="6">开关型</option>
+						</select>
+					</div>
+				</div>
+				<div class="modal-body row" id="d_dataDecodeOrder">
+					<div class="col-xs-3">
+						<p class="text-right middle">解码顺序</p>
+					</div>
+					<div class="col-xs-9">
+						<select class="selectpicker input-comm" id="dataDecodeOrder">
+							<option value="1">1234</option>
+							<option value="2">2143</option>
+							<option value="3">3412</option>
+							<option value="4">4321</option>
+						</select>
+					</div>
+				</div>
+				<div class="modal-body row" id="d_dataUnit">
+					<div class="col-xs-3">
+						<p class="text-right middle">单位</p>
+					</div>
+					<div class="col-xs-9">
+						<input type="text" id="dataUnit" class="form-control input-comm" placeholder="℃">
+					</div>
+				</div>
+				<div class="modal-body row" id="d_dataFun">
+					<div class="col-xs-3">
+						<p class="text-right middle">计算公式</p>
+					</div>
+					<div class="col-xs-9">
+						<input type="text" id="dataFun" class="form-control input-comm ">
+					</div>
+				</div>
+				<div class="modal-body row" id="d_dataBitPos">
+					<div class="col-xs-3">
+						<p class="text-right middle">bit位</p>
+					</div>
+					<div class="col-xs-9">
+						<input type="text" id="dataBitPos" class="form-control input-comm ">
+					</div>
+				</div>
+				<div class="modal-body row" id="d_data0Display">
+					<div class="col-xs-3">
+						<p class="text-right middle">0对应内容</p>
+					</div>
+					<div class="col-xs-9">
+						<select class="selectpicker input-comm" id="data0Display">
+							<option value="0">OFF</option>
+							<option value="1">ON</option>
+						</select>
+					</div>
+				</div>
+				<div class="modal-body row" id="d_data1Display">
+					<div class="col-xs-3">
+						<p class="text-right middle">1对应内容</p>
+					</div>
+					<div class="col-xs-9">
+						<select class="selectpicker input-comm" id="data1Display">
+							<option value="0">OFF</option>
+							<option value="1">ON</option>
+						</select>
+					</div>
+				</div>
+				<input type="hidden" id="deviceId" class="form-control input-comm">
+				<input type="hidden" id="id" class="form-control input-comm">
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="btn_newmbmd">新增</button>
+					<button type="button" class="btn btn-primary" id="btn_mbmdSave">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid div_dev">
+		<div class="page-header">
+			<h3>
+				元数据定义
+				<small>MODBUS配置</small>
+			</h3>
+		</div>
+		<div id="toolbardevTable">
+			<button id="download" class="btn btn-primary"
+				onClick="$('#devTable').tableExport({ type: 'excel', escape: 'false' })">数据导出</button>
+		</div>
+		<table id="devTable" data-toolbar="#toolbardevTable"></table>
+	</div>
+	<script type="text/javascript">
+		//初始化设备信息
+		$(function() {
+			initDevTable();
+		});
+	</script>
+
+	<script type="text/javascript">
+		function initDevTable() {
+			var data = {
+				"currIndex" : 1,
+				"pageSize" : 200
+			};
+	
+			$dev.selectByPage(data,
+				function(ret) {
+					var obj = ret.data;
+					for (i in obj) {
+						obj[i]['lastTime'] = $api.fromUnixtime(obj[i]['lastTime']);
+					}
+					$('#devTable').bootstrapTable({
+						data : obj,
+						striped : true,
+						pagination : true,
+						pageNumber : 1,
+						pageSize : 10,
+						pageList : [ 10, 50, 100, 1000 ],
+						search : true,
+						columns : [
+							{
+								title : '序号',
+								align : 'center',
+								formatter : function(value, row, index) {
+									return index + 1;
+								}
+							},
+							{
+								field : 'deviceName',
+								title : '设备名称',
+								align : 'center',
+								visible : true,
+								sortable : true
+							},
+							{
+								field : 'deviceType',
+								title : '设备类型',
+								align : 'center',
+								sortable : true
+							},
+							{
+								field : 'ownerName',
+								title : '型号',
+								align : 'center',
+								sortable : true
+							},
+							{
+								field : 'longitude',
+								title : '精度',
+								align : 'center',
+								sortable : true
+							},
+							{
+								field : 'latitude',
+								title : '纬度',
+								align : 'center',
+								sortable : true
+							},
+							{
+								field : 'position',
+								title : '安装位置',
+								align : 'center',
+								valign : 'middle',
+								sortable : true
+							},
+							{
+								field : 'isOnline',
+								title : '是否在线',
+								align : 'center',
+								sortable : true,
+								formatter : dataFormatterIsOnline
+							},
+							{
+								field : 'operate',
+								title : '操作',
+								align : 'center',
+								formatter : operateFormatter
+							} ],
+						formatNoMatches : function() {
+							return "没有相关的匹配结果";
+						},
+						formatLoadingMessage : function() {
+							return "";
+						}
+					});
+				},
+				function(ret) {
+					alert(ret.message);
+				});
+	
+		}
+	
+		function operateFormatter(value, row, index) {
+			return [
+				'<button type="button" class="btn btn-success  btn-sm" ',
+				'style="margin-right:5px;" data-toggle="modal" data-target="#mbMdTableModal"',
+				' onclick="openMbMdTable(\'' + escape(JSON.stringify(row)) + '\')">编辑</button>'
+			].join('');
+		}
+		function dataFormatterIsOnline(value, row, index) {
+			if (value) {
+				return '是';
+			} else {
+				return '否';
+			}
+		}
+	
+		function openMbMdTable(row) {
+			var rowData = unescape(row);
+			rowData = JSON.parse(rowData);
+			$("#mbMdTableLabel").text('设备   ' + rowData.deviceName + ' 元数据列表');
+			$("#deviceId").val(rowData.deviceId);
+			initMbMdTable(rowData.deviceId);
+		}
+	</script>
+	<script type="text/javascript">
+		function initMbMdTable(deviceId) {
+			//重新加载数据
+			$("#mbMdTable").bootstrapTable('destroy');
+			var data = {
+				"deviceId" : deviceId
+			};
+	
+			$modbus.selMdByDeviceId(data,
+				function(ret) {
+					var obj = ret.data;
+					for (i in obj) {
+						obj[i]['dataDecodeOrder_decode'] = decodeDataDecodeOrder(obj[i]['dataDecodeOrder']);
+						obj[i]['dataType_decode'] = decodeDataType(obj[i]['dataType']);
+					}
+					$('#mbMdTable').bootstrapTable({
+						data : obj,
+						// height : 600,
+						striped : true,
+						pagination : true,
+						pageNumber : 1,
+						pageSize : 10,
+						pageList : [ 10, 50, 100, 1000 ],
+						search : true,
+						maintainSelected : true,
+						// 						searchAlign : 'left',
+						columns : [
+							{
+								checkbox : true,
+								align : 'center',
+								visible : true
+							},
+							{
+								field : 'mbFunCode',
+								title : '功能吗',
+								align : 'center',
+								visible : true
+							},
+							{
+								field : 'dataName',
+								title : '数据名称',
+								align : 'center'
+							},
+							{
+								field : 'mbFunCode',
+								title : '功能码',
+								align : 'center'
+							},
+							{
+								field : 'mbRegisterAddress',
+								title : '寄存器地址',
+								align : 'center'
+							},
+							{
+								field : 'dataType_decode',
+								title : '数据类型',
+								align : 'center'
+							},
+							{
+								field : 'dataDecodeOrder_decode',
+								title : '编码顺序',
+								align : 'center'
+							},
+							{
+								field : 'dataUnit',
+								title : '数据单位',
+								align : 'center',
+								valign : 'middle'
+							},
+							{
+								field : 'operate',
+								title : '操作',
+								align : 'center',
+								formatter : mdOperate
+							} ],
+						formatNoMatches : function() {
+							return "没有相关的匹配结果";
+						},
+						formatLoadingMessage : function() {
+							return "";
+						}
+					});
+				},
+				function() {
+					alert('查询提示', '设备信息加载失败');
+				});
+		}
+	
+		function decodeDataDecodeOrder(value) {
+			if (value == '1') {
+				return '1234';
+			} else if (value == '2') {
+				return '2143';
+			} else if (value == '3') {
+				return '3412';
+			} else if (value == '4') {
+				return '4321';
+			} else {
+				return '0';
+			}
+		}
+	
+		function decodeDataType(value) {
+			if (value == '1') {
+				return '16位整形(有符号)';
+			} else if (value == '2') {
+				return '16位整形(无符号)';
+			} else if (value == '3') {
+				return '32位整形(有符号)';
+			} else if (value == '4') {
+				return '32位整形(无符号)';
+			} else if (value == '5') {
+				return '浮点型';
+			} else if (value == '6') {
+				return '开关型';
+			} else {
+				return '0';
+			}
+		}
+	
+		function mdOperate(value, row, index) {
+			return [
+				'<button type="button" class="btn btn-success  btn-sm" ',
+				'style="margin-right:5px;" data-toggle="modal" data-target="#mbMdModify"',
+				' onclick="editMbMd(\'' + escape(JSON.stringify(row)) + '\')">编辑</button>',
+				'<button type="button" class="btn btn-success  btn-sm" ',
+				'style="margin-right:5px;" data-toggle="modal"   ',
+				' onclick="editAlert(\'' + escape(JSON.stringify(row)) + '\')">报警</button>'
+			].join('');
+		}
+	
+		function editMbMd(row) {
+			var rowData = unescape(row);
+			rowData = JSON.parse(rowData);
+			$("#mbMdModifyLabel").text('编辑元数据 ' + rowData.dataName + ' 定义');
+			$("#mbGateNo").val(rowData.mbGateNo);
+			$("#mbFunCode").val(rowData.mbFunCode);
+			$("#mbRegisterAddress").val(rowData.mbRegisterAddress);
+			$("#dataName").val(rowData.dataName);
+			$("#dataType").val(rowData.dataType);
+			$("#dataDecodeOrder").val(rowData.dataDecodeOrder);
+			$("#dataUnit").val(rowData.dataUnit);
+			$("#data0Display").val(rowData.data0Display);
+			$("#data1Display").val(rowData.data1Display);
+			$("#dataFun").val(rowData.dataFun);
+			$("#id").val(rowData.id);
+			$("#mbFunCode").change();
+	
+			$('#mbMdModifyModal').modal('show');
+		}
+	
+		function editAlert(row) {
+			var rowData = unescape(row);
+			rowData = JSON.parse(rowData);
+		}
+	</script>
+	<script type="text/javascript">
+	
+		$("#mbFunCode").change(function() {
+	
+			$("#d_dataBitPos").hide();
+			if ($(this).val() == 1 || $(this).val() == 2) {
+				$("#d_dataUnit").hide();
+				$("#d_dataType").hide();
+				$("#d_dataFun").hide();
+				$("#d_dataDecodeOrder").hide();
+				$("#d_data0Display").show();
+				$("#d_data1Display").show();
+			} else {
+				$("#d_dataUnit").show();
+				$("#d_dataType").show();
+				$("#d_dataFun").show();
+				$("#d_dataDecodeOrder").show();
+				$("#d_data0Display").hide();
+				$("#d_data1Display").hide();
+			}
+		});
+	
+		$("#dataType").change(function() {
+			var option;
+			if ($(this).val() == 1 || $(this).val() == 2 || $(this).val() == 6) {
+				$("#dataDecodeOrder").empty();
+				option = $("<option>").val(1).text("12");
+				$("#dataDecodeOrder").append(option);
+				option = $("<option>").val(2).text("21");
+				$("#dataDecodeOrder").append(option);
+			} else {
+				$("#dataDecodeOrder").empty();
+				option = $("<option>").val(1).text("1234");
+				$("#dataDecodeOrder").append(option);
+				option = $("<option>").val(2).text("2143");
+				$("#dataDecodeOrder").append(option);
+				option = $("<option>").val(3).text("3412");
+				$("#dataDecodeOrder").append(option);
+				option = $("<option>").val(4).text("4321");
+				$("#dataDecodeOrder").append(option);
+			}
+			if ($(this).val() == 6) {
+				$("#d_dataFun").hide();
+				$("#d_dataUnit").hide();
+				$("#d_dataBitPos").show();
+				$("#d_data0Display").show();
+				$("#d_data1Display").show();
+			} else {
+				$("#d_dataFun").show();
+				$("#d_dataUnit").show();
+				$("#d_dataBitPos").hide();
+				$("#d_data0Display").hide();
+				$("#d_data1Display").hide();
+			}
+		});
+	
+		$("[id=btn_newmbmd]").click(function() {
+			$("#id").val("");
+			$("#mbGateNo").val(1);
+			$("#mbFunCode").val("3");
+			$("#mbRegisterAddress").val(0);
+			$("#dataName").val("");
+			$("#dataType").val(1);
+			$("#dataDecodeOrder").val(1);
+			$("#dataUnit").val("");
+			$("#data0Display").val("");
+			$("#data1Display").val("");
+			$("#dataFun").val("");
+	
+			$("#mbFunCode").change();
+	
+			$("#mbMdModifyLabel").text('新增元数据定义');
+			$('#mbMdModifyModal').modal('show');
+			$('#mbMdModifyModal').modal({
+				keyboard : false,
+			})
+		});
+	
+		$("#btn_mbmdSave").click(function() {
+			var data = {};
+			data.id = $("#id").val();
+			data.mbGateNo = $("#mbGateNo").val();
+			data.mbFunCode = $("#mbFunCode").val();
+			data.mbRegisterAddress = $("#mbRegisterAddress").val();
+			data.dataName = $("#dataName").val();
+			data.dataType = $("#dataType").val();
+			data.dataDecodeOrder = $("#dataDecodeOrder").val();
+			data.dataUnit = $("#dataUnit").val();
+			data.data0Display = $("#data0Display").val();
+			data.data1Display = $("#data1Display").val();
+			data.dataFun = $("#dataFun").val();
+			data.deviceId = $("#deviceId").val();
+			$modbus.saveMd(data,
+				function(ret) {
+					if (ret.code == 0) {
+						$("#id").val(ret.data.id);
+						$("#mbMdModifyLabel").text('编辑元数据 ' + ret.data.dataName + ' 定义');
+					} else {
+						alert("保存失败！");
+					}
+				},
+				function() {
+					alert('处理信息失败');
+				});
+		});
+	
+		$("#btn_delmbmd").click(function() {
+			var data = {};
+			data.mbMdDefines = $('#mbMdTable').bootstrapTable('getSelections');
+// 			prompt("---",JSON.stringify(data));
+			$modbus.delMdByIds(data,
+				function(ret) {
+					if (ret.code == 0) {
+						initMbMdTable($("#deviceId").val());
+					} else {
+						alert("删除失败！");
+					}
+				},
+				function() {
+					alert('处理信息失败');
+				});
+		});
+	
+		$('#mbMdModifyModal').on('hide.bs.modal',
+			function() {
+				initMbMdTable($("#deviceId").val());
+			})
+	</script>
+
+</body>
+</html>
