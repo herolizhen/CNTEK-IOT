@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.cntek.iot.design.dao.MbMetadataDefineMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cntek.iot.design.entity.MbMetadataDefine">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="gate_no" jdbcType="INTEGER" property="gateNo" />
+		<result column="dis_order" jdbcType="INTEGER"
+			property="disOrder" />
+		<result column="fun_code" jdbcType="INTEGER" property="funCode" />
+		<result column="reg_address" jdbcType="INTEGER"
+			property="regAddress" />
+		<result column="data_name" jdbcType="VARCHAR"
+			property="dataName" />
+		<result column="data_type" jdbcType="INTEGER"
+			property="dataType" />
+		<result column="data_decode" jdbcType="INTEGER"
+			property="dataDecode" />
+		<result column="data_unit" jdbcType="VARCHAR"
+			property="dataUnit" />
+		<result column="data_decimal" jdbcType="INTEGER"
+			property="dataDecimal" />
+		<result column="data_ratio" jdbcType="DECIMAL"
+			property="dataRatio" />
+		<result column="data_bit_pos" jdbcType="INTEGER"
+			property="dataBitPos" />
+		<result column="data_0_dis" jdbcType="VARCHAR"
+			property="data0Dis" />
+		<result column="data_1_dis" jdbcType="VARCHAR"
+			property="data1Dis" />
+		<result column="data_fun" jdbcType="VARCHAR" property="dataFun" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="org_id" jdbcType="VARCHAR" property="orgId" />
+		<result column="master_id" jdbcType="VARCHAR"
+			property="masterId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, gate_no, dis_order, fun_code, reg_address, data_name,
+		data_type,
+		data_decode,
+		data_unit, data_decimal, data_ratio,
+		data_bit_pos, data_0_dis, data_1_dis,
+		data_fun,
+		user_id, org_id,
+		master_id
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_metadata_define
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		t_mb_metadata_define
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.cntek.iot.design.entity.MbMetadataDefine">
+		insert into t_mb_metadata_define (ID, gate_no,
+		dis_order,
+		fun_code, reg_address, data_name,
+		data_type, data_decode,
+		data_unit,
+		data_decimal, data_ratio, data_bit_pos,
+		data_0_dis,
+		data_1_dis, data_fun,
+		user_id, org_id, master_id
+		)
+		values
+		(#{id,jdbcType=VARCHAR}, #{gateNo,jdbcType=INTEGER},
+		#{disOrder,jdbcType=INTEGER},
+		#{funCode,jdbcType=INTEGER},
+		#{regAddress,jdbcType=INTEGER}, #{dataName,jdbcType=VARCHAR},
+		#{dataType,jdbcType=INTEGER}, #{dataDecode,jdbcType=INTEGER},
+		#{dataUnit,jdbcType=VARCHAR},
+		#{dataDecimal,jdbcType=INTEGER},
+		#{dataRatio,jdbcType=DECIMAL}, #{dataBitPos,jdbcType=INTEGER},
+		#{data0Dis,jdbcType=VARCHAR}, #{data1Dis,jdbcType=VARCHAR},
+		#{dataFun,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{orgId,jdbcType=VARCHAR}, #{masterId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cntek.iot.design.entity.MbMetadataDefine">
+		insert into t_mb_metadata_define
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="gateNo != null">
+				gate_no,
+			</if>
+			<if test="disOrder != null">
+				dis_order,
+			</if>
+			<if test="funCode != null">
+				fun_code,
+			</if>
+			<if test="regAddress != null">
+				reg_address,
+			</if>
+			<if test="dataName != null">
+				data_name,
+			</if>
+			<if test="dataType != null">
+				data_type,
+			</if>
+			<if test="dataDecode != null">
+				data_decode,
+			</if>
+			<if test="dataUnit != null">
+				data_unit,
+			</if>
+			<if test="dataDecimal != null">
+				data_decimal,
+			</if>
+			<if test="dataRatio != null">
+				data_ratio,
+			</if>
+			<if test="dataBitPos != null">
+				data_bit_pos,
+			</if>
+			<if test="data0Dis != null">
+				data_0_dis,
+			</if>
+			<if test="data1Dis != null">
+				data_1_dis,
+			</if>
+			<if test="dataFun != null">
+				data_fun,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="orgId != null">
+				org_id,
+			</if>
+			<if test="masterId != null">
+				master_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="gateNo != null">
+				#{gateNo,jdbcType=INTEGER},
+			</if>
+			<if test="disOrder != null">
+				#{disOrder,jdbcType=INTEGER},
+			</if>
+			<if test="funCode != null">
+				#{funCode,jdbcType=INTEGER},
+			</if>
+			<if test="regAddress != null">
+				#{regAddress,jdbcType=INTEGER},
+			</if>
+			<if test="dataName != null">
+				#{dataName,jdbcType=VARCHAR},
+			</if>
+			<if test="dataType != null">
+				#{dataType,jdbcType=INTEGER},
+			</if>
+			<if test="dataDecode != null">
+				#{dataDecode,jdbcType=INTEGER},
+			</if>
+			<if test="dataUnit != null">
+				#{dataUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="dataDecimal != null">
+				#{dataDecimal,jdbcType=INTEGER},
+			</if>
+			<if test="dataRatio != null">
+				#{dataRatio,jdbcType=DECIMAL},
+			</if>
+			<if test="dataBitPos != null">
+				#{dataBitPos,jdbcType=INTEGER},
+			</if>
+			<if test="data0Dis != null">
+				#{data0Dis,jdbcType=VARCHAR},
+			</if>
+			<if test="data1Dis != null">
+				#{data1Dis,jdbcType=VARCHAR},
+			</if>
+			<if test="dataFun != null">
+				#{dataFun,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="masterId != null">
+				#{masterId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cntek.iot.design.entity.MbMetadataDefine">
+		update t_mb_metadata_define
+		<set>
+			<if test="gateNo != null">
+				gate_no = #{gateNo,jdbcType=INTEGER},
+			</if>
+			<if test="disOrder != null">
+				dis_order = #{disOrder,jdbcType=INTEGER},
+			</if>
+			<if test="funCode != null">
+				fun_code = #{funCode,jdbcType=INTEGER},
+			</if>
+			<if test="regAddress != null">
+				reg_address = #{regAddress,jdbcType=INTEGER},
+			</if>
+			<if test="dataName != null">
+				data_name = #{dataName,jdbcType=VARCHAR},
+			</if>
+			<if test="dataType != null">
+				data_type = #{dataType,jdbcType=INTEGER},
+			</if>
+			<if test="dataDecode != null">
+				data_decode = #{dataDecode,jdbcType=INTEGER},
+			</if>
+			<if test="dataUnit != null">
+				data_unit = #{dataUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="dataDecimal != null">
+				data_decimal = #{dataDecimal,jdbcType=INTEGER},
+			</if>
+			<if test="dataRatio != null">
+				data_ratio = #{dataRatio,jdbcType=DECIMAL},
+			</if>
+			<if test="dataBitPos != null">
+				data_bit_pos = #{dataBitPos,jdbcType=INTEGER},
+			</if>
+			<if test="data0Dis != null">
+				data_0_dis = #{data0Dis,jdbcType=VARCHAR},
+			</if>
+			<if test="data1Dis != null">
+				data_1_dis = #{data1Dis,jdbcType=VARCHAR},
+			</if>
+			<if test="dataFun != null">
+				data_fun = #{dataFun,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				org_id = #{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="masterId != null">
+				master_id = #{masterId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cntek.iot.design.entity.MbMetadataDefine">
+		update t_mb_metadata_define
+		set gate_no =
+		#{gateNo,jdbcType=INTEGER},
+		dis_order = #{disOrder,jdbcType=INTEGER},
+		fun_code = #{funCode,jdbcType=INTEGER},
+		reg_address =
+		#{regAddress,jdbcType=INTEGER},
+		data_name =
+		#{dataName,jdbcType=VARCHAR},
+		data_type = #{dataType,jdbcType=INTEGER},
+		data_decode = #{dataDecode,jdbcType=INTEGER},
+		data_unit =
+		#{dataUnit,jdbcType=VARCHAR},
+		data_decimal =
+		#{dataDecimal,jdbcType=INTEGER},
+		data_ratio =
+		#{dataRatio,jdbcType=DECIMAL},
+		data_bit_pos =
+		#{dataBitPos,jdbcType=INTEGER},
+		data_0_dis =
+		#{data0Dis,jdbcType=VARCHAR},
+		data_1_dis =
+		#{data1Dis,jdbcType=VARCHAR},
+		data_fun = #{dataFun,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=VARCHAR},
+		org_id =
+		#{orgId,jdbcType=VARCHAR},
+		master_id = #{masterId,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByUserId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_metadata_define
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByOrgId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_metadata_define
+		where org_id = #{orgId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByMasterId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_metadata_define
+		where master_id =
+		#{masterId,jdbcType=VARCHAR}
+		order by dis_order asc
+	</select>
+	<delete id="deleteByPKs" parameterType="int[]">
+		delete from t_mb_metadata_define
+		where ID in
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<select id="selectCountByMasterId" parameterType="map"
+		resultType="java.lang.Integer">
+		select
+		count(1)
+		from t_mb_metadata_define
+		where master_id =
+		#{masterId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByMasterIdAndDataName" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_metadata_define
+		where master_id =
+		#{masterId,jdbcType=VARCHAR}
+		and data_name like
+		CONCAT('%',#{dataName,jdbcType=VARCHAR},'%')
+		order by dis_order asc
+	</select>
+</mapper>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cntek.iot.design.dao.MbMasterMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cntek.iot.design.entity.MbMaster">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="description" jdbcType="VARCHAR"
+			property="description" />
+		<result column="display_type" jdbcType="VARCHAR"
+			property="displayType" />
+		<result column="pow_write" jdbcType="VARCHAR"
+			property="powWrite" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="org_id" jdbcType="VARCHAR" property="orgId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, name, description, display_type, pow_write, user_id,
+		org_id
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_master
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		t_mb_master
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.cntek.iot.design.entity.MbMaster">
+		insert into t_mb_master (ID, name, description,
+		display_type, pow_write, user_id,
+		org_id)
+		values
+		(#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{displayType,jdbcType=VARCHAR},
+		#{powWrite,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{orgId,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cntek.iot.design.entity.MbMaster">
+		insert into t_mb_master
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="displayType != null">
+				display_type,
+			</if>
+			<if test="powWrite != null">
+				pow_write,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="orgId != null">
+				org_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="displayType != null">
+				#{displayType,jdbcType=VARCHAR},
+			</if>
+			<if test="powWrite != null">
+				#{powWrite,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cntek.iot.design.entity.MbMaster">
+		update t_mb_master
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="displayType != null">
+				display_type = #{displayType,jdbcType=VARCHAR},
+			</if>
+			<if test="powWrite != null">
+				pow_write = #{powWrite,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				org_id = #{orgId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cntek.iot.design.entity.MbMaster">
+		update t_mb_master
+		set name = #{name,jdbcType=VARCHAR},
+		description = #{description,jdbcType=VARCHAR},
+		display_type =
+		#{displayType,jdbcType=VARCHAR},
+		pow_write =
+		#{powWrite,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=VARCHAR},
+		org_id = #{orgId,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByUserId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_master
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByOrgId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_master
+		where org_id = #{orgId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByOrgIdPageInfo" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_master
+		<if test="orgId != null">
+			<where>
+				<if test="orgId != null"> org_id = #{orgId,jdbcType=VARCHAR}</if>
+			</where>
+		</if>
+		limit
+		#{offset,jdbcType=INTEGER} , #{limit,jdbcType=INTEGER}
+	</select>
+	<select id="selectCountByOrgId" parameterType="map"
+		resultType="java.lang.Integer">
+		select
+		count(1)
+		from t_mb_master
+		<if test="orgId != null ">
+			<where>
+				<if test="orgId != null"> org_id = #{orgId,jdbcType=VARCHAR}</if>
+			</where>
+		</if>
+	</select>
+	<delete id="deleteByPKs" parameterType="int[]">
+		delete from t_mb_master
+		where ID in
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

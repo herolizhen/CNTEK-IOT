@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cntek.iot.dtu.dao.MbDtuInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cntek.iot.dtu.entity.MbDtuInfo">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="dtu_name" jdbcType="VARCHAR" property="dtuName" />
+		<result column="dtu_sn" jdbcType="VARCHAR" property="dtuSn" />
+		<result column="dtu_pw" jdbcType="VARCHAR" property="dtuPw" />
+		<result column="mac" jdbcType="VARCHAR" property="mac" />
+		<result column="module_name" jdbcType="VARCHAR"
+			property="moduleName" />
+		<result column="module_type" jdbcType="VARCHAR"
+			property="moduleType" />
+		<result column="firmware" jdbcType="VARCHAR"
+			property="firmware" />
+		<result column="firmware_type" jdbcType="VARCHAR"
+			property="firmwareType" />
+		<result column="is_activate" jdbcType="BIT"
+			property="isActivate" />
+		<result column="is_recovery" jdbcType="BIT"
+			property="isRecovery" />
+		<result column="iot_version" jdbcType="VARCHAR"
+			property="iotVersion" />
+		<result column="activate_time" jdbcType="TIMESTAMP"
+			property="activateTime" />
+		<result column="reg_ip" jdbcType="VARCHAR" property="regIp" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, dtu_name, dtu_sn, dtu_pw, mac, module_name,
+		module_type, firmware,
+		firmware_type,
+		is_activate, is_recovery,
+		iot_version, activate_time, reg_ip
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_dtu_info
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		t_mb_dtu_info
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.cntek.iot.dtu.entity.MbDtuInfo">
+		insert into t_mb_dtu_info (id, dtu_name, dtu_sn,
+		dtu_pw,
+		mac, module_name,
+		module_type, firmware, firmware_type,
+		is_activate,
+		is_recovery, iot_version,
+		activate_time, reg_ip)
+		values
+		(#{id,jdbcType=VARCHAR}, #{dtuName,jdbcType=VARCHAR},
+		#{dtuSn,jdbcType=VARCHAR},
+		#{dtuPw,jdbcType=VARCHAR},
+		#{mac,jdbcType=VARCHAR}, #{moduleName,jdbcType=VARCHAR},
+		#{moduleType,jdbcType=VARCHAR}, #{firmware,jdbcType=VARCHAR},
+		#{firmwareType,jdbcType=VARCHAR},
+		#{isActivate,jdbcType=BIT},
+		#{isRecovery,jdbcType=BIT}, #{iotVersion,jdbcType=VARCHAR},
+		#{activateTime,jdbcType=TIMESTAMP}, #{regIp,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cntek.iot.dtu.entity.MbDtuInfo">
+		insert into t_mb_dtu_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="dtuName != null">
+				dtu_name,
+			</if>
+			<if test="dtuSn != null">
+				dtu_sn,
+			</if>
+			<if test="dtuPw != null">
+				dtu_pw,
+			</if>
+			<if test="mac != null">
+				mac,
+			</if>
+			<if test="moduleName != null">
+				module_name,
+			</if>
+			<if test="moduleType != null">
+				module_type,
+			</if>
+			<if test="firmware != null">
+				firmware,
+			</if>
+			<if test="firmwareType != null">
+				firmware_type,
+			</if>
+			<if test="isActivate != null">
+				is_activate,
+			</if>
+			<if test="isRecovery != null">
+				is_recovery,
+			</if>
+			<if test="iotVersion != null">
+				iot_version,
+			</if>
+			<if test="activateTime != null">
+				activate_time,
+			</if>
+			<if test="regIp != null">
+				reg_ip,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="dtuName != null">
+				#{dtuName,jdbcType=VARCHAR},
+			</if>
+			<if test="dtuSn != null">
+				#{dtuSn,jdbcType=VARCHAR},
+			</if>
+			<if test="dtuPw != null">
+				#{dtuPw,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="moduleName != null">
+				#{moduleName,jdbcType=VARCHAR},
+			</if>
+			<if test="moduleType != null">
+				#{moduleType,jdbcType=VARCHAR},
+			</if>
+			<if test="firmware != null">
+				#{firmware,jdbcType=VARCHAR},
+			</if>
+			<if test="firmwareType != null">
+				#{firmwareType,jdbcType=VARCHAR},
+			</if>
+			<if test="isActivate != null">
+				#{isActivate,jdbcType=BIT},
+			</if>
+			<if test="isRecovery != null">
+				#{isRecovery,jdbcType=BIT},
+			</if>
+			<if test="iotVersion != null">
+				#{iotVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="activateTime != null">
+				#{activateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="regIp != null">
+				#{regIp,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cntek.iot.dtu.entity.MbDtuInfo">
+		update t_mb_dtu_info
+		<set>
+			<if test="dtuName != null">
+				dtu_name = #{dtuName,jdbcType=VARCHAR},
+			</if>
+			<if test="dtuSn != null">
+				dtu_sn = #{dtuSn,jdbcType=VARCHAR},
+			</if>
+			<if test="dtuPw != null">
+				dtu_pw = #{dtuPw,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				mac = #{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="moduleName != null">
+				module_name = #{moduleName,jdbcType=VARCHAR},
+			</if>
+			<if test="moduleType != null">
+				module_type = #{moduleType,jdbcType=VARCHAR},
+			</if>
+			<if test="firmware != null">
+				firmware = #{firmware,jdbcType=VARCHAR},
+			</if>
+			<if test="firmwareType != null">
+				firmware_type = #{firmwareType,jdbcType=VARCHAR},
+			</if>
+			<if test="isActivate != null">
+				is_activate = #{isActivate,jdbcType=BIT},
+			</if>
+			<if test="isRecovery != null">
+				is_recovery = #{isRecovery,jdbcType=BIT},
+			</if>
+			<if test="iotVersion != null">
+				iot_version = #{iotVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="activateTime != null">
+				activate_time = #{activateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="regIp != null">
+				reg_ip = #{regIp,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cntek.iot.dtu.entity.MbDtuInfo">
+		update t_mb_dtu_info
+		set dtu_name =
+		#{dtuName,jdbcType=VARCHAR},
+		dtu_sn = #{dtuSn,jdbcType=VARCHAR},
+		dtu_pw
+		= #{dtuPw,jdbcType=VARCHAR},
+		mac = #{mac,jdbcType=VARCHAR},
+		module_name
+		= #{moduleName,jdbcType=VARCHAR},
+		module_type =
+		#{moduleType,jdbcType=VARCHAR},
+		firmware =
+		#{firmware,jdbcType=VARCHAR},
+		firmware_type =
+		#{firmwareType,jdbcType=VARCHAR},
+		is_activate =
+		#{isActivate,jdbcType=BIT},
+		is_recovery = #{isRecovery,jdbcType=BIT},
+		iot_version = #{iotVersion,jdbcType=VARCHAR},
+		activate_time =
+		#{activateTime,jdbcType=TIMESTAMP},
+		reg_ip = #{regIp,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectAll" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_dtu_info
+	</select>
+
+	<delete id="deleteByPKs" parameterType="int[]">
+		delete from t_mb_dtu_info
+		where ID in
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<select id="validDtuSnPw"  parameterType="com.cntek.iot.dtu.entity.MbDtuInfo"
+		resultType="java.lang.Integer">
+		select
+		count(1)
+		from t_mb_dtu_info
+		where dtu_sn = #{dtuSn,jdbcType=VARCHAR}
+		and  dtu_pw = #{dtuPw,jdbcType=VARCHAR}
+	</select>
+</mapper>

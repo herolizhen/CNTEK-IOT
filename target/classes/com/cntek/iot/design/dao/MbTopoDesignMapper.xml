@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cntek.iot.design.dao.MbTopoDesignMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cntek.iot.design.entity.MbTopoDesign">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="is_main" jdbcType="BIT" property="isMain" />
+		<result column="dis_order" jdbcType="INTEGER"
+			property="disOrder" />
+		<result column="size" jdbcType="VARCHAR" property="size" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="org_id" jdbcType="VARCHAR" property="orgId" />
+		<result column="master_id" jdbcType="VARCHAR"
+			property="masterId" />
+		<result column="page_width" jdbcType="INTEGER"
+			property="pageWidth" />
+		<result column="page_height" jdbcType="INTEGER"
+			property="pageHeight" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.cntek.iot.design.entity.MbTopoDesign">
+		<result column="content" jdbcType="LONGVARCHAR"
+			property="content" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, title, is_main, dis_order, size, user_id, org_id,
+		master_id,
+		page_width, page_height
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_mb_topo_design
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectMainByMasterId"
+		parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_mb_topo_design
+		where master_id = #{id,jdbcType=VARCHAR}
+		and
+		is_main = 1
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		t_mb_topo_design
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.cntek.iot.design.entity.MbTopoDesign">
+		insert into t_mb_topo_design (ID, title, is_main,
+		dis_order, size, user_id,
+		org_id, master_id, page_width,
+		page_height,
+		content)
+		values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+		#{isMain,jdbcType=BIT},
+		#{disOrder,jdbcType=INTEGER},
+		#{size,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{orgId,jdbcType=VARCHAR}, #{masterId,jdbcType=VARCHAR},
+		#{pageWidth,jdbcType=INTEGER},
+		#{pageHeight,jdbcType=INTEGER},
+		#{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cntek.iot.design.entity.MbTopoDesign">
+		insert into t_mb_topo_design
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="isMain != null">
+				is_main,
+			</if>
+			<if test="disOrder != null">
+				dis_order,
+			</if>
+			<if test="size != null">
+				size,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="orgId != null">
+				org_id,
+			</if>
+			<if test="masterId != null">
+				master_id,
+			</if>
+			<if test="pageWidth != null">
+				page_width,
+			</if>
+			<if test="pageHeight != null">
+				page_height,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="isMain != null">
+				#{isMain,jdbcType=BIT},
+			</if>
+			<if test="disOrder != null">
+				#{disOrder,jdbcType=INTEGER},
+			</if>
+			<if test="size != null">
+				#{size,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="masterId != null">
+				#{masterId,jdbcType=VARCHAR},
+			</if>
+			<if test="pageWidth != null">
+				#{pageWidth,jdbcType=INTEGER},
+			</if>
+			<if test="pageHeight != null">
+				#{pageHeight,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cntek.iot.design.entity.MbTopoDesign">
+		update t_mb_topo_design
+		<set>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="isMain != null">
+				is_main = #{isMain,jdbcType=BIT},
+			</if>
+			<if test="disOrder != null">
+				dis_order = #{disOrder,jdbcType=INTEGER},
+			</if>
+			<if test="size != null">
+				size = #{size,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				org_id = #{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="masterId != null">
+				master_id = #{masterId,jdbcType=VARCHAR},
+			</if>
+			<if test="pageWidth != null">
+				page_width = #{pageWidth,jdbcType=INTEGER},
+			</if>
+			<if test="pageHeight != null">
+				page_height = #{pageHeight,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.cntek.iot.design.entity.MbTopoDesign">
+		update t_mb_topo_design
+		set title =
+		#{title,jdbcType=VARCHAR},
+		is_main = #{isMain,jdbcType=BIT},
+		dis_order =
+		#{disOrder,jdbcType=INTEGER},
+		size = #{size,jdbcType=VARCHAR},
+		user_id =
+		#{userId,jdbcType=VARCHAR},
+		org_id = #{orgId,jdbcType=VARCHAR},
+		master_id = #{masterId,jdbcType=VARCHAR},
+		page_width =
+		#{pageWidth,jdbcType=INTEGER},
+		page_height =
+		#{pageHeight,jdbcType=INTEGER},
+		content =
+		#{content,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cntek.iot.design.entity.MbTopoDesign">
+		update t_mb_topo_design
+		set title =
+		#{title,jdbcType=VARCHAR},
+		is_main = #{isMain,jdbcType=BIT},
+		dis_order =
+		#{disOrder,jdbcType=INTEGER},
+		size = #{size,jdbcType=VARCHAR},
+		user_id =
+		#{userId,jdbcType=VARCHAR},
+		org_id = #{orgId,jdbcType=VARCHAR},
+		master_id = #{masterId,jdbcType=VARCHAR},
+		page_width =
+		#{pageWidth,jdbcType=INTEGER},
+		page_height =
+		#{pageHeight,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByUserId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_topo_design
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByOrgId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_topo_design
+		where org_id = #{orgId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByMasterId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_topo_design
+		where master_id =
+		#{masterId,jdbcType=VARCHAR}
+		order by dis_order asc
+	</select>
+	<delete id="deleteByPKs" parameterType="int[]">
+		delete from t_mb_topo_design
+		where ID in
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<select id="selectCountByMasterId" parameterType="map"
+		resultType="java.lang.Integer">
+		select
+		count(1)
+		from t_mb_topo_design
+		where master_id =
+		#{masterId,jdbcType=VARCHAR}
+	</select>
+</mapper>

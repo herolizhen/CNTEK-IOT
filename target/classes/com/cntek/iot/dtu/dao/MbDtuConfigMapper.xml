@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cntek.iot.dtu.dao.MbDtuConfigMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cntek.iot.dtu.entity.MbDtuConfig">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="memo" jdbcType="VARCHAR" property="memo" />
+		<result column="dtu_sn" jdbcType="VARCHAR" property="dtuSn" />
+		<result column="rule_name" jdbcType="VARCHAR"
+			property="ruleName" />
+		<result column="rule_id" jdbcType="VARCHAR" property="ruleId" />
+		<result column="is_open" jdbcType="BIT" property="isOpen" />
+		<result column="is_online" jdbcType="BIT" property="isOnline" />
+		<result column="data_count" jdbcType="INTEGER"
+			property="dataCount" />
+		<result column="save_cycle" jdbcType="INTEGER"
+			property="saveCycle" />
+		<result column="location" jdbcType="VARCHAR"
+			property="location" />
+		<result column="longitude" jdbcType="DECIMAL"
+			property="longitude" />
+		<result column="latitude" jdbcType="DECIMAL"
+			property="latitude" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="org_id" jdbcType="VARCHAR" property="orgId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, img_url, name, memo, dtu_sn, rule_name, rule_id,
+		is_open, is_online,
+		data_count,
+		save_cycle, location, longitude,
+		latitude, user_id, org_id
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_dtu_config
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		t_mb_dtu_config
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.cntek.iot.dtu.entity.MbDtuConfig">
+		insert into t_mb_dtu_config (id, img_url, name,
+		memo,
+		dtu_sn, rule_name,
+		rule_id, is_open, is_online, data_count,
+		save_cycle,
+		location, longitude,
+		latitude, user_id, org_id
+		)
+		values
+		(#{id,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{memo,jdbcType=VARCHAR},
+		#{dtuSn,jdbcType=VARCHAR}, #{ruleName,jdbcType=VARCHAR},
+		#{ruleId,jdbcType=VARCHAR}, #{isOpen,jdbcType=BIT},
+		#{isOnline,jdbcType=BIT}, #{dataCount,jdbcType=INTEGER},
+		#{saveCycle,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR},
+		#{longitude,jdbcType=DECIMAL},
+		#{latitude,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cntek.iot.dtu.entity.MbDtuConfig">
+		insert into t_mb_dtu_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="imgUrl != null">
+				img_url,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="memo != null">
+				memo,
+			</if>
+			<if test="dtuSn != null">
+				dtu_sn,
+			</if>
+			<if test="ruleName != null">
+				rule_name,
+			</if>
+			<if test="ruleId != null">
+				rule_id,
+			</if>
+			<if test="isOpen != null">
+				is_open,
+			</if>
+			<if test="isOnline != null">
+				is_online,
+			</if>
+			<if test="dataCount != null">
+				data_count,
+			</if>
+			<if test="saveCycle != null">
+				save_cycle,
+			</if>
+			<if test="location != null">
+				location,
+			</if>
+			<if test="longitude != null">
+				longitude,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="orgId != null">
+				org_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="imgUrl != null">
+				#{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="memo != null">
+				#{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="dtuSn != null">
+				#{dtuSn,jdbcType=VARCHAR},
+			</if>
+			<if test="ruleName != null">
+				#{ruleName,jdbcType=VARCHAR},
+			</if>
+			<if test="ruleId != null">
+				#{ruleId,jdbcType=VARCHAR},
+			</if>
+			<if test="isOpen != null">
+				#{isOpen,jdbcType=BIT},
+			</if>
+			<if test="isOnline != null">
+				#{isOnline,jdbcType=BIT},
+			</if>
+			<if test="dataCount != null">
+				#{dataCount,jdbcType=INTEGER},
+			</if>
+			<if test="saveCycle != null">
+				#{saveCycle,jdbcType=INTEGER},
+			</if>
+			<if test="location != null">
+				#{location,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				#{longitude,jdbcType=DECIMAL},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cntek.iot.dtu.entity.MbDtuConfig">
+		update t_mb_dtu_config
+		<set>
+			<if test="imgUrl != null">
+				img_url = #{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="memo != null">
+				memo = #{memo,jdbcType=VARCHAR},
+			</if>
+			<if test="dtuSn != null">
+				dtu_sn = #{dtuSn,jdbcType=VARCHAR},
+			</if>
+			<if test="ruleName != null">
+				rule_name = #{ruleName,jdbcType=VARCHAR},
+			</if>
+			<if test="ruleId != null">
+				rule_id = #{ruleId,jdbcType=VARCHAR},
+			</if>
+			<if test="isOpen != null">
+				is_open = #{isOpen,jdbcType=BIT},
+			</if>
+			<if test="isOnline != null">
+				is_online = #{isOnline,jdbcType=BIT},
+			</if>
+			<if test="dataCount != null">
+				data_count = #{dataCount,jdbcType=INTEGER},
+			</if>
+			<if test="saveCycle != null">
+				save_cycle = #{saveCycle,jdbcType=INTEGER},
+			</if>
+			<if test="location != null">
+				location = #{location,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude,jdbcType=DECIMAL},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				org_id = #{orgId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cntek.iot.dtu.entity.MbDtuConfig">
+		update t_mb_dtu_config
+		set img_url =
+		#{imgUrl,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		memo =
+		#{memo,jdbcType=VARCHAR},
+		dtu_sn = #{dtuSn,jdbcType=VARCHAR},
+		rule_name
+		= #{ruleName,jdbcType=VARCHAR},
+		rule_id = #{ruleId,jdbcType=VARCHAR},
+		is_open = #{isOpen,jdbcType=BIT},
+		is_online = #{isOnline,jdbcType=BIT},
+		data_count = #{dataCount,jdbcType=INTEGER},
+		save_cycle =
+		#{saveCycle,jdbcType=INTEGER},
+		location = #{location,jdbcType=VARCHAR},
+		longitude = #{longitude,jdbcType=DECIMAL},
+		latitude =
+		#{latitude,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=VARCHAR},
+		org_id = #{orgId,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByUserId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_dtu_config
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByOrgId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_dtu_config
+		where org_id = #{orgId,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPKs" parameterType="int[]">
+		delete from t_mb_dtu_config
+		where ID in
+		<foreach item="item" index="index" collection="array" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="isDtuUsed"  parameterType="map"
+		resultType="java.lang.Integer">
+		select
+		count(1)
+		from t_mb_dtu_config
+		where dtu_sn = #{dtuSn,jdbcType=VARCHAR}
+		and id != #{id,jdbcType=VARCHAR}
+	</select>
+</mapper>
