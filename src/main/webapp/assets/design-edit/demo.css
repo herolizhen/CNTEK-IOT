@@ -13,19 +13,19 @@ ul {
 }
 
 #controlNameBox li:hover {
-	background: #ccc;
+	background: #ffff00;
 }
 
-.CNicons {
+#controlNameBox li img {
 	width: 24px;
 	height: 24px;
 	display: inline-block;
 	vertical-align: top;
 }
 
-.controlName {
+#controlNameBox li a  {
 	display: inline-block;
-	width: 140px;
+	width: 80px;
 	height: 24px;
 	font: 13px bold Î¢ÈíÑÅºÚ;
 	color: #000;
@@ -33,16 +33,8 @@ ul {
 	margin-left: 8px;
 }
 
-.box {
-	padding: 8px;
-	outline: rgb(32, 158, 145) dotted 8px;
-	border: 0px solid rgb(255, 255, 255);
-	border-image: none;
-	left: 109px;
-	top: 185px;
-	width: 266px;
-	height: 266px;
-	position: absolute;
-	z-index: 800;
-	outline-offset: -8px;
+.dev {
+	outline: rgb(32, 158, 145) dotted 4px;
+	border:1px solid #ccc;
+	padding:2px;
 }

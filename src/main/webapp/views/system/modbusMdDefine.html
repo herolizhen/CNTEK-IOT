@@ -48,7 +48,7 @@
 					<h4 class="modal-title" id="mbMdTableLabel">模态框（Modal）标题</h4>
 				</div>
 				<div id="toolbarmbMdTableModal">
-					<button type="button" id="download" id="btn_download" class="btn btn-primary"
+					<button type="button" id="btn_download" class="btn btn-primary"
 						onClick="$('#mbMdTable').tableExport({ type: 'excel', escape: 'false' })">数据导出</button>
 					<button type="button" id="btn_delmbmd" class="btn btn-primary">删除</button>
 					<button type="button" id="btn_newmbmd" class="btn btn-primary">新增</button>
@@ -609,7 +609,7 @@
 		$('#mbMdModifyModal').on('hide.bs.modal',
 			function() {
 				initMbMdTable($("#deviceId").val());
-			})
+			});
 	</script>
 
 </body>

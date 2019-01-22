@@ -4,7 +4,6 @@
 <!-- 
 	namespace：必须与对应的接口全类名一致
 	id:必须与对应接口的某个对应的方法名一致
-	
  -->
 <mapper namespace="com.cntek.iot.example.dao.UserDao">
 	

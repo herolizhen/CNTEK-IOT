@@ -41,12 +41,13 @@
 		parameterType="com.cntek.iot.modbus.entity.DevRealTime">
 		insert into ${tableName} ${insertString}
 	</insert>
+	
 	<select id="selectLast"
-		parameterType="com.cntek.iot.modbus.entity.DevRealTime"
+		parameterType="com.cntek.iot.modbus.entity.DevRealTime" 
 		resultType="java.util.HashMap">
 		select *
 		from ${tableName}
-		where dtime = (select max(dtime)
+		where d_time = (select max(d_time)
 		from ${tableName})
 	</select>
 

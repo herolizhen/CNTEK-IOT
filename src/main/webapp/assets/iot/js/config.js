@@ -5,9 +5,11 @@
 
 	cfg.URL_DEV_SELECTBYPAGE = HOST + '/' + APPNAME + '/device/selectByPage';
 	cfg.URL_DEV_SAVEORUPDATE = HOST + '/' + APPNAME + '/device/saveOrUpdate';
+	cfg.URL_DEV_GETREALTIMEDATA = HOST + '/' + APPNAME + '/device/getRealTimeData';
+
 	cfg.URL_MBMD_SELMDBYDEVICEID = HOST + '/' + APPNAME + '/modbus/selMdByDeviceId';
 	cfg.URL_MBMD_SAVEMD = HOST + '/' + APPNAME + '/modbus/saveMd';
 	cfg.URL_MBMD_DELMDBYIDS = HOST + '/' + APPNAME + '/modbus/delMdByIds';
-
 	w.$cfg = cfg;
+	
 })(window);

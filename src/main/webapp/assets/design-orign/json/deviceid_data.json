@@ -1,0 +1,13 @@
+{
+    "deviceid": 1,
+    "orgid": 4,
+    "orgname": "YPEC娴嬭瘯涓绘満",
+    "Address": 2,
+    "ValueType": 0,
+    "IndexOfType": 1,
+    "devname": "A鐩告湁鍔熷姛鐜囨柟鍚�(姝ｅ悜涓�0)",
+    "CurValue": "1",
+    "LinkState": 0,
+    "RecvTime": "2017-01-0515:17:16",
+    "Description": "寮�鍏抽噺杈撳叆DI"
+},{"deviceid":2,"orgid":4,"orgname":"YPEC娴嬭瘯涓绘満","Addres":2,"ValueType":0,"IndexOfType":2,"devname":"B鐩告湁鍔熷姛鐜囨柟鍚�(姝ｅ悜涓�0)","CurValue":"1","LinkState":0,"RecvTime":"2017-01-05 15:17:16","Description":"寮�鍏抽噺杈撳叆DI"},{"deviceid":3,"orgid":4,"orgname":"YPEC娴嬭瘯涓绘満","Address":2,"ValueType":0,"IndexOfType":3,"devname":"C鐩告湁鍔熷姛鐜囨柟鍚�(姝ｅ悜涓�0)","CurValue":"1","LinkState":0,"RecvTime":"2017-01-05 15:17:16","Description":"寮�鍏抽噺杈撳叆DI"},{"deviceid":4,"orgid":4,"orgname":"YPEC娴嬭瘯涓绘満","Address":2,"ValueType":0,"IndexOfType":4,"devname":"涓夌浉鏈夊姛鍔熺巼鏂瑰悜(姝ｅ悜涓�0)","CurValue":"1","LinkState":0,"RecvTime":"2017-01-05 15:17:16","Description":"寮�鍏抽噺杈撳叆DI"},{"deviceid":5,"orgid":4,"orgname":"YPEC娴嬭瘯涓绘満","Address":2,"ValueType":0,"IndexOfType":5,"devname":"A鐩告棤鍔熷姛鐜囨柟鍚�(姝ｅ悜涓�0)","CurValue":"0","LinkState":0,"RecvTime":"2017-01-05 15:17:16","Description":"寮�鍏抽噺杈撳叆DI"},{"deviceid":6,"orgid":4,"orgname":"YPEC娴嬭瘯涓绘満","Address":2,"ValueType":0,"IndexOfType":6,"devname":"B鐩告棤鍔熷姛鐜囨柟鍚�(姝ｅ悜涓�0)","CurValue":"1","LinkState":0,"RecvTime":"2017-01-05 15:17:21","Description":"寮�鍏抽噺杈撳叆DI"},{"deviceid":7,"orgid":4,"orgname":"YPEC娴嬭瘯涓绘満","Address":2,"ValueType":0,"IndexOfType":7,"devname":"C鐩告棤鍔熷姛鐜囨柟鍚�(姝ｅ悜涓�0)","CurValue":"1","LinkState":0,"RecvTime":"2017-01-05 15:17:28","Description":"寮�鍏抽噺杈撳叆DI"},{"deviceid":8,"orgid":4,"orgname":"YPEC娴嬭瘯涓绘満","Address":2,"ValueType":0,"IndexOfType":8,"devname":"涓夌浉鏃犲姛鍔熺巼鏂瑰悜(姝ｅ悜涓�0)","CurValue":"1","LinkState":0,"RecvTime":"2017-01-05 15:17:16","Description":"寮�鍏抽噺杈撳叆DI"},{"deviceid":9,"orgid":2,"orgname":"YPEC娴嬭瘯涓绘満","Address":255,"ValueType":0,"IndexOfType":1,"devname":"鍛婅娴嬭瘯","CurValue":"1","LinkState":0,"RecvTime":"2016-12-27 09:51:58","Description":"寮�鍏抽噺杈撳叆DI"},{"deviceid":10,"orgid":2,"orgname":"YPEC娴嬭瘯涓绘満","Address":255,"ValueType":1,"IndexOfType":2,"devname":"澶囩敤杈撳嚭2","CurValue":"0","LinkState":0,"RecvTime":"2016-12-26 15:43:52","Description":"寮�鍏抽噺杈撳嚭DO"}

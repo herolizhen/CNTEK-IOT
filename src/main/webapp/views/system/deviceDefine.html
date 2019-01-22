@@ -16,7 +16,7 @@
 <script src="../../assets/iot/js/device.js?v=1.0.0"></script>
 <script src="../../assets/iot/js/modbus.js?v=1.0.0"></script>
 <script type="text/javascript"
-	src="https://api.map.baidu.com/api?v=3.0&ak=GQ4zmNLkdvCz0Hi9cV020YVZOerfWTFQ"></script>
+	src="https://api.map.baidu.com/api?v=3.0&ak=d0GGkN7Lnx6BqTGYzPiSHnPCj02daVYT"></script>
 <style type="text/css">
 .page-header {
 	padding-bottom: 1px;
@@ -35,7 +35,7 @@
 	margin: 0;
 	font-family: "微软雅黑";
 }
-
+//百度地图索引层建议
 .tangram-suggestion-main {
 	z-index: 1060;
 }
@@ -307,7 +307,6 @@
 			var rowData = unescape(row);
 			rowData = JSON.parse(rowData);
 			$("#detailModalLabel").text('编辑设备：   ' + rowData.deviceName);
-	
 			$("#deviceId").val(rowData.deviceId);
 			$("#deviceName").val(rowData.deviceName);
 			$("#deviceType").val(rowData.deviceType);
@@ -337,7 +336,7 @@
 			$("#latitude").val("");
 			$("#installer").val("");
 			$("#installDate").val("");
-			$("#manager").val(v);
+			$("#manager").val("");
 			$("#tel").val("");
 			$('#detailModal').modal('show');
 		})
@@ -357,7 +356,6 @@
 			data.installDate = $("#installDate").val();
 			data.manager = $("#manager").val();
 			data.tel = $("#tel").val();
-			// 			prompt("123123", JSON.stringify(data));
 			$dev.saveOrUpdate(data,
 				function(ret) {
 					if (ret.code == 0) {
@@ -452,9 +450,9 @@
 				},
 				function() {
 					alert('处理信息失败');
-				});
+			});
 		})
-	//根据role属相选择对象
+		//根据role属相选择对象
 		$("[role]").on('hide.bs.modal',
 			function() {
 				initTableData();

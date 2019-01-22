@@ -1,6 +1,7 @@
 package com.cntek.iot.modbus.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -102,23 +103,12 @@ public class DevRealTimeServiceImpl implements IDevRealTimeService {
 	}
 
 	@Override
-	public Map<String, Object> selectLast(String tableName) {
+	public List<Map<String, Object>> selectLast(String tableName) {
 		DevRealTime drt = new DevRealTime();
 		tableName = "T_RT_" + tableName.replaceAll("\\-", "");
 		drt.setTableName(tableName);
-		Map<String, Object> lastDateSet = this.devRealTimeDao.selectLast(drt);
-		if (lastDateSet != null) {
-			Map<String, Object> set = new HashMap<String, Object>();
-			for (String key : lastDateSet.keySet()) {
-				if (key.toUpperCase().indexOf("COL_") == 0) {
-					set.put(key.split("_")[1], lastDateSet.get(key));
-				} else if (key.equalsIgnoreCase("dtime")) {
-					set.put(key, lastDateSet.get(key));
-				}
-			}
-			return set;
-		}
-		return null;
+		List<Map<String, Object>> lastDateSet = this.devRealTimeDao.selectLast(drt);
+		return lastDateSet;
 	}
 
 }

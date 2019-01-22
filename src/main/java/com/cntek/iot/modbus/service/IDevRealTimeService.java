@@ -1,5 +1,6 @@
 package com.cntek.iot.modbus.service;
 
+import java.util.List;
 import java.util.Map;
 
 public interface IDevRealTimeService {
@@ -13,6 +14,6 @@ public interface IDevRealTimeService {
 
 	int insertData(String tableName, String jsonString) throws Exception;
 
-	Map<String, Object> selectLast(String tableName) throws Exception;
+	List<Map<String, Object>> selectLast(String tableName) throws Exception;
 
 }

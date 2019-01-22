@@ -52,7 +52,7 @@ public class MbMdDefineServiceImpl implements IMbMdDefineService {
 		for (int i = 0; i < list.size(); i++) {
 			MbMdDefine mbDefine = list.get(i);
 			if (mbDefine.getMbRegisterAddress() >= reg_begin
-					&& mbDefine.getMbRegisterAddress() <= (reg_begin + data_len)) {
+					&& mbDefine.getMbRegisterAddress() < (reg_begin + data_len)) {
 				Object d = dealMbData(hexString, reg_begin, data_len, mbDefine);
 				insertData(mbDefine, d);
 			}
@@ -68,7 +68,8 @@ public class MbMdDefineServiceImpl implements IMbMdDefineService {
 			sb.append("mb_gate_no int NOT NULL,");
 			sb.append("mb_fun_code int NOT NULL,");
 			sb.append("mb_register_address int NOT NULL,");
-			sb.append("d_time timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),");
+//			sb.append("d_time timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),");
+			sb.append("d_time timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),");		
 			sb.append("d_dec decimal(12,4) DEFAULT NULL,");
 			sb.append("d_char varchar(45) DEFAULT NULL,");
 			sb.append("PRIMARY KEY (device_id,mb_gate_no,mb_fun_code,mb_register_address,d_time)");

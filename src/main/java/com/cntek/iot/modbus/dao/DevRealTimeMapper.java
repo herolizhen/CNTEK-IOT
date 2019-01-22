@@ -14,7 +14,7 @@ public interface DevRealTimeMapper {
 
 	List<DevRealTime> getTableCols(DevRealTime devRealTime);
 
-	Map<String, Object> selectLast(DevRealTime devRealTime);
+	List<Map<String, Object>> selectLast(DevRealTime devRealTime);
 
 	int insertData(DevRealTime DevRealTime);
 

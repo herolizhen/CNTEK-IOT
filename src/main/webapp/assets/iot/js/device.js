@@ -14,5 +14,9 @@
     	Initialize();
     	$iot.POST($cfg.URL_DEV_SAVEORUPDATE, dev.token, data, success, error);
     };
+    dev.getRealTimeData= function (data, success, error) {
+    	Initialize();
+    	$iot.POST($cfg.URL_DEV_GETREALTIMEDATA, dev.token, data, success, error);
+    };
     w.$dev = dev;
 })(window);

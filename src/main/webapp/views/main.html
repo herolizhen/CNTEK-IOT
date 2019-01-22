@@ -153,25 +153,17 @@
 								<li data-key="111" onclick="onMenuHor(this)"><a>设备列表</a></li>
 								<li data-key="222" onclick="onMenuHor(this)"><a>元数据管理</a></li>
 							</ul></li>
-						<li><a class="has-arrow" aria-expanded="false">组态管理</a>
+						<li><a class="has-arrow" aria-expanded="false">我的设备</a>
 							<ul aria-expanded="false">
-								<li data-key="333" onclick="onMenuHor(this)"><a>组态设计</a></li>
-								<li data-key="444" onclick="onMenuHor(this)"><a>组态设计-new</a></li>
-								<li data-key="555" onclick="onMenuHor(this)"><a>组态设计-demo</a></li>
+								<li data-key="333" onclick="onMenuHor(this)"><a>设备监控</a></li>
+								<li data-key="444" onclick="onMenuHor(this)"><a>改造版本</a></li>
+<!-- 								<li data-key="555" onclick="onMenuHor(this)"><a>重新开发</a></li> -->
 							</ul></li>
-						<li><a class="has-arrow" aria-expanded="false">权限管理</a>
+						<li><a class="has-arrow" aria-expanded="false">设备监测</a>
 							<ul aria-expanded="false">
-								<li><a>item 2.1</a></li>
-								<li><a>item 2.2</a></li>
-								<li><a>item 2.3</a></li>
-								<li><a>item 2.4</a></li>
-							</ul></li>
-						<li><a class="has-arrow" aria-expanded="false">监控中心</a>
-							<ul aria-expanded="false">
-								<li><a>item 2.1</a></li>
-								<li><a>item 2.2</a></li>
-								<li><a>item 2.3</a></li>
-								<li><a>item 2.4</a></li>
+								<li data-key="666" onclick="onMenuHor(this)"><a>规则定义</a></li>
+								<li data-key="777" onclick="onMenuHor(this)"><a>模块管理</a></li>
+								<li data-key="888" onclick="onMenuHor(this)"><a>DTU台账</a></li>
 							</ul></li>
 					</ul>
 				</nav>
@@ -210,11 +202,17 @@
 			} else if (key == '222') {
 				url = '../views/system/modbusMdDefine.html' ;
 			} else if (key == '333') {
-				url = '../assets/design/index.html' ;
+				url = '../dtu/userDtuList' ;
 			}else if (key == '444') {
-				url = '../assets/scada/index.html' ;
+				url = '../assets/design-orign/index.html' ;
 			}else if (key == '555') {
-				url = '../assets/demo/index.html' ;
+				url = '../assets/design-demo/index.html' ;
+			}else if (key == '666') {
+				url = '../design/master' ;
+			}else if (key == '777') {
+				url = '../dtu/config' ;
+			}else if (key == '888') {
+				url = '../dtu/info' ;
 			}
 			$('#iframe_fun').prop('src', url);
 		}

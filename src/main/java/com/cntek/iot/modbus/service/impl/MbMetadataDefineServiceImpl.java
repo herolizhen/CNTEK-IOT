@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
 import com.cntek.iot.modbus.dao.DevRealTimeMapper;
-import com.cntek.iot.modbus.dao.MbMetadataDefineMapper;
+import com.cntek.iot.modbus.dao.MbMetadataMapper;
 import com.cntek.iot.modbus.dto.MbComm;
 import com.cntek.iot.modbus.entity.DevRealTime;
 import com.cntek.iot.modbus.entity.MbMetadataDefine;
@@ -23,7 +23,7 @@ public class MbMetadataDefineServiceImpl implements IMbMetadataDefineService {
 
 	private static Log log = LogFactory.getLog(MbMetadataDefineServiceImpl.class);
 	@Resource
-	MbMetadataDefineMapper mbMetadataDefineDao;
+	MbMetadataMapper mbMetadataDefineDao;
 
 	@Resource
 	DevRealTimeMapper devRealTimeDao;
