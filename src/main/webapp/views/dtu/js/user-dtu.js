@@ -67,13 +67,6 @@ function initTable() {
 				width : '120',
 				halign : 'center',
 				align : 'left'
-			},
-			{
-				field : 'operate',
-				title : '操作',
-				align : 'center',
-				width : '160',
-				formatter : operateFormatter
 			} ],
 		formatNoMatches : function() {
 			return '没有相关的匹配结果';
@@ -84,9 +77,12 @@ function initTable() {
 	});
 }
 
-function imgFromUrl(value,row,index){
-	return '<img  src="'+value+'"  style="padding:1px;background:#13151f;border:solid #1e2132 1px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px; max-width: 100%" >';
-	//return '<img src="'+value+'"  class="img-rounded">';
+function imgFromUrl(value, row, index) {
+	var inHtml = [ '<a  target="_blank" href="topoShow?dtuId=' + row.id + '">',
+		'<img  src="' + value + '"  style="padding:1px;background:#ACF1FD;border:solid #ACF1FD 1px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px; max-width: 100%" >',
+		'</a>'
+	].join('');
+	return inHtml;
 }
 
 function isOnlineToStr(value, row, index) {
