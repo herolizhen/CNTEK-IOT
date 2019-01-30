@@ -26,4 +26,7 @@ public interface MbDtuConfigMapper {
 	int deleteByPKs(String[] ids);
 	
 	int isDtuUsed(@Param("dtuSn") String dtuSn, @Param("id") String id);
+	
+	List<MbDtuConfig> selPowUserDtuConfig(String userId);
+	
 }

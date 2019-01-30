@@ -11,23 +11,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta name="content-type" content="text/html; charset=UTF-8">
-
-<link rel="stylesheet"
-	href="<%=basePath%>assets/jquery-easyui/themes/default/easyui.css">
-<link rel='stylesheet'
-	href='<%=basePath%>views/design/css/uc-color-picker.css' />
-<link rel='stylesheet'
-	href='<%=basePath%>views/design/css/uc-goal-thermometer.css' />
-
+<link rel="stylesheet" href="<%=basePath%>assets/jquery-easyui/themes/default/easyui.css">
+<link rel='stylesheet' href='<%=basePath%>views/design/css/uc-color-picker.css' />
+<link rel='stylesheet' href='<%=basePath%>views/design/css/uc-goal-thermometer.css' />
 <script src="<%=basePath%>assets/jquery/jquery-3.3.1.js"></script>
 <script src="<%=basePath%>assets/jquery-easyui/jquery.easyui.min.js"></script>
-<script src='<%=basePath%>/views/design/js/echarts.js'></script> 
+<script src='<%=basePath%>/views/design/js/echarts.js'></script>
 <script src="<%=basePath%>views/design/js/uc-goal-thermometer.js"></script>
 <script src='<%=basePath%>views/design/js/uc-color-picker.js'></script>
 <script src="<%=basePath%>views/design/js/topo-show.js"></script>
 <script src="<%=basePath%>views/design/js/easyui-lang-zh_CN.js"></script>
-
-
 <style>
 * {
 	margin: 0;
@@ -93,10 +86,7 @@ ul {
 </style>
 </head>
 <body class="easyui-layout" style="width:100%;height:100%;">
-
-	<div title="预览" data-options="closable:false"
-		style="padding:4px;position:relative;" id="previewBox"></div>
-
+	<div title="预览" data-options="closable:false" style="padding:4px;position:relative;" id="previewBox"></div>
 	<script type="text/javascript">
 		var topoId = '${topoId}';
 		var masterId = '${masterId}';

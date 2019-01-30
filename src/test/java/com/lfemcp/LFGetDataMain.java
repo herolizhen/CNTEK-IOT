@@ -16,9 +16,9 @@ public class LFGetDataMain {
 
 	public static void main(String[] args) {
 
-		String from = "2019-01-21 00:00";
-		String end =  "2019-01-22 00:00";
 
+		String from = "2019-01-29 00:00";
+		String end = "2019-01-30 00:00";
 		String czSn = "A0I9F328";
 		String wxSn = "A0I7R290";
 		String rule = "4542";
@@ -38,7 +38,7 @@ public class LFGetDataMain {
 
 			// 常州伍丰
 
-			DbOperate.delete(cztable, from);
+			DbOperate.delete(cztable, from,end);
 			System.out.println("删除数据表：" + cztable);
 
 			outputString = interfaceUtil("http://www.lfemcp.com/DataAction!queryHistory.action",
@@ -58,7 +58,7 @@ public class LFGetDataMain {
 
 			// 无锡龙源
 
-			DbOperate.delete(wxtable, from);
+			DbOperate.delete(wxtable, from,end);
 			System.out.println("删除数据表：" + wxtable);
 
 			outputString = interfaceUtil("http://www.lfemcp.com/DataAction!queryHistory.action",

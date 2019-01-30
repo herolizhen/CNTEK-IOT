@@ -6,7 +6,7 @@ import com.cntek.iot.design.entity.MbMaster;
 import com.cntek.iot.design.entity.MbMetadataDefine;
 import com.cntek.iot.design.entity.MbTopoDesign;
 
-public interface IModbusService {
+public interface IDesignService {
 
 	MbMaster insertMbMaster(MbMaster record);
 

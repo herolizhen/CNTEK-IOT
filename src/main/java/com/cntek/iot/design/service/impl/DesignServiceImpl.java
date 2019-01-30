@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
+
 import org.springframework.stereotype.Service;
 
 import com.cntek.iot.design.dao.MbMasterMapper;
@@ -13,11 +14,12 @@ import com.cntek.iot.design.dao.MbTopoDesignMapper;
 import com.cntek.iot.design.entity.MbMaster;
 import com.cntek.iot.design.entity.MbMetadataDefine;
 import com.cntek.iot.design.entity.MbTopoDesign;
-import com.cntek.iot.design.service.IModbusService;
+import com.cntek.iot.design.service.IDesignService;
 import com.mysql.cj.util.StringUtils;
 
-@Service("modbusService")
-public class ModbusServiceImpl implements IModbusService {
+
+@Service("designService")
+public class DesignServiceImpl implements IDesignService {
 
 //	private static Log log = LogFactory.getLog(ModbusServiceImpl.class);
 	@Resource
@@ -178,7 +180,7 @@ public class ModbusServiceImpl implements IModbusService {
 	@Override
 	public MbMaster insertOrUpdateMaster(MbMaster record) {
 		int ret = 0;
-		if (StringUtils.isNullOrEmpty(record.getId())) {
+		if (StringUtils.isEmptyOrWhitespaceOnly(record.getId())) {
 			record.setId(UUID.randomUUID().toString());
 			ret = this.masterDao.insertSelective(record);
 		} else {
@@ -197,7 +199,7 @@ public class ModbusServiceImpl implements IModbusService {
 		int order = this.metadaDefineDao.selectCountByMasterId(record.getMasterId());
 		order++;
 		record.setDisOrder(order);
-		if (StringUtils.isNullOrEmpty(record.getId())) {
+		if (StringUtils.isEmptyOrWhitespaceOnly(record.getId())) {
 			record.setId(UUID.randomUUID().toString());
 			ret = this.metadaDefineDao.insertSelective(record);
 		} else {
@@ -221,7 +223,7 @@ public class ModbusServiceImpl implements IModbusService {
 		count++;
 		record.setDisOrder(count);
 		int ret = 0;
-		if (StringUtils.isNullOrEmpty(record.getId())) {
+		if (StringUtils.isEmptyOrWhitespaceOnly(record.getId())) {
 			record.setId(UUID.randomUUID().toString());
 			ret = this.topoDesignDao.insertSelective(record);
 		} else {

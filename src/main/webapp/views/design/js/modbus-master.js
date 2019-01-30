@@ -188,7 +188,6 @@ function operateFormatter(value, row, index) {
 		'style="margin-right:5px;" data-toggle="modal" data-target="#topoTableModal"',
 		' onclick="openTopoTable(\'' + escape(JSON.stringify(row)) + '\')">组态设计</button>',
 	].join('');
-
 }
 
 function editmaster(row) {
@@ -214,7 +213,6 @@ function editmaster(row) {
 		keyboard : false,
 	})
 }
-
 
 function openMbMdTable(row) {
 	var rowData = unescape(row);

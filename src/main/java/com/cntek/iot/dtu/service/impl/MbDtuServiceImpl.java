@@ -28,7 +28,23 @@ public class MbDtuServiceImpl implements IMbDtuService {
 
 	@Override
 	public List<MbDtuConfig> selectConfigByUserId(String userId) {
-		return this.configDao.selectByUserId(userId);
+		List<MbDtuConfig>  ownerList =  this.configDao.selectByUserId(userId);
+		List<MbDtuConfig>  list = this.configDao.selPowUserDtuConfig(userId);
+		
+		for(int i = 0;i<list.size();i++) {
+			boolean isHave = false;
+			MbDtuConfig config = (MbDtuConfig)list.get(i);
+			for( int j=0;j<ownerList.size();j++) {
+				MbDtuConfig ownerConfig = (MbDtuConfig)ownerList.get(j);
+				if(ownerConfig.getId().equalsIgnoreCase(config.getId())) {
+					isHave = true;
+				}
+			}
+			if(!isHave) {
+				ownerList.add(config);
+			}
+		}
+		return ownerList;
 	}
 
 	@Override

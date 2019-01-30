@@ -2,139 +2,55 @@
 $(function() {
 	initInfoTable();
 
+	$('#infoForm').validate({
+		rules : {
+			'dtuName' : {
+				required : true,
+				minlength : 2,
+				maxlength : 36
+			},
+			'dtuSn' : {
+				required : true,
+				minlength : 5,
+				maxlength : 20
+			},
+			'dtuPw' : {
+				required : true,
+				maxlength : 20
+			}
+		},
+		messages : {
+			'dtuName' : {
+				required : '请输入数据名称',
+				maxlength : '数据名称不能超过{0}个字符',
+				minlength : '数据名称不能少于{0}个字符'
+			},
+			'dtuSn' : {
+				required : '请输入数据名称',
+				maxlength : '数据名称不能超过{0}个字符',
+				minlength : '数据名称不能少于{0}个字符'
+			},
+			'dtuPw' : {
+				maxlength : '数据名称不能超过{0}个字符'
+			}
+		}
+	});
+
 	$('#btn_newinfo').click(function() {
-		$('#infoId').val('');
-		$('#dtuName').val('');
-		$('#dtuSn').val('');
-		$('#dtuPw').val('111111');
-		$('#mac').val('');
-		$('#moduleName').val('');
-		$('#moduleType').val('1');
-		$('#firmware').val('');
-		$('#firmwareType').val('');
-//		$('#isActivate0').prop('checked', true);
-		$('#isRecovery0').prop('checked', true);
-		$('#iotVersion').val('');
-//		$('#activateTime').val('');
-		$('#infoModal').modal('show');
-		$('#infoModal').modal({
-			keyboard : false,
-		})
+		newInfo();
 	});
 
 	$('#btn_delinfo').click(function() {
-		var ids = '';
-		$.each($('#infoTable').bootstrapTable('getSelections'), function(i, item) {
-			if (i == 0) {
-				ids += item.id;
-			} else {
-				ids += ',' + item.id;
-			}
-		});
-		$.ajax({
-			url : 'delInfo',
-			type : 'POST',
-			data : {
-				'ids' : ids
-			},
-			dataType : 'json',
-			success : function(ret) {
-				if (ret.code == 0) {
-					$('#infoTable').bootstrapTable('refresh');
-				} else {
-					alert('信息删除失败！');
-				}
-			},
-			error : function(xhr) {
-				console.log(JSON.stringify(xhr));
-				alert('信息删除失败！');
-			}
-		});
+		delInfo();
 	});
 
 	$('#btn_savinfo').click(function() {
-//		if (!valid.form()) {
-//			return;
-//		}
-		var data = {};
-		data.id = $('#infoId').val();
-		data.dtuName = $('#dtuName').val();
-		data.dtuSn = $('#dtuSn').val();
-		data.dtuPw = $('#dtuPw').val();
-		data.mac = $('#mac').val();
-		data.moduleName = $('#moduleName').val();
-		data.moduleType = $('#moduleType').val();
-		data.firmware = $('#firmware').val();
-		data.firmwareType = $('#firmwareType').val();	
-//		if ($('#isActivate1').prop('checked') == true) {
-//			data.isActivate = 1;
-//		} else {
-//			data.isActivate = 0;
-//		}
-		if ($('#isRecovery1').prop('checked') == true) {
-			data.isRecovery = 1;
-		} else {
-			data.isRecovery = 0;
+		if (!$('#orgForm').valid()) {
+			return;
 		}
-		data.iotVersion = $('#iotVersion').val();
-//		data.regIp = $('#regIp').val();
-		$.ajax({
-			url : 'savInfo',
-			type : 'POST',
-			data : data,
-			dataType : 'json',
-			success : function(ret) {
-				if (ret.code == 0) {
-					$('#infoTable').bootstrapTable('refresh');
-					$('#infoId').val(ret.data.id);
-				} else {
-					alert('信息保存失败！');
-				}
-			},
-			error : function(xhr) {
-				console.log(JSON.stringify(xhr));
-				alert('信息保存失败！');
-			}
-		});
+		savInfo();
 	});
 
-	var valid = validateForm();
-	function validateForm() {
-		var valid = $('#infoForm').validate({
-			rules : {
-				'dtuName' : {
-					required : true,
-					minlength : 2,
-					maxlength : 36
-				},
-				'dtuSn' : {
-					required : true,
-					minlength : 5,
-					maxlength : 20
-				},
-				'dtuPw' : {
-					required : true,
-					maxlength : 20
-				}
-			},
-			messages : {
-				'dtuName' : {
-					required : '请输入数据名称',
-					maxlength : '数据名称不能超过{0}个字符',
-					minlength : '数据名称不能少于{0}个字符'
-				},
-				'dtuSn' : {
-					required : '请输入数据名称',
-					maxlength : '数据名称不能超过{0}个字符',
-					minlength : '数据名称不能少于{0}个字符'
-				},
-				'dtuPw' : {
-					maxlength : '数据名称不能超过{0}个字符'
-				}
-			}
-		});
-		return valid;
-	}
 });
 
 function initInfoTable() {
@@ -142,7 +58,6 @@ function initInfoTable() {
 		url : 'getInfoPage', //服务器数据的加载地址
 		striped : true, //设置为 true 会有隔行变色效果
 		pagination : true, //开启分页
-		//sidePagination : 'server', //服务器端分页
 		pageNumber : 1, //默认加载页
 		pageSize : 10, //每页数据
 		pageList : [ 10, 50, 100, 1000 ], //可选的每页数据
@@ -150,7 +65,6 @@ function initInfoTable() {
 		dataField : 'data', //后端返回的实体数据
 		dataType : 'json', //后端数据传递类型
 		responseHandler : function(res) {
-			// 在ajax获取到数据，渲染表格之前，修改数据源
 			return res;
 		},
 		queryParams : function(params) {
@@ -203,14 +117,14 @@ function initInfoTable() {
 				title : '模块类型',
 				width : '60',
 				align : 'center',
-				formatter:modelTypeToStr
+				formatter : modelTypeToStr
 			},
 			{
 				field : 'firmwareType',
 				title : '固件类型',
 				width : '60',
 				align : 'center'
-			},	
+			},
 			{
 				field : 'firmware',
 				title : '固件名称',
@@ -223,7 +137,7 @@ function initInfoTable() {
 				width : '300',
 				halign : 'center',
 				align : 'left'
-			},			
+			},
 			{
 				field : 'isActivate',
 				title : '激活',
@@ -246,7 +160,7 @@ function initInfoTable() {
 				width : '480',
 				halign : 'center',
 				align : 'left',
-				formatter:dateTimeToStr
+				formatter : dateTimeToStr
 			},
 			{
 				field : 'operate',
@@ -273,22 +187,23 @@ function booleanToStr(value, row, index) {
 }
 
 function modelTypeToStr(value, row, index) {
-	if (value =='1') {
+	if (value == '1') {
 		return '2G';
-	}else if(value =='2')  {
+	} else if (value == '2') {
 		return '3G';
-	}else if(value =='3') {
+	} else if (value == '3') {
 		return '4G';
-	}else if(value =='4'){
+	} else if (value == '4') {
 		return 'WIFI';
 	}
 }
 
 function dateTimeToStr(unixtime) {
-        var timestamp = new Date(unixtime);
-        beijing_datetime = timestamp.toLocaleDateString().replace(/\//g, "-") + " " + timestamp.toTimeString().substr(0, 8);
-        return beijing_datetime;
-    };
+	var timestamp = new Date(unixtime);
+	beijing_datetime = timestamp.toLocaleDateString().replace(/\//g, "-") + " " + timestamp.toTimeString().substr(0, 8);
+	return beijing_datetime;
+}
+;
 
 function operateFormatter(value, row, index) {
 	return [
@@ -320,4 +235,92 @@ function editInfo(escap) {
 	}
 	$('#iotVersion').val(row.iotVersion);
 	$('#activateTime').val(row.activateTime);
+}
+
+
+function newInfo() {
+	$('#infoId').val('');
+	$('#dtuName').val('');
+	$('#dtuSn').val('');
+	$('#dtuPw').val('111111');
+	$('#mac').val('');
+	$('#moduleName').val('');
+	$('#moduleType').val('1');
+	$('#firmware').val('');
+	$('#firmwareType').val('');
+	$('#isRecovery0').prop('checked', true);
+	$('#iotVersion').val('');
+	$('#infoModal').modal('show');
+	$('#infoModal').modal({
+		keyboard : false
+	});
+}
+
+function delInfo() {
+	var ids = '';
+	$.each($('#infoTable').bootstrapTable('getSelections'), function(i, item) {
+		if (i == 0) {
+			ids += item.id;
+		} else {
+			ids += ',' + item.id;
+		}
+	});
+	$.ajax({
+		url : 'delInfo',
+		type : 'POST',
+		data : {
+			'ids' : ids
+		},
+		dataType : 'json',
+		success : function(ret) {
+			if (ret.code == 0) {
+				$('#infoTable').bootstrapTable('refresh');
+			} else {
+				alert('信息删除失败！');
+			}
+		},
+		error : function(xhr) {
+			console.log(JSON.stringify(xhr));
+			alert('信息删除失败！');
+		}
+	});
+}
+
+function savInfo() {
+	var data = {};
+	data.id = $('#infoId').val();
+	data.dtuName = $('#dtuName').val();
+	data.dtuSn = $('#dtuSn').val();
+	data.dtuPw = $('#dtuPw').val();
+	data.mac = $('#mac').val();
+	data.moduleName = $('#moduleName').val();
+	data.moduleType = $('#moduleType').val();
+	data.firmware = $('#firmware').val();
+	data.firmwareType = $('#firmwareType').val();
+
+	if ($('#isRecovery1').prop('checked') == true) {
+		data.isRecovery = 1;
+	} else {
+		data.isRecovery = 0;
+	}
+	data.iotVersion = $('#iotVersion').val();
+
+	$.ajax({
+		url : 'savInfo',
+		type : 'POST',
+		data : data,
+		dataType : 'json',
+		success : function(ret) {
+			if (ret.code == 0) {
+				$('#infoTable').bootstrapTable('refresh');
+				$('#infoId').val(ret.data.id);
+			} else {
+				alert('信息保存失败！');
+			}
+		},
+		error : function(xhr) {
+			console.log(JSON.stringify(xhr));
+			alert('信息保存失败！');
+		}
+	});
 }

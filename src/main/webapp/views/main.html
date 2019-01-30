@@ -7,11 +7,10 @@
 <meta name="content-type" content="text/html; charset=UTF-8">
 <link href="../assets/bootstrap4/css/bootstrap.min.css" rel="stylesheet">
 <link href="../assets/metismenu/metisMenu.min.css" rel="stylesheet">
-<script src="../assets/jquery/jquery-3.3.1.slim.min.js"></script>
+<script src="../assets/jquery/jquery-3.3.1.min.js"></script>
 <script src="../assets/popper/popper.min.js"></script>
 <script src="../assets/bootstrap4/js/bootstrap.min.js"></script>
 <script src="../assets/metismenu/metisMenu.min.js"></script>
-
 <style>
 .frame-func-menu {
 	height: 100%;
@@ -113,81 +112,79 @@
 		<div class="row div_shadow" id="content-frame-navbar">
 			<div class="col-xs-1 col-lg-2 ">
 				<nav class="navbar  nav-pills navbar-expand-lg ">
-					<a class="navbar-brand" href="#"> <img
-						src="../static/bootstrap-solid.svg" width="30" height="30" alt="">
+					<a class="navbar-brand" href="#"> <img src="../static/bootstrap-solid.svg" width="30" height="30" alt="">
 					</a> <a class="navbar-brand" style="" href="#">北方智能</a>
 				</nav>
 			</div>
 			<div class="col-xs-10 col-lg-10 ">
 				<nav class="navbar  nav-pills navbar-expand-lg ">
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse " id="navbarSupportedContent">
 						<ul class="nav  nav-pills nav-fill mr-auto " id="content-menu">
-							<li class="nav-item " onclick="onMenuVer(this)" id="menu1"><a
-								class="nav-link " href="#"> 设备管理 <span
-									class="glyphicon glyphicon-user"></span>
+							<li class="nav-item " onclick="onMenuVer(this)" id="menu1"><a class="nav-link " href="#"> 设备管理 <span class="glyphicon glyphicon-user"></span>
 							</a></li>
-							<li class="nav-item" onclick="onMenuVer(this)" id="menu2"><a
-								class="nav-link" href="#">运营管理</a></li>
-							<li class="nav-item " onclick="onMenuVer(this)" id="menu3"><a
-								class="nav-link" href="#">系统管理</a></li>
-
+							<li class="nav-item" onclick="onMenuVer(this)" id="menu2"><a class="nav-link" href="#">运营管理</a></li>
+							<li class="nav-item " onclick="onMenuVer(this)" id="menu3"><a class="nav-link" href="#" >系统管理</a></li>
 						</ul>
 						<form class="form-inline my-2 my-lg-0">
-							<input class="form-control mr-sm-2" type="search"
-								placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success my-2 my-sm-0"
-								type="submit">搜索</button>
+							<nav class="navbar navbar-light bg-light">
+								<span class="navbar-text" id="userinfo"> 尊敬的用户:欢迎您！ </span>
+							</nav>
+							<button class="btn btn-outline-success my-2 my-sm-0" id="loginOut">注销</button>
 						</form>
 					</div>
 				</nav>
-
 			</div>
 		</div>
 		<div class="row div_shadow">
 			<div id="frame-left " class="col-xs-1 col-lg-2 div_shadow ">
 				<nav class="sidebar-nav ">
 					<ul class="metismenu" id="mm_menu2">
-						<li><a class="has-arrow" aria-expanded="false">基础配置</a>
+						<li><a class="has-arrow" aria-expanded="false">权限管理</a>
 							<ul aria-expanded="false">
-								<li data-key="111" onclick="onMenuHor(this)"><a>设备列表</a></li>
-								<li data-key="222" onclick="onMenuHor(this)"><a>元数据管理</a></li>
+								<li data-key="111" onclick="onMenuHor(this)"><a>机构管理</a></li>
+								<li data-key="222" onclick="onMenuHor(this)"><a>用户管理</a></li>
+								<li data-key="555" onclick="onMenuHor(this)"><a>用户授权</a></li>
 							</ul></li>
-						<li><a class="has-arrow" aria-expanded="false">我的设备</a>
+						<li><a class="has-arrow" aria-expanded="false">设备监控</a>
 							<ul aria-expanded="false">
-								<li data-key="333" onclick="onMenuHor(this)"><a>设备监控</a></li>
-								<li data-key="444" onclick="onMenuHor(this)"><a>改造版本</a></li>
-								<!--<li data-key="555" onclick="onMenuHor(this)"><a>重新开发</a></li> -->
+								<li data-key="333" onclick="onMenuHor(this)"><a>我的设备</a></li>
+								<!-- 								<li data-key="444" onclick="onMenuHor(this)"><a>改造版本</a></li> -->
 							</ul></li>
-						<li><a class="has-arrow" aria-expanded="false">设备监测</a>
+						<li><a class="has-arrow" aria-expanded="false">后台管理</a>
 							<ul aria-expanded="false">
-								<li data-key="666" onclick="onMenuHor(this)"><a>规则定义</a></li>
-								<li data-key="777" onclick="onMenuHor(this)"><a>模块管理</a></li>
-								<li data-key="888" onclick="onMenuHor(this)"><a>DTU台账</a></li>
+								<li data-key="666" onclick="onMenuHor(this)"><a>设备台账</a></li>
+								<li data-key="777" onclick="onMenuHor(this)"><a>规则定义</a></li>
+								<li data-key="888" onclick="onMenuHor(this)"><a>设备信息维护</a></li>
 							</ul></li>
 					</ul>
 				</nav>
 			</div>
 			<div id="frame-right" class="col-xs-4 col-lg-10 div_shadow ">
-				<iframe id="iframe_fun" width="100%"
-					style="overflow-x:scroll;white-space:nowrap;border-width: 0 "></iframe>
+				<iframe id="iframe_fun" width="100%" style="overflow-x:scroll;white-space:nowrap;border-width: 0 "></iframe>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
+	
+		$(function() {
+			$('#mm_menu2').metisMenu();
+			Initialize();
+			getUserInfo();
+			$('#loginOut').click(function() {
+				loginOut();
+			});
+		});
+	
 		function Initialize() {
 			//屏幕显示内容初始化
-			//$('#dd_menu1').dropdown();
 			$('#dd_menu1').dropdown('dispose');
 			var tmp = $('#content-frame-navbar').height();
 			var h = window.innerHeight - tmp - 15;
 			$('#iframe_fun').height(h);
-			//$('#iframe_fun').prop('src', 'system/deviceInfo.html');
 			setTimeout(function() {
 				$('#iframe_fun').prop('src', 'default.html');
 			}, 300)
@@ -203,27 +200,59 @@
 			var key = $(li).attr('data-key');
 			var url = 'www.baidu.com';
 			if (key == '111') {
-				url = '../views/system/deviceDefine.html' ;
+				url = '../pow/org' ;
 			} else if (key == '222') {
-				url = '../views/system/modbusMdDefine.html' ;
+				url = '../pow/user' ;
 			} else if (key == '333') {
 				url = '../dtu/userDtuList' ;
-			}else if (key == '444') {
+			} else if (key == '444') {
 				url = '../assets/design-orign/index.html' ;
-			}else if (key == '666') {
-				url = '../design/master' ;
-			}else if (key == '777') {
-				url = '../dtu/config' ;
-			}else if (key == '888') {
+			} else if (key == '666') {
 				url = '../dtu/info' ;
+			} else if (key == '777') {
+				url = '../design/master' ;
+			} else if (key == '888') {
+				url = '../dtu/config' ;
+			} else if (key == '555') {
+				url = '../pow/userDtu' ;
 			}
+	
 			$('#iframe_fun').prop('src', url);
 		}
 	
-		$(function() {
-			$('#mm_menu2').metisMenu();
-			Initialize();
-		});
+		function getUserInfo() {
+			$.ajax({
+				url : '../pow/getUserInfo',
+				type : 'POST',
+				dataType : 'json',
+				success : function(ret) {
+					if (ret.code == 0) {
+						$('#userinfo').text(' 尊敬的用户:' + ret.data.realname + ' 欢迎您！');
+					}
+				},
+				error : function(xhr) {
+					console.log(JSON.stringify(xhr));
+					alert('获取数据失败！');
+				}
+			});
+		}
+	
+		function loginOut() {
+			$.ajax({
+				url : '../pow/loginOut',
+				type : 'POST',
+				dataType : 'json',
+				success : function(ret) {
+					if (ret == true) {
+						window.location.href = '../login.jsp';
+					}
+				},
+				error : function(xhr) {
+					console.log(JSON.stringify(xhr));
+					alert('获取数据失败！');
+				}
+			});
+		}
 	</script>
 </body>
 </html>

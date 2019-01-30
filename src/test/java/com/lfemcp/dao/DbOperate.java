@@ -65,12 +65,12 @@ public class DbOperate {
 		return true;
 	}
 
-	public static boolean delete(String table, String data) {
+	public static boolean delete(String table, String star,String end) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String sql = "delete from " + table + "  where cjsj > str_to_date('" + data + "', '%Y-%m-%d %H:%i')";
+		String sql = "delete from " + table + "  where cjsj > str_to_date('" + star + "', '%Y-%m-%d %H:%i') and   cjsj <= str_to_date('" + end + "', '%Y-%m-%d %H:%i')";
 
 		try {
 			conn = JdbcUtil.getConnection();

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,42 +16,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cntek.iot.comm.dto.CommPara;
 import com.cntek.iot.comm.dto.RetInfoDto;
 import com.cntek.iot.design.entity.MbMaster;
 import com.cntek.iot.design.entity.MbMetadataDefine;
 import com.cntek.iot.design.entity.MbTopoDesign;
-import com.cntek.iot.design.service.IModbusService;
+import com.cntek.iot.design.service.IDesignService;
 import com.cntek.iot.dtu.dto.Random;
-import com.cntek.iot.modbus.dto.MbComm;
+import com.cntek.iot.pow.entity.PowUser;
 import com.mysql.cj.util.StringUtils;
 
 @Controller
 @RequestMapping("/design")
 public class DesignAction {
 	@Autowired
-	private IModbusService modbusService;
+	private IDesignService designService;
 
 	@RequestMapping("/master")
-	public String masterList(Model model) {
-		model.addAttribute("orgId", "111");
-		model.addAttribute("userId", "111");
+	public String masterList(Model model,HttpSession session) {
+		PowUser user = (PowUser)session.getAttribute("usersession");
+		model.addAttribute("orgId", user.getOrgId());
+		model.addAttribute("userId", user.getUsername());
 		return "design/modbus_master";
 	}
 
 	@RequestMapping("/getMasterPage")
-	public @ResponseBody Map<String, Object> getMasterPage(@RequestParam String orgId,
+	public @ResponseBody Map<String, Object> getMasterPage(@RequestParam String userId,
 			@RequestParam(defaultValue = "0", required = false) int limit,
 			@RequestParam(defaultValue = "0", required = false) int offset) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("data", modbusService.selectMbMasterByOrgId(orgId));
+		map.put("data", designService.selectMbMasterByUserId(userId));
 		return map;
 	}
 
 	@RequestMapping("/delMaster")
-	public @ResponseBody RetInfoDto delMaster(MbComm dto) {
+	public @ResponseBody RetInfoDto delMaster(CommPara dto) {
 		RetInfoDto info = new RetInfoDto();
 		try {
-			int ret = this.modbusService.deleteMbMasterByPks(dto.getIds().split(","));
+			int ret = this.designService.deleteMbMasterByPks(dto.getIds().split(","));
 			if (ret > 0) {
 				info.setCode(0);
 			} else {
@@ -67,7 +70,7 @@ public class DesignAction {
 	public @ResponseBody RetInfoDto savMaster(MbMaster dto) {
 		RetInfoDto info = new RetInfoDto();
 		try {
-			MbMaster data = this.modbusService.insertOrUpdateMaster(dto);
+			MbMaster data = this.designService.insertOrUpdateMaster(dto);
 			if (data != null) {
 				info.setCode(0);
 				info.setData(data);
@@ -86,7 +89,7 @@ public class DesignAction {
 			@RequestParam(defaultValue = "0", required = false) int limit,
 			@RequestParam(defaultValue = "0", required = false) int offset) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("data", modbusService.selectMbMetadataDefineByMasterId(masterId));
+		map.put("data", designService.selectMbMetadataDefineByMasterId(masterId));
 		return map;
 	}
 
@@ -94,7 +97,7 @@ public class DesignAction {
 	public @ResponseBody RetInfoDto savMetadataDefine(MbMetadataDefine dto) {
 		RetInfoDto info = new RetInfoDto();
 		try {
-			MbMetadataDefine data = this.modbusService.insertOrUpdateMetadataDefine(dto);
+			MbMetadataDefine data = this.designService.insertOrUpdateMetadataDefine(dto);
 			if (data != null) {
 				info.setCode(0);
 				info.setData(data);
@@ -109,10 +112,10 @@ public class DesignAction {
 	}
 
 	@RequestMapping("/delMetadataDefine")
-	public @ResponseBody RetInfoDto delMetadataDefine(MbComm dto) {
+	public @ResponseBody RetInfoDto delMetadataDefine(CommPara dto) {
 		RetInfoDto info = new RetInfoDto();
 		try {
-			int ret = this.modbusService.deleteMbMetadataDefineByPks(dto.getIds().split(","));
+			int ret = this.designService.deleteMbMetadataDefineByPks(dto.getIds().split(","));
 			if (ret > 0) {
 				info.setCode(0);
 			} else {
@@ -130,7 +133,7 @@ public class DesignAction {
 			@RequestParam(defaultValue = "0", required = false) int limit,
 			@RequestParam(defaultValue = "0", required = false) int offset) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("data", modbusService.selectMbTopoDesignByMasterId(masterId));
+		map.put("data", designService.selectMbTopoDesignByMasterId(masterId));
 		return map;
 	}
 
@@ -138,7 +141,7 @@ public class DesignAction {
 	public @ResponseBody RetInfoDto savTopoDesign(MbTopoDesign dto) {
 		RetInfoDto info = new RetInfoDto();
 		try {
-			MbTopoDesign data = this.modbusService.insertOrUpdateTopoDesign(dto);
+			MbTopoDesign data = this.designService.insertOrUpdateTopoDesign(dto);
 			if (data != null) {
 				info.setCode(0);
 				info.setData(data);
@@ -153,10 +156,10 @@ public class DesignAction {
 	}
 
 	@RequestMapping("/delTopoDesign")
-	public @ResponseBody RetInfoDto delTopoDesign(MbComm dto) {
+	public @ResponseBody RetInfoDto delTopoDesign(CommPara dto) {
 		RetInfoDto info = new RetInfoDto();
 		try {
-			int ret = this.modbusService.deleteMbTopoDesignByPks(dto.getIds().split(","));
+			int ret = this.designService.deleteMbTopoDesignByPks(dto.getIds().split(","));
 			if (ret > 0) {
 				info.setCode(0);
 			} else {
@@ -171,7 +174,7 @@ public class DesignAction {
 
 	@RequestMapping("/topoDesign")
 	public String topoDesign(@RequestParam String id, Model model) {
-		MbTopoDesign topo = this.modbusService.selectMbTopoDesignByPk(id);
+		MbTopoDesign topo = this.designService.selectMbTopoDesignByPk(id);
 		model.addAttribute("topo", topo.getContent());
 		model.addAttribute("topoId", topo.getId());
 		model.addAttribute("masterId", topo.getMasterId());
@@ -182,9 +185,9 @@ public class DesignAction {
 	public @ResponseBody RetInfoDto topoSave(@RequestBody String design, @RequestParam String topoId) {
 		RetInfoDto info = new RetInfoDto();
 		try {
-			MbTopoDesign topo = this.modbusService.selectMbTopoDesignByPk(topoId);
+			MbTopoDesign topo = this.designService.selectMbTopoDesignByPk(topoId);
 			topo.setContent(design);
-			topo = this.modbusService.insertOrUpdateTopoDesign(topo);
+			topo = this.designService.insertOrUpdateTopoDesign(topo);
 			if (topo != null) {
 				info.setCode(0);
 				info.setData(topo);
@@ -210,9 +213,9 @@ public class DesignAction {
 	public @ResponseBody Object getMetadataDefine(@RequestParam String masterId, HttpServletRequest request) {
 		String dataName = request.getParameter("dataName");
 		if (StringUtils.isNullOrEmpty(dataName)) {
-			return this.modbusService.selectMbMetadataDefineByMasterId(masterId);
+			return this.designService.selectMbMetadataDefineByMasterId(masterId);
 		} else {
-			return this.modbusService.selectMbMetadataDefineByMasterIdAndDataName(masterId, dataName);
+			return this.designService.selectMbMetadataDefineByMasterIdAndDataName(masterId, dataName);
 		}
 	}
 

@@ -273,13 +273,23 @@
 			#{item}
 		</foreach>
 	</delete>
-	
-	<select id="isDtuUsed"  parameterType="map"
+
+	<select id="isDtuUsed" parameterType="map"
 		resultType="java.lang.Integer">
 		select
 		count(1)
 		from t_mb_dtu_config
-		where dtu_sn = #{dtuSn,jdbcType=VARCHAR}
+		where dtu_sn =
+		#{dtuSn,jdbcType=VARCHAR}
 		and id != #{id,jdbcType=VARCHAR}
 	</select>
+
+	<select id="selPowUserDtuConfig" parameterType="map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_mb_dtu_config tmdc where tmdc.id in (select id from
+		t_pow_user_dtu pud where pud.username = #{userId,jdbcType=VARCHAR})
+	</select>
+
 </mapper>

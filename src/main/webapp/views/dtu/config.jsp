@@ -1,18 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>设计主索引</title>
+<title>DTU配置管理</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta name="content-type" content="text/html; charset=UTF-8">
-
 <link rel="stylesheet" href="<%=basePath%>/assets/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="<%=basePath%>/assets/bootstrap-table/src/bootstrap-table.css">
 <link rel="stylesheet" href="<%=basePath%>/static/css/comm.css">
@@ -26,26 +24,20 @@
 <script src="<%=basePath%>/views/dtu/js/config.js"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=d0GGkN7Lnx6BqTGYzPiSHnPCj02daVYT"></script>
 </head>
-
 <body>
-
-<!-- 设备配置信息维护 -->
-	<div class="modal fade" id="configModal" tabindex="-1"
-		role="dialog" aria-labelledby="configLabel" aria-hidden="true"
-		data-backdrop="static">
+	<div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configLabel" aria-hidden="true" data-backdrop="static">
 		<div class="modal-dialog" style="width:600px">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="configLabel">设备配置信息维护</h4>
 				</div>
-				<form id="configForm" name="configForm" class="form-horizontal"
-					role="form" novalidate="novalidate">
+				<form id="configForm" name="configForm" class="form-horizontal" role="form" novalidate="novalidate">
 					<div class="modal-body row" id="dtuImg">
 						<div class="col-xs-3"></div>
 						<div class="col-xs-6">
-							<img id="equipImg" src="http://cdn.lfemcp.com/userimg/equip/fa/fa4a1792-f8f4-4e91-abb1-84a17e29a30b.jpg" class="img-responsive" alt="设备图" style="display: block;">
+							<img id="equipImg" src="http://cdn.lfemcp.com/userimg/equip/fa/fa4a1792-f8f4-4e91-abb1-84a17e29a30b.jpg" class="img-responsive" alt="设备图"
+								style="display: block;">
 						</div>
 						<div class="col-xs-3"></div>
 					</div>
@@ -95,7 +87,7 @@
 							<p class="text-right middle">数据规则</p>
 						</div>
 						<div class="col-xs-6">
-								<input type="text" id="ruleName" name="ruleName" class="form-control input-comm">
+							<input type="text" id="ruleName" name="ruleName" class="form-control input-comm">
 						</div>
 						<div class="col-xs-2">
 							<button type="button" id="btn_openRule" class="btn btn-primary">选择</button>
@@ -106,11 +98,8 @@
 							<p class="text-right middle">是否公开</p>
 						</div>
 						<div class="col-xs-8">
-							<label class="radio-inline"> 
-								<input type="radio"	name="isOpen" id="isOpen0"> 不公开
-							</label> 
-							<label class="radio-inline">
-								<input type="radio" name="isOpen" id="isOpen1"> 公开
+							<label class="radio-inline"> <input type="radio" name="isOpen" id="isOpen0"> 不公开
+							</label> <label class="radio-inline"> <input type="radio" name="isOpen" id="isOpen1"> 公开
 							</label>
 						</div>
 					</div>
@@ -136,9 +125,7 @@
 							<input type="text" id="latitude" name="latitude" class="form-control input-comm" placeholder="纬度">
 						</div>
 					</div>
-					<input type="hidden" id="configId">
-					<input type="hidden" id="ruleId">
-					<input type="hidden" id ="imgUrl">
+					<input type="hidden" id="configId"> <input type="hidden" id="ruleId"> <input type="hidden" id="imgUrl">
 				</form>
 				<div class="modal-footer">
 					<button id="btn_savconfig" type="button" class="btn btn-primary">保存</button>
@@ -147,20 +134,15 @@
 			</div>
 		</div>
 	</div>
-
-<!-- 选择展示规则 -->
-	<div class="modal fade" id="ruleTableModal" tabindex="-1" role="dialog"
-		aria-labelledby="ruleTableLabel" aria-hidden="true"
-		data-backdrop="static">
+	<!-- 选择展示规则 -->
+	<div class="modal fade" id="ruleTableModal" tabindex="-1" role="dialog" aria-labelledby="ruleTableLabel" aria-hidden="true" data-backdrop="static">
 		<div class="modal-dialog" style="width:700px">
-			<div class="modal-content" style="padding: 1px 10px 1px;" >
+			<div class="modal-content" style="padding: 1px 10px 1px;">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="ruleTableLabel">可选择的数据及展示规则</h4>
 				</div>
-				<div id="rulebarTopoTable">
-				</div>
+				<div id="rulebarTopoTable"></div>
 				<table id="ruleTable" data-toolbar="rulebarTopoTable"></table>
 				<div class="modal-footer">
 					<button id=btn_selRule type="button" class="btn btn-primary">选择</button>
@@ -170,8 +152,8 @@
 		</div>
 	</div>
 	<!-- GIS -->
-	<div class="modal fade" id="gisModal" tabindex="-1" role="dialog" aria-labelledby="gisModalLabel"
-		aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal fade" id="gisModal" tabindex="-1" role="dialog" aria-labelledby="gisModalLabel" aria-hidden="true" data-backdrop="static"
+		data-keyboard="false">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -183,8 +165,7 @@
 					<div class="modal-body row">
 						<div class="col-xs-6">
 							<div class="input-group ">
-								<span class="input-group-addon">地址</span>
-								<input type="text" id="suggestId" class="form-control">
+								<span class="input-group-addon">地址</span> <input type="text" id="suggestId" class="form-control">
 							</div>
 						</div>
 						<div class="col-xs-6">
@@ -194,30 +175,25 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<div class="container-fluid div_dev">
 		<div class="page-header">
 			<h3>
-				DTU管理 <small>模块信息维护及配置</small>
+				设备管理<small>用户添加设备，选择元数据、监控界面</small>
 			</h3>
 		</div>
 		<div id="configToolbar">
 			<button type="button" id="btn_newconfig" class="btn btn-primary">新增</button>
 			<button type="button" id="btn_delconfig" class="btn btn-primary">删除</button>
 		</div>
-		<table id="configTable" data-toolbar="#configToolbar"/>
+		<table id="configTable" data-toolbar="#configToolbar" />
 	</div>
-
-
 	<script type="text/javascript">
 		var userId = '${userId}';
 		var orgId = '${orgId}';
 	</script>
-	
 </body>
 </html>

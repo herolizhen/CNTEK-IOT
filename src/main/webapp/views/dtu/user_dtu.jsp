@@ -1,18 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>设计主索引</title>
+<title>用户设备管理</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta name="content-type" content="text/html; charset=UTF-8">
-
 <link rel="stylesheet" href="<%=basePath%>/assets/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="<%=basePath%>/assets/bootstrap-table/src/bootstrap-table.css">
 <link rel="stylesheet" href="<%=basePath%>/static/css/comm.css">
@@ -26,23 +24,18 @@
 <script src="<%=basePath%>/views/dtu/js/user-dtu.js"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=d0GGkN7Lnx6BqTGYzPiSHnPCj02daVYT"></script>
 </head>
-
 <body>
-
 	<div class="container-fluid div_dev">
 		<div class="page-header">
 			<h3>
 				用户设备列表<small>用户的DTU设备</small>
 			</h3>
 		</div>
-		<table id="userDtuListTable"/>
+		<table id="userDtuListTable" />
 	</div>
-
-
 	<script type="text/javascript">
 		var userId = '${userId}';
 		var orgId = '${orgId}';
 	</script>
-	
 </body>
 </html>

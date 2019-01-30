@@ -11,8 +11,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,14 +24,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cntek.iot.comm.dto.CommPara;
 import com.cntek.iot.comm.dto.RetInfoDto;
 import com.cntek.iot.design.entity.MbTopoDesign;
-import com.cntek.iot.design.service.IModbusService;
+import com.cntek.iot.design.service.IDesignService;
 import com.cntek.iot.dtu.dto.Random;
 import com.cntek.iot.dtu.entity.MbDtuConfig;
 import com.cntek.iot.dtu.entity.MbDtuInfo;
 import com.cntek.iot.dtu.service.IMbDtuService;
-import com.cntek.iot.modbus.dto.MbComm;
+import com.cntek.iot.pow.entity.PowUser;
 
 /**
  * @ClassName: DtuAction
@@ -42,12 +45,18 @@ import com.cntek.iot.modbus.dto.MbComm;
 @RequestMapping("/dtu")
 public class DtuAction {
 
-	public static final String USERFILEPATH = "C:\\tools\\apache\\apache-tomcat-9.0.1\\webapps\\CNTEK-IOT\\userdata\\image\\";
-	public static final String USERURLPATH = "http://localhost:8080/CNTEK-IOT/userdata/image/";
+//	public static final String USERFILEPATH = "C:\\tools\\apache\\apache-tomcat-9.0.1\\webapps\\CNTEK-IOT\\userdata\\image\\";
+//	public static final String USERURLPATH = "http://localhost:8080/CNTEK-IOT/userdata/image/";
+
+	@Value("${cfg.sys.userfile.filePath}")
+	private String USERFILEPATH;
+	@Value("${cfg.sys.userfile.urlPath}")
+	private String USERURLPATH;
+
 	@Autowired
 	private IMbDtuService mbDtuService;
 	@Autowired
-	private IModbusService modbusService;
+	private IDesignService designService;
 
 	/**
 	 * 
@@ -58,9 +67,10 @@ public class DtuAction {
 	 * @return
 	 */
 	@RequestMapping("/config")
-	public String config(Model model) {
-		model.addAttribute("orgId", "111");
-		model.addAttribute("userId", "111");
+	public String config(Model model,HttpSession session) {
+		PowUser user = (PowUser)session.getAttribute("usersession");
+		model.addAttribute("orgId", user.getOrgId());
+		model.addAttribute("userId", user.getUsername());
 		return "dtu/config";
 	}
 
@@ -92,7 +102,7 @@ public class DtuAction {
 	}
 
 	@RequestMapping("/delConfig")
-	public @ResponseBody RetInfoDto delConfig(MbComm dto) {
+	public @ResponseBody RetInfoDto delConfig(CommPara dto) {
 		RetInfoDto info = new RetInfoDto();
 		try {
 			int ret = this.mbDtuService.deleteConfigByPks(dto.getIds().split(","));
@@ -140,7 +150,7 @@ public class DtuAction {
 	}
 
 	@RequestMapping("/delInfo")
-	public @ResponseBody RetInfoDto delInfo(MbComm dto) {
+	public @ResponseBody RetInfoDto delInfo(CommPara dto) {
 		RetInfoDto info = new RetInfoDto();
 		try {
 			int ret = this.mbDtuService.deleteInfoByPks(dto.getIds().split(","));
@@ -159,7 +169,6 @@ public class DtuAction {
 	@RequestMapping(value = "uploadFile", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
 	public void uploadFile(HttpServletResponse response, HttpServletRequest request,
 			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
-		System.out.println(file.getOriginalFilename());
 
 		String fileName = file.getOriginalFilename();
 		String filePath = USERFILEPATH;
@@ -201,16 +210,17 @@ public class DtuAction {
 	}
 
 	@RequestMapping("/userDtuList")
-	public String userDtuList(Model model) {
-		model.addAttribute("orgId", "111");
-		model.addAttribute("userId", "111");
+	public String userDtuList(Model model,HttpSession session) {
+		PowUser user = (PowUser)session.getAttribute("usersession");
+		model.addAttribute("orgId", user.getOrgId());
+		model.addAttribute("userId", user.getUsername());
 		return "dtu/user_dtu";
 	}
 
 	@RequestMapping("/topoShow")
 	public String topoShow(@RequestParam String dtuId, Model model) {
 		MbDtuConfig config = this.mbDtuService.selectConfigByPk(dtuId);
-		MbTopoDesign topo = this.modbusService.selectMainTopoByPK(config.getRuleId());
+		MbTopoDesign topo = this.designService.selectMainTopoByPK(config.getRuleId());
 		if (topo != null) {
 			model.addAttribute("topo", topo.getContent());
 			model.addAttribute("dtuId", dtuId);
@@ -229,7 +239,7 @@ public class DtuAction {
 			map.put("nowValue", Math.round(Math.random() * 100));
 			out.add(map);
 		}
-		System.out.println(out);
+//		System.out.println(out);
 		return out;
 	}
 }

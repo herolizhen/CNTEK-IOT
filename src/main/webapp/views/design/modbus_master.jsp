@@ -1,8 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+ path + "/";
 %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +11,6 @@
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta name="content-type" content="text/html; charset=UTF-8">
-
 <link rel="stylesheet" href="<%=basePath%>/assets/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="<%=basePath%>/assets/bootstrap-table/src/bootstrap-table.css">
 <link rel="stylesheet" href="<%=basePath%>/static/css/comm.css">
@@ -26,41 +24,33 @@
 <script src="<%=basePath%>/views/design/js/modbus-master.js"></script>
 <script src="<%=basePath%>/views/design/js/modbus-metadata.js"></script>
 <script src="<%=basePath%>/views/design/js/modbus-topo.js"></script>
-
 </head>
-
 <body>
 	<!-- 模态框 规则定义 -->
-	<div class="modal fade" id="detailMasterModal" tabindex="-1"
-		role="dialog" aria-labelledby="detailMasterLabel" aria-hidden="true"
-		data-backdrop="static" data-keyboard="false">
+	<div class="modal fade" id="detailMasterModal" tabindex="-1" role="dialog" aria-labelledby="detailMasterLabel" aria-hidden="true" data-backdrop="static"
+		data-keyboard="false">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="detailMasterLabel">模态框（Modal）标题</h4>
 				</div>
 				<div class="modal-body row">
 					<div class="col-xs-12">
 						<div class="input-group ">
-							<span class="input-group-addon">规则名称</span> <input type="text"
-								id="name" class="form-control">
+							<span class="input-group-addon">规则名称</span> <input type="text" id="name" class="form-control">
 						</div>
 						<br>
 						<div class="input-group ">
 							<span class="input-group-addon">规则说明</span>
-							<textarea class="form-control" id="description"
-								placeholder="规则说明" rows="3"></textarea>
+							<textarea class="form-control" id="description" placeholder="规则说明" rows="3"></textarea>
 						</div>
 						<br>
 						<div class="input-group ">
 							<span class="input-group-addon">数据展示</span>
 							<div class="form-control">
-								<label class="radio-inline"> <input type="radio"
-									name="displayType" id="displayType0"> 列表展示
-								</label> <label class="radio-inline"> <input type="radio"
-									name="displayType" id="displayType1"> 组态展示
+								<label class="radio-inline"> <input type="radio" name="displayType" id="displayType0"> 列表展示
+								</label> <label class="radio-inline"> <input type="radio" name="displayType" id="displayType1"> 组态展示
 								</label>
 							</div>
 						</div>
@@ -68,17 +58,14 @@
 						<div class="input-group ">
 							<span class="input-group-addon">控制权限</span>
 							<div class="form-control">
-								<label class="radio-inline"> <input type="radio"
-									name="powWrite" id="powWrite0"> 不可以
-								</label> <label class="radio-inline"> <input type="radio"
-									name="powWrite" id="powWrite1">可以
+								<label class="radio-inline"> <input type="radio" name="powWrite" id="powWrite0"> 不可以
+								</label> <label class="radio-inline"> <input type="radio" name="powWrite" id="powWrite1">可以
 								</label>
 							</div>
 						</div>
 					</div>
 				</div>
-				<input type="hidden" id="id"> <input type="hidden"
-					id="masterId">
+				<input type="hidden" id="id"> <input type="hidden" id="masterId">
 				<div class="modal-footer">
 					<button id="btn_savmaster" type="button" class="btn btn-primary">保存</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -87,19 +74,15 @@
 		</div>
 	</div>
 	<!-- 元数据列表-->
-	<div class="modal fade" id="mbMdTableModal" tabindex="-1" role="dialog"
-		aria-labelledby="mbMdTableLabel" aria-hidden="true"
-		data-backdrop="static">
+	<div class="modal fade" id="mbMdTableModal" tabindex="-1" role="dialog" aria-labelledby="mbMdTableLabel" aria-hidden="true" data-backdrop="static">
 		<div class="modal-dialog" style="width:900px">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="mbMdTableLabel">模态框（Modal）标题</h4>
 				</div>
 				<div id="toolbarmbMdTableModal">
-					<button type="button" id="btn_download" class="btn btn-primary"
-						onClick="$('#mbMdTable').tableExport({ type: 'excel', escape: 'false' })">数据导出</button>
+					<button type="button" id="btn_download" class="btn btn-primary" onClick="$('#mbMdTable').tableExport({ type: 'excel', escape: 'false' })">数据导出</button>
 					<button type="button" id="btn_delmbmd" class="btn btn-primary">删除</button>
 					<button type="button" id="btn_newmbmd" class="btn btn-primary">新增</button>
 				</div>
@@ -111,25 +94,20 @@
 		</div>
 	</div>
 	<!-- 元数据定义-->
-	<div class="modal fade" id="mbMdModifyModal" tabindex="-1"
-		role="dialog" aria-labelledby="mbMdModifyLabel" aria-hidden="true"
-		data-backdrop="static">
+	<div class="modal fade" id="mbMdModifyModal" tabindex="-1" role="dialog" aria-labelledby="mbMdModifyLabel" aria-hidden="true" data-backdrop="static">
 		<div class="modal-dialog" style="width:600px">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="mbMdModifyLabel">新增元素</h4>
 				</div>
-				<form id="addOrUpdateMbmdForm" name="addOrUpdateMbmdForm"
-					class="form-horizontal" role="form" novalidate="novalidate">
+				<form id="addOrUpdateMbmdForm" name="addOrUpdateMbmdForm" class="form-horizontal" role="form" novalidate="novalidate">
 					<div class="modal-body row">
 						<div class="col-xs-3">
 							<p class="text-right middle">数据名称</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="dataName" name="dataName"
-								class="form-control input-comm" placeholder="温度1#">
+							<input type="text" id="dataName" name="dataName" class="form-control input-comm" placeholder="温度1#">
 						</div>
 					</div>
 					<div class="modal-body row">
@@ -137,8 +115,7 @@
 							<p class="text-right middle">设备从站地址</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="gateNo" name="gateNo"
-								class="form-control input-comm" placeholder="1">
+							<input type="text" id="gateNo" name="gateNo" class="form-control input-comm" placeholder="1">
 						</div>
 					</div>
 					<div class="modal-body row">
@@ -159,8 +136,7 @@
 							<p class="text-right middle">寄存器地址</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="regAddress" name="regAddress"
-								class="form-control input-comm " placeholder="40001">
+							<input type="text" id="regAddress" name="regAddress" class="form-control input-comm " placeholder="40001">
 						</div>
 					</div>
 					<div class="modal-body row" id="d_dataType">
@@ -196,8 +172,7 @@
 							<p class="text-right middle">单位</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="dataUnit" name="dataUnit"
-								class="form-control input-comm" placeholder="℃">
+							<input type="text" id="dataUnit" name="dataUnit" class="form-control input-comm" placeholder="℃">
 						</div>
 					</div>
 					<div class="modal-body row" id="d_dataFun">
@@ -205,8 +180,7 @@
 							<p class="text-right middle">计算公式</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="formula" name="formula"
-								class="form-control input-comm ">
+							<input type="text" id="formula" name="formula" class="form-control input-comm ">
 						</div>
 					</div>
 					<div class="modal-body row" id="d_dataBitPos">
@@ -214,8 +188,7 @@
 							<p class="text-right middle">bit位</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="dataBitPos" name="dataBotPos"
-								class="form-control input-comm ">
+							<input type="text" id="dataBitPos" name="dataBotPos" class="form-control input-comm ">
 						</div>
 					</div>
 					<div class="modal-body row" id="d_data0Dis">
@@ -240,8 +213,7 @@
 							</select>
 						</div>
 					</div>
-					<input type="hidden" id="metadataId"> <input type="hidden"
-						id="disOrder">
+					<input type="hidden" id="metadataId"> <input type="hidden" id="disOrder">
 				</form>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="btn_newmbmd">新增</button>
@@ -251,16 +223,12 @@
 			</div>
 		</div>
 	</div>
-
 	<!--topo 列表-->
-	<div class="modal fade" id="topoTableModal" tabindex="-1" role="dialog"
-		aria-labelledby="topoTableLabel" aria-hidden="true"
-		data-backdrop="static">
+	<div class="modal fade" id="topoTableModal" tabindex="-1" role="dialog" aria-labelledby="topoTableLabel" aria-hidden="true" data-backdrop="static">
 		<div class="modal-dialog" style="width:600px">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="topoTableLabel">模态框（Modal）标题</h4>
 				</div>
 				<div id="toolbarTopoTable">
@@ -274,27 +242,21 @@
 			</div>
 		</div>
 	</div>
-
 	<!-- topo 新增 -->
-	<div class="modal fade" id="topoModifyModal" tabindex="-1"
-		role="dialog" aria-labelledby="topoModifyLabel" aria-hidden="true"
-		data-backdrop="static">
+	<div class="modal fade" id="topoModifyModal" tabindex="-1" role="dialog" aria-labelledby="topoModifyLabel" aria-hidden="true" data-backdrop="static">
 		<div class="modal-dialog" style="width:600px">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="topoModifyLabel">新增组态画面</h4>
 				</div>
-				<form id="topoForm" name="topoForm" class="form-horizontal"
-					role="form" novalidate="novalidate">
+				<form id="topoForm" name="topoForm" class="form-horizontal" role="form" novalidate="novalidate">
 					<div class="modal-body row">
 						<div class="col-xs-3">
 							<p class="text-right middle">页面标题</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="title" name="title"
-								class="form-control input-comm" placeholder="标题1#">
+							<input type="text" id="title" name="title" class="form-control input-comm" placeholder="标题1#">
 						</div>
 					</div>
 					<div class="modal-body row">
@@ -320,8 +282,7 @@
 							<p class="text-right middle">页面宽度</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="pageWidth" name="pageWidth"
-								disabled="disabled" class="form-control input-comm">
+							<input type="text" id="pageWidth" name="pageWidth" disabled="disabled" class="form-control input-comm">
 						</div>
 					</div>
 					<div class="modal-body row">
@@ -329,8 +290,7 @@
 							<p class="text-right middle">页面高度</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="pageHeight" name="pageHeight"
-								disabled="disabled" class="form-control input-comm">
+							<input type="text" id="pageHeight" name="pageHeight" disabled="disabled" class="form-control input-comm">
 						</div>
 					</div>
 					<input type="hidden" id="topoId">
@@ -356,7 +316,6 @@
 		<table id="tableData" data-toolbar="#toolbar">
 		</table>
 	</div>
-
 	<script type="text/javascript">
 		var orgId = '${orgId}';
 		var userId = '${userId}';

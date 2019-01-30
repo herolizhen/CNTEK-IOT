@@ -3,12 +3,11 @@ $(function() {
 	initTable();
 
 });
-function initTable(){
+function initTable() {
 	$('#userDtuListTable').bootstrapTable({
 		url : 'getConfigPage', //服务器数据的加载地址
 		striped : true, //设置为 true 会有隔行变色效果
 		pagination : true, //开启分页
-		//sidePagination : 'server', //服务器端分页
 		pageNumber : 1, //默认加载页
 		pageSize : 10, //每页数据
 		pageList : [ 10, 50, 100, 1000 ], //可选的每页数据
@@ -16,7 +15,6 @@ function initTable(){
 		dataField : 'data', //后端返回的实体数据
 		dataType : 'json', //后端数据传递类型
 		responseHandler : function(res) {
-			// 在ajax获取到数据，渲染表格之前，修改数据源
 			return res;
 		},
 		queryParams : function(params) {
@@ -28,9 +26,11 @@ function initTable(){
 		}, //请求服务器数据时的参数
 		columns : [
 			{
-				checkbox : true,
-				align : 'center',
-				visible : true
+				field : 'imgUrl',
+				title : '我的设备',
+				width : '200',
+				halign : 'center',
+				formatter : imgFromUrl
 			},
 			{
 				field : 'name',
@@ -82,6 +82,11 @@ function initTable(){
 			return '';
 		}
 	});
+}
+
+function imgFromUrl(value,row,index){
+	return '<img  src="'+value+'"  style="padding:1px;background:#13151f;border:solid #1e2132 1px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px; max-width: 100%" >';
+	//return '<img src="'+value+'"  class="img-rounded">';
 }
 
 function isOnlineToStr(value, row, index) {

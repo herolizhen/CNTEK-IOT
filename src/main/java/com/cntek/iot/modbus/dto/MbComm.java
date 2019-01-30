@@ -13,7 +13,6 @@ public class MbComm {
 	private Integer mbDataLength;
 	private String data;
 	private List<MbMdDefine> mbMdDefines;
-	private String ids;
 
 	public List<MbMdDefine> getMbMdDefines() {
 		return mbMdDefines;
@@ -71,12 +70,5 @@ public class MbComm {
 		this.data = data;
 	}
 
-	public String getIds() {
-		return ids;
-	}
-
-	public void setIds(String ids) {
-		this.ids = ids;
-	}
 
 }
