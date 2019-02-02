@@ -3,7 +3,6 @@ var marker;
 
 $(function() {
 	initTable();
-
 	$('.form_datetime').datetimepicker({
 		language : 'cn',
 		minView : "month", //选择日期后，不会再跳转去选择时分秒 
@@ -67,9 +66,14 @@ $(function() {
 	});
 
 	$('#btn_openGis').click(function() {
+		$('#gisModal').modal('show');
+		$('#gislModalLabel').text("设备：" + $('#name').val() + "地理位置");
+	});
+	
+	$('#gisModal').on('shown.bs.modal', function() {
 		openGis();
 	});
-
+	
 	$("#btn_selGisPoint").click(function() {
 		selGisPoint();
 	});
@@ -163,6 +167,7 @@ function operateFormatter(value, row, index) {
 }
 
 function editOrg(escap) {
+	$("#orgForm").validate().resetForm();
 	var row = unescape(escap);
 	row = JSON.parse(row);
 	$('#orgId').val(row.orgId);
@@ -180,6 +185,8 @@ function editOrg(escap) {
 	$('#foundDate').val(beijing_datetime);
 }
 
+var marker;
+
 function openGis() {
 	var longitude,
 		latitude;
@@ -191,18 +198,26 @@ function openGis() {
 		latitude = $('#latitude').val();
 	}
 
-	$('#gisModal').modal('show');
-	$('#gislModalLabel').text("设备：" + $('#name').val() + "地理位置");
 	// 百度地图API功能
 	var baiduMap = new BMap.Map("baiduMap");
 	var point = new BMap.Point(longitude, latitude);
+
 	baiduMap.centerAndZoom(point, 14);
 	baiduMap.enableScrollWheelZoom();
 	baiduMap.disableDoubleClickZoom();
-	baiduMap.addEventListener("tilesloaded", function() {
-		baiduMap.setCenter(point);
-	});
 
+	function add() {
+		// 创建标注
+		var myIcon = new BMap.Icon("../static/bootstrap-solid.svg", new BMap.Size(38, 38));
+		marker = new BMap.Marker(point, {
+			icon : myIcon
+		});
+		baiduMap.addOverlay(marker); // 将标注添加到地图中
+		baiduMap.setCenter(point);
+		baiduMap.removeEventListener("tilesloaded", add);
+	}
+
+	baiduMap.addEventListener("tilesloaded", add);
 	baiduMap.addEventListener("dblclick", baiduMapDBClick);
 	function baiduMapDBClick(e) {
 		// 创建标注
@@ -211,16 +226,13 @@ function openGis() {
 		marker = new BMap.Marker(point, {
 			icon : myIcon
 		});
+		var geoc = new BMap.Geocoder();
+		geoc.getLocation(point, function(rs) {
+			$('#address').val(rs.address);
+		});
 		baiduMap.clearOverlays(); //清除地图上所有覆盖物
 		baiduMap.addOverlay(marker); // 将标注添加到地图中  
 	}
-	// 创建标注
-	var myIcon = new BMap.Icon("../static/bootstrap-solid.svg", new BMap.Size(38, 38));
-	marker = new BMap.Marker(point, {
-		icon : myIcon
-	});
-	baiduMap.addOverlay(marker); // 将标注添加到地图中
-	baiduMap.setCenter(point);
 
 	var ac = new BMap.Autocomplete( //建立一个自动完成的对象
 		{
@@ -255,12 +267,13 @@ function selGisPoint() {
 	var geoc = new BMap.Geocoder();
 	geoc.getLocation(point, function(rs) {
 		var addComp = rs.addressComponents;
-		$('#address').val(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+		$('#address').val(rs.address);
 	});
 	$('#gisModal').modal('hide');
 }
 
 function newOrg() {
+	$("#orgForm").validate().resetForm();
 	$('#orgId').val('');
 	$('#name').val('');
 	$('#longitude').val('');

@@ -654,7 +654,10 @@ ul {
 	<script type="text/javascript">
 		var topoId   = '${topoId}';
 		var masterId = '${masterId}';
-		var devices  =  $.parseJSON('${topo}');
+		var devices  = {};
+		if('${topo}' !=''){
+			devices =  $.parseJSON('${topo}');
+		}
  		console.log('${topo}');
 	</script>
 	<script src="<%=basePath%>/views/design/js/topo-design-init.js"></script>

@@ -1,20 +1,28 @@
 package com.cntek.iot.design.action;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cntek.iot.comm.dto.CommPara;
 import com.cntek.iot.comm.dto.RetInfoDto;
@@ -29,6 +37,12 @@ import com.mysql.cj.util.StringUtils;
 @Controller
 @RequestMapping("/design")
 public class DesignAction {
+	@Value("${cfg.sys.userfile.filePath}")
+	private String USERFILEPATH;
+	@Value("${cfg.sys.userfile.urlPath}")
+	private String USERURLPATH;
+
+	
 	@Autowired
 	private IDesignService designService;
 
@@ -231,4 +245,29 @@ public class DesignAction {
 		System.out.println(out);
 		return out;
 	}
+	
+	
+	
+	
+	@RequestMapping(value = "subFile", method = RequestMethod.POST, produces = "text/html;charset=utf-8")
+	public void subFile(HttpServletResponse response, HttpServletRequest request,
+			@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
+
+		String fileName = file.getOriginalFilename();
+		String filePath = USERFILEPATH;
+		File fileNew = new File(filePath);
+		if (!fileNew.exists()) {
+			fileNew.mkdirs();
+		}
+		fileNew = new File(filePath + fileName);
+		if (fileNew.exists()) {
+			fileNew.delete();
+		}
+		BufferedOutputStream buff = new BufferedOutputStream(new FileOutputStream(fileNew));
+		buff.write(file.getBytes());
+		buff.close();
+		response.getWriter().write( fileName);
+		response.setHeader("Access-Control-Allow-Origin", "*");
+	}
+
 }

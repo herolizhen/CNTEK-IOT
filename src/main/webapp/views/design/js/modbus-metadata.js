@@ -41,8 +41,8 @@ $(function() {
 			$('#d_dataFun').hide();
 			$('#d_dataUnit').hide();
 			$('#d_dataBitPos').show();
-			$('#d_data0Display').show();
-			$('#d_data1Display').show();
+			$('#d_data0Dis').show();
+			$('#d_data1Dis').show();
 		} else {
 			$('#d_dataFun').show();
 			$('#d_dataUnit').show();
@@ -53,14 +53,16 @@ $(function() {
 	});
 	
 	$('[id=btn_newmbmd]').click(function() {
+		$("#addOrUpdateMbmdForm").validate().resetForm();
 		$('#metadataId').val('');
-		$('#gateNo').val(1);
-		$('#funCode').val('3');
-		$('#regAddress').val(0);
+		//$('#gateNo').val('');
+		//$('#funCode').val('3');
+		$('#regAddress').val('');
 		$('#dataName').val('');
-		$('#dataType').val(1);
-		$('#dataDecode').val(1);
-		$('#dataUnit').val('');
+		//$('#dataType').val(1);
+		//$('#dataDecode').val(1);
+		//$('#dataUnit').val('');
+		$('#dataBitPos').val('');
 		$('#data0Dis').val('');
 		$('#data1Dis').val('');
 		$('#dataFun').val('');
@@ -254,7 +256,7 @@ function initMbMdTable(masterId) {
 			{
 				field : 'dataName',
 				title : '数据名称',
-				align : 'center'
+				align : 'left'
 			},
 			{
 				field : 'gateNo',
@@ -360,6 +362,7 @@ function mdOperate(value, row, index) {
 }
 
 function editMbMd(row) {
+	$("#addOrUpdateMbmdForm").validate().resetForm();
 	var rowData = unescape(row);
 	rowData = JSON.parse(rowData);
 	$('#mbMdModifyLabel').text('编辑元数据 ' + rowData.dataName + ' 定义');

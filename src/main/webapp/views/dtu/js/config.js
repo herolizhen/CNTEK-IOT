@@ -1,9 +1,6 @@
-//gis变量
-var marker;
-
+var isNew = false;
 $(function() {
 	initConfigTable();
-
 	$('#configForm').validate({
 		rules : {
 			'name' : {
@@ -40,7 +37,9 @@ $(function() {
 				}
 			},
 			'password' : {
-				required : true,
+				required : function() {
+					return isNew;
+				},
 				onkeyup : false,
 				minlength : 6,
 				maxlength : 6,
@@ -116,6 +115,11 @@ $(function() {
 	});
 
 	$('#btn_selectGis').click(function() {
+		$('#gisModal').modal('show');
+		$('#gislModalLabel').text("设备：" + $('#name').val() + "地理位置");
+	});
+
+	$('#gisModal').on('shown.bs.modal', function() {
 		openGis();
 	});
 
@@ -130,6 +134,9 @@ $(function() {
 		savConfig();
 	});
 
+	$("#dtuSn").on("input", function(e) {
+		isNew = true;
+	});
 });
 
 function initConfigTable() {
@@ -321,6 +328,8 @@ function displayTypeToStr(value, row, index) {
 }
 
 function editConfig(escap) {
+	isNew = false;
+	$("#configForm").validate().resetForm();
 	var row = unescape(escap);
 	row = JSON.parse(row);
 	$('#name').val(row.name);
@@ -373,6 +382,8 @@ function uploadFile(fileId, arg) {
 }
 
 function newConfig() {
+	$("#configForm").validate().resetForm();
+	isNew = true;
 	$('#configId').val('');
 	$('#name').val('');
 	$('#memo').val('');
@@ -419,6 +430,9 @@ function delConfig() {
 	});
 }
 
+
+//gis变量
+var marker;
 function openGis() {
 	var longitude,
 		latitude;
@@ -429,18 +443,26 @@ function openGis() {
 		longitude = $('#longitude').val();
 		latitude = $('#latitude').val();
 	}
-
-	$('#gisModal').modal('show');
-	$('#gislModalLabel').text("设备：" + $('#name').val() + "地理位置");
 	// 百度地图API功能
 	var baiduMap = new BMap.Map("baiduMap");
 	var point = new BMap.Point(longitude, latitude);
+
 	baiduMap.centerAndZoom(point, 14);
 	baiduMap.enableScrollWheelZoom();
 	baiduMap.disableDoubleClickZoom();
-	baiduMap.addEventListener("tilesloaded", function() {
+
+	function add() {
 		baiduMap.setCenter(point);
-	});
+		// 创建标注
+		var myIcon = new BMap.Icon("../static/bootstrap-solid.svg", new BMap.Size(38, 38));
+		marker = new BMap.Marker(point, {
+			icon : myIcon
+		});
+		baiduMap.addOverlay(marker); // 将标注添加到地图中
+		baiduMap.setCenter(point);
+		baiduMap.removeEventListener("tilesloaded", add);
+	}
+	baiduMap.addEventListener("tilesloaded", add);
 
 	baiduMap.addEventListener("dblclick", baiduMapDBClick);
 	function baiduMapDBClick(e) {
@@ -450,22 +472,20 @@ function openGis() {
 		marker = new BMap.Marker(point, {
 			icon : myIcon
 		});
+		var geoc = new BMap.Geocoder();
+		geoc.getLocation(point, function(rs) {
+			$('#location').val(rs.address);
+		});
 		baiduMap.clearOverlays(); //清除地图上所有覆盖物
 		baiduMap.addOverlay(marker); // 将标注添加到地图中  
 	}
-	// 创建标注
-	var myIcon = new BMap.Icon("../static/bootstrap-solid.svg", new BMap.Size(38, 38));
-	marker = new BMap.Marker(point, {
-		icon : myIcon
-	});
-	baiduMap.addOverlay(marker); // 将标注添加到地图中
-	baiduMap.setCenter(point);
 
 	var ac = new BMap.Autocomplete( //建立一个自动完成的对象
 		{
 			"input" : "suggestId",
 			"location" : baiduMap
 		});
+
 	var myValue;
 	ac.addEventListener("onconfirm", function(e) { //鼠标点击下拉列表后的事件
 		var _value = e.item.value;
@@ -478,6 +498,7 @@ function openGis() {
 		function myFun() {
 			var pp = local.getResults().getPoi(0).point; //获取第一个智能搜索的结果
 			baiduMap.centerAndZoom(pp, 18);
+			marker = new BMap.Marker(pp);
 			baiduMap.addOverlay(new BMap.Marker(pp)); //添加标注
 		}
 		var local = new BMap.LocalSearch(baiduMap, { //智能搜索
@@ -494,7 +515,7 @@ function selGisPoint() {
 	var geoc = new BMap.Geocoder();
 	geoc.getLocation(point, function(rs) {
 		var addComp = rs.addressComponents;
-		$('#location').val(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+		$('#location').val(rs.address);
 	});
 	$('#gisModal').modal('hide');
 }
@@ -508,6 +529,7 @@ function savConfig() {
 	data.pageHeight = $('#pageHeight').val();
 	data.dtuSn = $('#dtuSn').val();
 	data.ruleName = $('#ruleName').val();
+
 	if ($('#isOpen1').prop('checked') == true) {
 		data.isOpen = 1;
 	} else {
@@ -531,6 +553,8 @@ function savConfig() {
 			if (ret.code == 0) {
 				$('#configTable').bootstrapTable('refresh');
 				$('#configId').val(ret.data.id);
+				isNew = false;
+				$('#configModal').modal('hide');
 			} else {
 				alert('信息保存失败！');
 			}

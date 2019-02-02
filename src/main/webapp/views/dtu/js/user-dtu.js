@@ -1,11 +1,16 @@
 
 $(function() {
 	initTable();
-
+	$('#gisModal').on('shown.bs.modal', function() {
+		openGis(rowdata);
+	})
 });
 function initTable() {
 	$('#userDtuListTable').bootstrapTable({
 		url : 'getConfigPage', //服务器数据的加载地址
+		showHeader : false,
+		showRefresh : true,
+		checkboxHeader : true,
 		striped : true, //设置为 true 会有隔行变色效果
 		pagination : true, //开启分页
 		pageNumber : 1, //默认加载页
@@ -34,39 +39,22 @@ function initTable() {
 			},
 			{
 				field : 'name',
-				title : '名称',
-				width : '200',
+				title : '设备名称',
+				width : '600',
 				sortable : true,
 				halign : 'center',
-				align : 'left'
+				align : 'left',
+				valign : 'middle',
+				formatter : dataFormatter
 			},
 			{
-				field : 'memo',
-				title : '描述',
-				halign : 'center',
-				align : 'left'
-			},
-			{
-				field : 'location',
-				title : '所在地',
-				width : '300',
-				halign : 'center',
-				align : 'left'
-			},
-			{
-				field : 'isOnline',
-				title : '在线',
-				width : '40',
-				formatter : isOnlineToStr,
-				halign : 'center',
-				align : 'center'
-			},
-			{
-				field : 'ruleName',
-				title : '数据规则',
+				field : 'operate',
+				title : '操作',
 				width : '120',
 				halign : 'center',
-				align : 'left'
+				align : 'center',
+				valign : 'middle',
+				formatter : operateFormatter,
 			} ],
 		formatNoMatches : function() {
 			return '没有相关的匹配结果';
@@ -85,15 +73,94 @@ function imgFromUrl(value, row, index) {
 	return inHtml;
 }
 
-function isOnlineToStr(value, row, index) {
-	if (value) {
-		return '是';
+function dataFormatter(value, row, index) {
+	var isOnline;
+	if (row.isOnline) {
+		isOnline = '在线';
 	} else {
-		return '否';
+		isOnline = '离线';
 	}
+
+	return [
+		'设备名称：' + row.name,
+		'<br/>',
+		'是否在线：' + isOnline,
+		'<br/>',
+		'备注：' + row.memo,
+		'<br/>',
+		'设备描述：' + row.memo,
+		'<button type="button" class="btn btn-success  btn-xs" ',
+		'style="margin-right:5px;"  data-toggle="modal" data-target="#configModal"',
+		' onclick="showDetail(\'' + escape(JSON.stringify(row)) + '\')">设备详情</button>',
+		'<br/>',
+		'安装位置:' + row.location,
+		'<button type="button" class="btn btn-success  btn-xs" ',
+		'style="margin-right:5px;"   data-toggle="modal" data-target="#gisModal"',
+		' onclick="preOpenGis(\'' + escape(JSON.stringify(row)) + '\')">GIS 位置</button>'
+	].join('');
+
 }
+
+//gis变量
+var marker;
+var rowdata;
+
+function preOpenGis(escap) {
+	rowdata = escap;
+}
+
 function operateFormatter(value, row, index) {
 	return [
-		'<a class="btn btn-success  btn-sm" target="_blank" href="topoShow?dtuId=' + row.id + '">实时数据</a>'
+		'<a class="btn btn-success  btn-lg" target="_blank" href="topoShow?dtuId=' + row.id + '">实时数据</a>'
 	].join('');
+}
+
+function openGis(escap) {
+	var row = unescape(escap);
+	row = JSON.parse(row);
+
+	$('#gislModalLabel').text("设备：" + row.name + "地理位置");
+	$('#gisModal').modal('show');
+	// 百度地图API功能
+	var baiduMap = new BMap.Map("baiduMap");
+	var point = new BMap.Point(row.longitude, row.latitude);
+
+	baiduMap.centerAndZoom(point, 14);
+	baiduMap.enableScrollWheelZoom();
+	baiduMap.disableDoubleClickZoom();
+
+	function add() {
+		// 创建标注
+		var myIcon = new BMap.Icon("../static/bootstrap-solid.svg", new BMap.Size(38, 38));
+		marker = new BMap.Marker(point, {
+			icon : myIcon
+		});
+		baiduMap.addOverlay(marker); // 将标注添加到地图中
+		baiduMap.setCenter(point);
+		baiduMap.removeEventListener("tilesloaded", add);
+	}
+	baiduMap.addEventListener("tilesloaded", add);
+}
+
+function showDetail(escap) {
+	var row = unescape(escap);
+	row = JSON.parse(row);
+	$('#name').val(row.name);
+	$('#configId').val(row.id);
+	$('#memo').val(row.memo);
+	$('#dtuSn').val(row.dtuSn);
+	$('#ruleName').val(row.ruleName);
+	$('#ruleId').val(row.ruleId);
+	$('#imgUrl').val(row.imgUrl);
+	if (row.isOpen == '1') {
+		$('#isOpen1').prop('checked', true);
+	} else {
+		$('#isOpen0').prop('checked', true);
+	}
+	$('#location').val(row.location);
+	$('#longitude').val(row.longitude);
+	$('#latitude').val(row.latitude);
+	$("#equipImg").attr('src', row.imgUrl);
+	$("#imgUrl").val(row.imgUrl);
+	$('#dtuImg').show();
 }

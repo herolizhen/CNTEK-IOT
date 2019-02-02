@@ -1,7 +1,6 @@
 
 $(function() {
 	initInfoTable();
-
 	$('#infoForm').validate({
 		rules : {
 			'dtuName' : {
@@ -21,17 +20,17 @@ $(function() {
 		},
 		messages : {
 			'dtuName' : {
-				required : '请输入数据名称',
+				required : '请输入设备名称',
 				maxlength : '数据名称不能超过{0}个字符',
 				minlength : '数据名称不能少于{0}个字符'
 			},
 			'dtuSn' : {
-				required : '请输入数据名称',
+				required : '请输入DTU编号',
 				maxlength : '数据名称不能超过{0}个字符',
 				minlength : '数据名称不能少于{0}个字符'
 			},
 			'dtuPw' : {
-				maxlength : '数据名称不能超过{0}个字符'
+				maxlength : '密码不能超过{0}个字符'
 			}
 		}
 	});
@@ -45,7 +44,7 @@ $(function() {
 	});
 
 	$('#btn_savinfo').click(function() {
-		if (!$('#orgForm').valid()) {
+		if (!$('#infoForm').valid()) {
 			return;
 		}
 		savInfo();
@@ -203,7 +202,6 @@ function dateTimeToStr(unixtime) {
 	beijing_datetime = timestamp.toLocaleDateString().replace(/\//g, "-") + " " + timestamp.toTimeString().substr(0, 8);
 	return beijing_datetime;
 }
-;
 
 function operateFormatter(value, row, index) {
 	return [
@@ -214,6 +212,7 @@ function operateFormatter(value, row, index) {
 }
 
 function editInfo(escap) {
+	$("#infoForm").validate().resetForm();
 	var row = unescape(escap);
 	row = JSON.parse(row);
 	$('#dtuName').val(row.dtuName);
@@ -237,8 +236,8 @@ function editInfo(escap) {
 	$('#activateTime').val(row.activateTime);
 }
 
-
 function newInfo() {
+	$("#infoForm").validate().resetForm();
 	$('#infoId').val('');
 	$('#dtuName').val('');
 	$('#dtuSn').val('');

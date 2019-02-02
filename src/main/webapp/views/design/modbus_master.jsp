@@ -107,7 +107,7 @@
 							<p class="text-right middle">数据名称</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="dataName" name="dataName" class="form-control input-comm" placeholder="温度1#">
+							<input type="text" id="dataName" name="dataName" class="form-control input-comm" placeholder="例如：温度1#">
 						</div>
 					</div>
 					<div class="modal-body row">
@@ -115,7 +115,7 @@
 							<p class="text-right middle">设备从站地址</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="gateNo" name="gateNo" class="form-control input-comm" placeholder="1">
+							<input type="text" id="gateNo" name="gateNo" class="form-control input-comm" >
 						</div>
 					</div>
 					<div class="modal-body row">
@@ -123,7 +123,7 @@
 							<p class="text-right middle">功能码</p>
 						</div>
 						<div class="col-xs-8">
-							<select id="funCode" class="combobox selectpicker input-comm">
+							<select id="funCode"  class="form-control input-comm">
 								<option value="1">01:读线圈</option>
 								<option value="2">02:读离散量输入</option>
 								<option value="3">03:读保持寄存器</option>
@@ -136,7 +136,7 @@
 							<p class="text-right middle">寄存器地址</p>
 						</div>
 						<div class="col-xs-8">
-							<input type="text" id="regAddress" name="regAddress" class="form-control input-comm " placeholder="40001">
+							<input type="text" id="regAddress" name="regAddress" class="form-control input-comm ">
 						</div>
 					</div>
 					<div class="modal-body row" id="d_dataType">
@@ -144,7 +144,7 @@
 							<p class="text-right middle">数值类型</p>
 						</div>
 						<div class="col-xs-8">
-							<select class="selectpicker input-comm " id="dataType">
+							<select id="dataType"  class="form-control input-comm">
 								<option value="1">16位整形(有符号)</option>
 								<option value="2">16位整形(无符号)</option>
 								<option value="3">32位整形(有符号)</option>
@@ -159,7 +159,7 @@
 							<p class="text-right middle">解码顺序</p>
 						</div>
 						<div class="col-xs-8">
-							<select class="selectpicker input-comm" id="dataDecode">
+							<select  id="dataDecode"  class="form-control input-comm">
 								<option value="1">1234</option>
 								<option value="2">2143</option>
 								<option value="3">3412</option>
@@ -196,7 +196,7 @@
 							<p class="text-right middle">0对应内容</p>
 						</div>
 						<div class="col-xs-8">
-							<select class="selectpicker input-comm" id="data0Dis">
+							<select  id="data0Dis" class="form-control input-comm ">
 								<option value="0">OFF</option>
 								<option value="1">ON</option>
 							</select>
@@ -207,7 +207,7 @@
 							<p class="text-right middle">1对应内容</p>
 						</div>
 						<div class="col-xs-8">
-							<select class="selectpicker input-comm" id="data1Dis">
+							<select id="data1Dis" class="form-control input-comm ">
 								<option value="0">OFF</option>
 								<option value="1">ON</option>
 							</select>

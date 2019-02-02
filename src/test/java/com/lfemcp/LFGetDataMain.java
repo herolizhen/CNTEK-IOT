@@ -17,8 +17,8 @@ public class LFGetDataMain {
 	public static void main(String[] args) {
 
 
-		String from = "2019-01-29 00:00";
-		String end = "2019-01-30 00:00";
+		String from = "2019-02-01 00:00";
+		String end = "2019-02-02 00:00";
 		String czSn = "A0I9F328";
 		String wxSn = "A0I7R290";
 		String rule = "4542";

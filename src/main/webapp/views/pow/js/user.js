@@ -17,8 +17,6 @@ $(function() {
 		showMeridian : 1
 	});
 
-	
-	
 	$('#companySel').change(function() {
 		$('#orgId').val($(this).val());
 		$('#company').val($("#companySel option:selected").text());
@@ -257,6 +255,7 @@ function operateFormatter(value, row, index) {
 
 
 function editUser(escap) {
+	$("#userForm").validate().resetForm();
 	isnew = false;
 	var row = unescape(escap);
 	row = JSON.parse(row);
@@ -286,6 +285,7 @@ function editUser(escap) {
 }
 
 function newUser() {
+	$("#userForm").validate().resetForm();
 	$('#appId').val('');
 	$('#username').val('');
 	$("#username").attr("disabled", false);

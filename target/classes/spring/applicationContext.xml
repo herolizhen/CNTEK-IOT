@@ -12,8 +12,28 @@
 
 	<!-- don't handle the static resource -->
 	<mvc:default-servlet-handler />
-	<!-- if you use annotation you must configure following setting -->
 	<mvc:annotation-driven />
+	<mvc:resources location="/assets/" mapping="/assets/**/*"/> 
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/views/*.html" />			
+			<mvc:exclude-mapping path="/static/*.svg" />
+			<mvc:exclude-mapping path="/static/css/*.svg" />
+			<mvc:exclude-mapping path="/assets/*/*.css" />
+			<mvc:exclude-mapping path="/assets/*/*.js" />
+			<mvc:exclude-mapping path="/assets/*/css/*.css" />
+			<mvc:exclude-mapping path="/assets/*/fonts/*.woff" />
+			<mvc:exclude-mapping path="/assets/**/js/*.js" />
+			<mvc:exclude-mapping path="/assets/**/css/*.map" />
+			<mvc:exclude-mapping path="/assets/*/*.*.*.*" />
+			<mvc:exclude-mapping path="/topo/subFile" />
+			<mvc:exclude-mapping path="/userdata/image/*.*" />
+			<bean class="com.cntek.iot.pow.util.CommonInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
@@ -22,11 +42,13 @@
 		<property name="locations">
 			<list>
 				<value>classpath:config/jdbc.properties</value>
+				<value>classpath:config/cfg.properties</value>
+				<value>classpath:config/log.properties</value>
 			</list>
 		</property>
 	</bean>
+	
 	<task:annotation-driven /> <!-- 定时器开关 -->
-
 
 	<context:component-scan base-package="com.cntek.iot" />
 

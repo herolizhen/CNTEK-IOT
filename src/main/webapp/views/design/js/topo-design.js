@@ -153,7 +153,6 @@ $(function() {
 		$("#selele").find("[data-Id='bg']").attr('selected', 'selected').siblings().removeAttr('selected');
 		var title = $("#selele").find("[data-Id='bg']").text();
 		$('#eastBox').panel('setTitle', '属性[' + title + ']');
-		//select 器件类型中火狐对selected的解析不一样，导致出现错误。但不报错，网上搜索的解决方案在select中添加属性autocomplete="off"，但添加后未能解决问题
 		$('#t_property').find('tr').hide();
 		$('.static').show();
 		$('#tr_shuju').hide();
@@ -164,7 +163,6 @@ $(function() {
 		$('#tr_i_scroll').show();
 
 		for (var i in deviced.bg) {
-			//console.log($('[name="' + i + '"]').val());
 			$('[name="' + i + '"]').val(deviced.bg[i]);
 		}
 		//多选处理 by lizhen
@@ -252,7 +250,6 @@ $(function() {
 
 	function createDev($target, left, top, html, DevFlag) {
 		if (falg) {
-
 			falg = false;
 			$target.append(html);
 			$('#' + devId).css({
@@ -264,7 +261,7 @@ $(function() {
 			var menuText = $('[id="a_' + menuIndex + '"]').text();
 
 			$('#selele').append('<option data-Id="' + devId + '"value="' + menuIndex + '">' + menuText + '</option>');
-
+	console.log('-----------------------------------:' + devId);
 			deviced[devId] = {
 				x: parseInt(left),
 				y: parseInt(top),
@@ -345,13 +342,10 @@ $(function() {
 				deviced[devId].fontFamily = "Arial";
 				deviced[devId].fontWeight = "bold";
 			} else if (deviced[devId].devIndex == 2) { //静态标签
-
 				deviced[devId].bgImg = '../views/design/images/2.png';
 				deviced[devId].tagtype = "pic";
 				deviced[devId].linkorgid = "";
-
 			} else if (deviced[devId].devIndex == 5) { //监测点信息
-
 				deviced[devId].bgColor = "rgba(0,0,0,0)";
 				deviced[devId].fontWeight = 'bold';
 				deviced[devId].fontColor = "#333333";
@@ -2916,7 +2910,7 @@ function fileDialog(url, inputId) {
 
 function uploadFile(fileId, url, inputId) {
 	var fileObj = document.getElementById(fileId).files[0];
-	var FileController = "../topo/" + url;
+	var FileController = "../design/" + url;
 
 	// FormData h5新对象
 	var form = new FormData();
@@ -2933,7 +2927,7 @@ function uploadFile(fileId, url, inputId) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var response = xhr.responseText;
-				var imgUrl = '../design/data/' + response;
+				var imgUrl = '../userdata/image/' + response;
 				$('#' + inputId).val(imgUrl);
 				if ($('#resizeBox').css('outline-style') !== 'none') {
 					deviced.bg.bgImg = imgUrl;
