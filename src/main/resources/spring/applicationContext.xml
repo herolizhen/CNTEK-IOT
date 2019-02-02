@@ -28,8 +28,6 @@
 			<mvc:exclude-mapping path="/assets/**/js/*.js" />
 			<mvc:exclude-mapping path="/assets/**/css/*.map" />
 			<mvc:exclude-mapping path="/assets/*/*.*.*.*" />
-			<mvc:exclude-mapping path="/topo/subFile" />
-			<mvc:exclude-mapping path="/userdata/image/*.*" />
 			<bean class="com.cntek.iot.pow.util.CommonInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
